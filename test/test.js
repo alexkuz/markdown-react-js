@@ -2,7 +2,7 @@
 
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import { mdReact } from '../index';
+import { mdReact } from '../src/index';
 import React, { renderToStaticMarkup } from 'react';
 import update from 'react/lib/update';
 

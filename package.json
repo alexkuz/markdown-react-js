@@ -2,7 +2,7 @@
   "name": "markdown-react-js",
   "version": "0.1.0",
   "description": "Markdown to React Component converter",
-  "main": "index.js",
+  "main": "src-es5/index.js",
   "directories": {
     "example": "examples",
     "test": "test"

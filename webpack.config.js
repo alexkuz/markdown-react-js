@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './index',
+  entry: './src/index',
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel?stage=0', exclude: /node_modules/ }

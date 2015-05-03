@@ -1,0 +1,26 @@
+{
+  "name": "markdown-react-js-gh-pages",
+  "version": "0.1.0",
+  "description": "Markdown to React Component converter",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "lodash": "^3.8.0",
+    "markdown": "^0.5.0",
+    "markdown-react-js": "https://github.com/alexkuz/markdown-react-js/archive/master.tar.gz",
+    "react": "^0.13.2"
+  },
+  "devDependencies": {
+    "babel": "^5.2.6",
+    "babel-core": "^5.2.6",
+    "babel-eslint": "^3.0.1",
+    "babel-loader": "^5.0.0",
+    "eslint": "^0.20.0",
+    "eslint-plugin-react": "^2.2.0",
+    "webpack": "^1.8.11"
+  },
+  "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)"
+}

@@ -1,0 +1,9 @@
+var ComponentExample = React.createClass({
+    render: function() {
+      return (
+        <div></div>
+      )
+    }
+});
+
+React.render(<ComponentExample/>, mountNode);

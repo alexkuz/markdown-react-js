@@ -51,6 +51,8 @@ var ComponentExample = React.createClass({
             '[1]: http://slashdot.org\n' +
             '[link text itself]: http://www.reddit.com'
           } />
+          <MDReactComponent text='-----' />
+          <MDReactComponent text='#### This page is using [Component Playground](https://github.com/FormidableLabs/component-playground), check it out' />
         </div>
       )
     }

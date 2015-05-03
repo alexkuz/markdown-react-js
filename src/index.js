@@ -3,7 +3,7 @@
 import React, { Component } from 'react/addons';
 import Playground from 'component-playground';
 import componentExample from 'raw!../examples/component.example';
-import { MDReactComponent } from 'markdown-react-js';
+import MDReactComponent from 'markdown-react-js';
 
 class Index extends Component {
   render() {

@@ -1,7 +1,7 @@
 var ComponentExample = React.createClass({
     render: function() {
       return (
-        <div></div>
+        <MDReactComponent text='Hello, **world**!' />
       )
     }
 });

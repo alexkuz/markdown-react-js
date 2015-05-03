@@ -9,7 +9,7 @@ class Index extends Component {
   render() {
     return (
       <div className="component-documentation">
-        <Playground codeText={componentExample} scope={{ React, MDReactComponent }}/>
+        <Playground codeText={componentExample} scope={{ React, MDReactComponent }} />
       </div>
     );
   }

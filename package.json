@@ -14,8 +14,11 @@
   },
   "devDependencies": {
     "babel": "^5.2.6",
+    "babel-core": "^5.2.6",
     "babel-eslint": "^3.0.1",
-    "mocha": "^2.2.4"
+    "babel-loader": "^5.0.0",
+    "mocha": "^2.2.4",
+    "webpack": "^1.8.11"
   },
   "peerDependencies": {
     "react": "^0.13.2"

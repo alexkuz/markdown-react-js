@@ -3,7 +3,7 @@ REPORTER = spec
 all: eslint test
 
 test:
-	@NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel/register --recursive --reporter $(REPORTER) --timeout 3000
+	@NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babelhook --recursive --reporter $(REPORTER) --timeout 3000
 
 eslint:
 	eslint lib examples test index.js

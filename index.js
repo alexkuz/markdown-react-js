@@ -1,7 +1,7 @@
 'use strict';
 
 import { markdown } from 'markdown';
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import assign from 'lodash/object/assign';
 
@@ -9,30 +9,50 @@ const DEFAULT_TAGS = {
   'html': 'span'
 };
 
-function iterateTree(tree, options={}, level=0, index=0) {
-  let tag = tree.shift();
-  const key = `mdrct-${index}`;
+function mdReactFactory(options={}) {
   const { onIterate, tags=DEFAULT_TAGS } = options;
 
-  const props = (tree.length && isPlainObject(tree[0])) ?
-    assign(tree.shift(), { key }) :
-    { key };
+  function iterateTree(tree, level=0, index=0) {
+    let tag = tree.shift();
+    const key = `mdrct-${index}`;
 
-  const children = tree.map(
-    (branch, idx) => Array.isArray(branch) ?
-      iterateTree(branch, options, level + 1, idx) :
-      branch
-  );
+    const props = (tree.length && isPlainObject(tree[0])) ?
+      assign(tree.shift(), { key }) :
+      { key };
 
-  tag = tags[tag] || tag;
+    const children = tree.map(
+      (branch, idx) => Array.isArray(branch) ?
+        iterateTree(branch, level + 1, idx) :
+        branch
+    );
 
-  return (typeof onIterate === 'function') ?
-    onIterate(tag, props, children, level) :
-    React.createElement(tag, props, children);
+    tag = tags[tag] || tag;
+
+    return (typeof onIterate === 'function') ?
+      onIterate(tag, props, children, level) :
+      React.createElement(tag, props, children);
+  }
+
+  return function(text) {
+    const tree = markdown.toHTMLTree(text);
+
+    return iterateTree(tree);
+  };
 }
 
-export default function(text, options) {
-  const tree = markdown.toHTMLTree(text);
+class MDReactComponent extends Component {
+  static propTypes = {
+    text: PropTypes.string.isRequired,
+    onIterate: PropTypes.func,
+    tags: PropTypes.object
+  }
 
-  return iterateTree(tree, options);
+  render() {
+    const { onIterate, tags, text } = this.props;
+
+    return mdReactFactory({ onIterate, tags })(text);
+  }
 }
+
+export default MDReactComponent;
+export { mdReactFactory as mdReact };

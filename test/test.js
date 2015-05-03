@@ -2,12 +2,12 @@
 
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
-import mdReact from '../index';
+import { mdReact } from '../index';
 import React, { renderToStaticMarkup } from 'react';
 import update from 'react/lib/update';
 
 function render(text, options) {
-  return renderToStaticMarkup(mdReact(text, options));
+  return renderToStaticMarkup(mdReact(options)(text));
 }
 
 function linkCallback(tag, props, children) {

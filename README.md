@@ -2,6 +2,8 @@
 
 Markdown to React Component converter.
 
+**DEMO**: http://alexkuz.github.io/markdown-react-js/
+
 ## Examples
 
 #### Basic example

@@ -1,0 +1,40 @@
+{
+  "name": "markdown-react-js",
+  "version": "0.1.0",
+  "description": "Markdown to React Component converter",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^2.3.0",
+    "lodash": "^3.8.0",
+    "markdown": "^0.5.0"
+  },
+  "devDependencies": {
+    "babel": "^5.2.6",
+    "babel-eslint": "^3.0.1",
+    "mocha": "^2.2.4"
+  },
+  "peerDependencies": {
+    "react": "^0.13.2"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexkuz/markdown-react-js"
+  },
+  "keywords": [
+    "markdown",
+    "react"
+  ],
+  "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexkuz/markdown-react-js/issues"
+  },
+  "homepage": "https://github.com/alexkuz/markdown-react-js"
+}

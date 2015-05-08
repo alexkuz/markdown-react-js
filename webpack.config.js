@@ -20,6 +20,7 @@ module.exports = {
   entry: './src/index',
   module: {
     loaders: [
+      { test: /\.json$/, loader: 'json' },
       { test: /\.js$/, loader: 'babel?stage=0', exclude: /node_modules/ }
     ]
   },
@@ -43,11 +44,11 @@ module.exports = {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compressor: {
+    //     warnings: false
+    //   }
+    // })
   ],
   resolve: {
     root: [__dirname],

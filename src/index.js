@@ -44,13 +44,15 @@ class MDReactComponent extends Component {
   static propTypes = {
     text: PropTypes.string.isRequired,
     onIterate: PropTypes.func,
-    tags: PropTypes.object
+    tags: PropTypes.object,
+    dialect: PropTypes.string,
+    markdownOptions: PropTypes.object
   }
 
   render() {
-    const { onIterate, tags, text } = this.props;
+    const { onIterate, tags, text, dialect, markdownOptions } = this.props;
 
-    return mdReactFactory({ onIterate, tags })(text);
+    return mdReactFactory({ onIterate, tags, dialect, markdownOptions })(text);
   }
 }
 

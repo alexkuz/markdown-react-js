@@ -83,15 +83,19 @@ var MDReactComponent = (function (_Component) {
       var onIterate = _props.onIterate;
       var tags = _props.tags;
       var text = _props.text;
+      var dialect = _props.dialect;
+      var markdownOptions = _props.markdownOptions;
 
-      return mdReactFactory({ onIterate: onIterate, tags: tags })(text);
+      return mdReactFactory({ onIterate: onIterate, tags: tags, dialect: dialect, markdownOptions: markdownOptions })(text);
     }
   }], [{
     key: 'propTypes',
     value: {
       text: _React$PropTypes$Component.PropTypes.string.isRequired,
       onIterate: _React$PropTypes$Component.PropTypes.func,
-      tags: _React$PropTypes$Component.PropTypes.object
+      tags: _React$PropTypes$Component.PropTypes.object,
+      dialect: _React$PropTypes$Component.PropTypes.string,
+      markdownOptions: _React$PropTypes$Component.PropTypes.object
     },
     enumerable: true
   }]);

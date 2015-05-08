@@ -20,6 +20,7 @@
     "babel-loader": "^5.0.0",
     "eslint": "^0.20.0",
     "eslint-plugin-react": "^2.2.0",
+    "markdown-react-js": "file:../../../../var/folders/d6/5dn632qn5f59bcv1jj8hf2fr0000gn/T/npm-10019-a646a8f0/1431096463286-0.8326649267692119/448ba09160ba454203e13fb71ecebfbf32ec09f1",
     "webpack": "^1.8.11"
   },
   "author": "Alexander <alexkuz@gmail.com> (http://kuzya.org/)"

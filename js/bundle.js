@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6aee7ee76554e85af09f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d82f1bbbd75b86b32984"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -24600,7 +24600,7 @@
 	  }
 
 	  return function (text) {
-	    var tree = convertTree(md.parse(text));
+	    var tree = convertTree(md.parse(text, {}));
 	    return iterateTree(tree);
 	  };
 	}

@@ -10,7 +10,7 @@
   "dependencies": {
     "lodash": "^3.8.0",
     "markdown": "^0.5.0",
-    "markdown-react-js": "https://github.com/alexkuz/markdown-react-js/archive/master.tar.gz",
+    "markdown-react-js": "^0.1.1",
     "react": "^0.13.2"
   },
   "devDependencies": {

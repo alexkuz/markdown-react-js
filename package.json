@@ -10,7 +10,8 @@
   "dependencies": {
     "chai": "^2.3.0",
     "lodash": "^3.8.0",
-    "markdown": "^0.5.0"
+    "markdown": "^0.5.0",
+    "markdown-it": "^4.2.1"
   },
   "devDependencies": {
     "babel": "^5.2.6",

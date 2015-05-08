@@ -1,18 +1,27 @@
 'use strict';
 
-import { markdown } from 'markdown';
+import markdown from 'markdown-it';
 import React, { PropTypes, Component } from 'react';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import assign from 'lodash/object/assign';
+import reduce from 'lodash/collection/reduce';
 
 const DEFAULT_TAGS = {
-  'html': 'span'
+  '': 'span'
 };
 
 function mdReactFactory(options={}) {
-  const { onIterate, tags=DEFAULT_TAGS, dialect, markdownOptions } = options;
+  const { onIterate, tags=DEFAULT_TAGS,
+    presetName, markdownOptions,
+    enableRules=[], disableRules=[], plugins=[] } = options;
 
-  function iterateTree(tree, level=0, index=0) {
+  let md = markdown(presetName, markdownOptions)
+    .enable(enableRules)
+    .disable(disableRules);
+
+  md = reduce(plugins, (m, plugin) => m.use(plugin), md);
+
+  function iterateTree(token, level=0, index=0) {
     let tag = tree.shift();
     const key = `mdrct-${index}`;
 
@@ -34,8 +43,8 @@ function mdReactFactory(options={}) {
   }
 
   return function(text) {
-    const tree = markdown.toHTMLTree(text, dialect, markdownOptions);
-
+    const tree = md.parse(text);
+    console.log(tree);
     return iterateTree(tree);
   };
 }

@@ -1,6 +1,6 @@
 {
   "name": "markdown-react-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Markdown to React Component converter",
   "main": "src-es5/index.js",
   "directories": {

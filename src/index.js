@@ -10,7 +10,7 @@ const DEFAULT_TAGS = {
 };
 
 function mdReactFactory(options={}) {
-  const { onIterate, tags=DEFAULT_TAGS } = options;
+  const { onIterate, tags=DEFAULT_TAGS, dialect, markdownOptions } = options;
 
   function iterateTree(tree, level=0, index=0) {
     let tag = tree.shift();
@@ -34,7 +34,7 @@ function mdReactFactory(options={}) {
   }
 
   return function(text) {
-    const tree = markdown.toHTMLTree(text);
+    const tree = markdown.toHTMLTree(text, dialect, markdownOptions);
 
     return iterateTree(tree);
   };

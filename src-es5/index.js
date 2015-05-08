@@ -37,6 +37,8 @@ function mdReactFactory() {
   var onIterate = options.onIterate;
   var _options$tags = options.tags;
   var tags = _options$tags === undefined ? DEFAULT_TAGS : _options$tags;
+  var dialect = options.dialect;
+  var markdownOptions = options.markdownOptions;
 
   function iterateTree(tree) {
     var level = arguments[1] === undefined ? 0 : arguments[1];
@@ -57,7 +59,7 @@ function mdReactFactory() {
   }
 
   return function (text) {
-    var tree = _markdown.markdown.toHTMLTree(text);
+    var tree = _markdown.markdown.toHTMLTree(text, dialect, markdownOptions);
 
     return iterateTree(tree);
   };

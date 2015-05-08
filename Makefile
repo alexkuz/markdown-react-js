@@ -12,7 +12,7 @@ test:
 	@NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babelhook --recursive --reporter $(REPORTER) --timeout 3000
 
 eslint:
-	eslint test src/index.js
+	./node_modules/eslint/bin/eslint.js test src/index.js
 
 tests: test
 

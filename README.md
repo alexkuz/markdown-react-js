@@ -2,6 +2,8 @@
 
 Markdown to React Component converter.
 
+This project uses Markdown parser from [Markdown It](https://github.com/markdown-it/markdown-it) library, but loosely supports its plugins.
+
 **DEMO**: http://alexkuz.github.io/markdown-react-js/
 
 ## Examples
@@ -9,28 +11,37 @@ Markdown to React Component converter.
 #### Basic example
 
 ```
-import mdReact from 'markdown-react-js';
+import MDReactComponent from 'markdown-react-js';
 
 ...
 
 render() {
   return (
-    <div>{mdReact('Some text **with emphasis**.')}</div>   
+    <MDReactComponent text='Some text **with emphasis**.' />   
   );
+}
+```
+
+or, using function instead of component:
+
+```
+import { mdReact } from 'markdown-react-js';
+
+...
+
+render() {
+  return mdReact()('Some text **with emphasis**.');
 }
 ```
 
 Result:
 
 ```
-<div>
-  <span>
-    <p>
-      Some text with <strong>emphasis</strong>.
-    </p>
-  </span>
-</div>
-
+<span>
+  <p>
+    Some text with <strong>emphasis</strong>.
+  </p>
+</span>
 ```
 
 #### Using custom tags
@@ -46,7 +57,7 @@ const TAGS = {
 
 render() {
   return (
-    <span>{mdReact('Some **bold** and *italic* text.', { tags })}</span>   
+    <MDReactComponent text='Some **bold** and *italic* text.' tags={TAGS} />   
   );
 }
 ```
@@ -54,13 +65,11 @@ render() {
 Result:
 
 ```
-<div>
-  <span>
-    <p>
-      Some <b>bold</b> and <i>italic</i> text.
-    </p>
-  </span>
-</div>
+<span>
+  <p>
+    Some <b>bold</b> and <i>italic</i> text.
+  </p>
+</span>
 
 ```
 
@@ -69,28 +78,28 @@ Result:
 ```
 import update from 'react/lib/update';
 
-function onIterate(tag, props, children, level) {
+function handleIterate(Tag, props, children, level) {
   if (level === 1) {
     props = update(props, {
       className: { $set: 'first-level-class' }
     });
   }
   
-  if (tag === 'a') {
+  if (Tag === 'a') {
     props = update(props, {
       className: { $set: 'link-class' },
       href: { $apply: h => h.replace('SOME_URL', 'http://example.com') }
     });
   }
   
-  return React.createElement(tag, props, children);
+  return <Tag {...props}>{children}</Tag>;
 }
 
 ...
 
 render() {
   return (
-    <span>{mdReact('[This link](SOME_URL) has it’s own style.', { onIterate })}</span>   
+    <MDReactComponent text='[This link](SOME_URL) has it’s own style.' onIterate={handleIterate} />   
   );
 }
 ```
@@ -98,12 +107,18 @@ render() {
 Result:
 
 ```
-<div>
-  <span>
-    <p class="first-level-class">
-      <a href="http://example.com" class="link-class">This link</a> has it’s own style.
-    </p>
-  </span>
-</div>
+<span>
+  <p class="first-level-class">
+    <a href="http://example.com" class="link-class">This link</a> has it’s own style.
+  </p>
+</span>
 
 ```
+
+### Copyright
+
+Copyright 2015, Alexander Kuznetsov &lt;alexkuz@gmail.com&gt;
+
+Markdown-It:
+
+Copyright (c) 2014 Vitaly Puzrin &lt;vitaly@rcdesign.ru&gt;, Alex Kocharin &lt;alex@kocharin.ru&gt;

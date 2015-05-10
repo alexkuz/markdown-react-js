@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d82f1bbbd75b86b32984"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "add80cb0807caa4c186e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -542,7 +542,7 @@
 
 	var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
 
-	var _React$Component = __webpack_require__(7);
+	var _React$Component = __webpack_require__(8);
 
 	var _React$Component2 = _interopRequireDefault(_React$Component);
 
@@ -550,15 +550,31 @@
 
 	var _Playground2 = _interopRequireDefault(_Playground);
 
-	var _componentExample = __webpack_require__(149);
+	var _componentExample = __webpack_require__(174);
 
 	var _componentExample2 = _interopRequireDefault(_componentExample);
 
-	var _MDReactComponent = __webpack_require__(148);
+	var _MDReactComponent = __webpack_require__(169);
 
 	var _MDReactComponent2 = _interopRequireDefault(_MDReactComponent);
 
+	var _markdownText__ = __webpack_require__(175);
+
+	var _markdownText__2 = _interopRequireDefault(_markdownText__);
+
 	'use strict';
+
+	var __plugins__ = {
+	  abbr: __webpack_require__(104),
+	  container: __webpack_require__(105),
+	  deflist: __webpack_require__(106),
+	  emoji: __webpack_require__(107),
+	  footnote: __webpack_require__(112),
+	  ins: __webpack_require__(113),
+	  mark: __webpack_require__(114),
+	  sub: __webpack_require__(115),
+	  sup: __webpack_require__(116)
+	};
 
 	var Index = (function (_Component) {
 	  function Index() {
@@ -577,7 +593,9 @@
 	      return _React$Component2['default'].createElement(
 	        'div',
 	        { className: 'component-documentation' },
-	        _React$Component2['default'].createElement(_Playground2['default'], { codeText: _componentExample2['default'], scope: { React: _React$Component2['default'], MDReactComponent: _MDReactComponent2['default'] } })
+	        _React$Component2['default'].createElement(_Playground2['default'], { codeText: _componentExample2['default'],
+	          es6Console: true,
+	          scope: { React: _React$Component2['default'], MDReactComponent: _MDReactComponent2['default'], __markdownText__: _markdownText__2['default'], __plugins__: __plugins__ } })
 	      );
 	    }
 	  }]);
@@ -767,7 +785,7 @@
 	////////////////////////////////////////////////////////////////////////////////
 
 	/*eslint-disable max-len*/
-	var UNICODE_PUNCT_RE = __webpack_require__(23);
+	var UNICODE_PUNCT_RE = __webpack_require__(25);
 
 	// Currently without astral characters support.
 	function isPunctChar(char) {
@@ -839,7 +857,7 @@
 	//
 	exports.lib                 = {};
 	exports.lib.mdurl           = __webpack_require__(45);
-	exports.lib.ucmicro         = __webpack_require__(147);
+	exports.lib.ucmicro         = __webpack_require__(168);
 
 	exports.assign              = assign;
 	exports.isString            = isString;
@@ -1329,7 +1347,7 @@
 
 	function getDocblock(state) {
 	  if (!state.g.docblock) {
-	    var docblock = __webpack_require__(157);
+	    var docblock = __webpack_require__(183);
 	    state.g.docblock =
 	      docblock.parseAsObject(docblock.extract(state.g.source));
 	  }
@@ -9288,7 +9306,7 @@
 
 	var isLength = __webpack_require__(6),
 	    isNative = __webpack_require__(9),
-	    isObjectLike = __webpack_require__(8);
+	    isObjectLike = __webpack_require__(7);
 
 	/** `Object#toString` result references. */
 	var arrayTag = '[object Array]';
@@ -9378,12 +9396,6 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = React;
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/**
 	 * Checks if `value` is object-like.
 	 *
@@ -9399,11 +9411,17 @@
 
 
 /***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = React;
+
+/***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var escapeRegExp = __webpack_require__(94),
-	    isObjectLike = __webpack_require__(8);
+	var escapeRegExp = __webpack_require__(101),
+	    isObjectLike = __webpack_require__(7);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]';
@@ -9496,10 +9514,10 @@
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(12),
+	var isArrayLike = __webpack_require__(13),
 	    isNative = __webpack_require__(9),
 	    isObject = __webpack_require__(10),
-	    shimKeys = __webpack_require__(90);
+	    shimKeys = __webpack_require__(94);
 
 	/* Native method references for those with the same name as other `lodash` methods. */
 	var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
@@ -9547,7 +9565,29 @@
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(33),
+	/**
+	 * Converts `value` to a string if it is not one. An empty string is returned
+	 * for `null` or `undefined` values.
+	 *
+	 * @private
+	 * @param {*} value The value to process.
+	 * @returns {string} Returns the string.
+	 */
+	function baseToString(value) {
+	  if (typeof value == 'string') {
+	    return value;
+	  }
+	  return value == null ? '' : (value + '');
+	}
+
+	module.exports = baseToString;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getLength = __webpack_require__(34),
 	    isLength = __webpack_require__(6);
 
 	/**
@@ -9565,7 +9605,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Parse link destination
@@ -9650,7 +9690,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Parse link title
@@ -9709,7 +9749,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
@@ -9920,7 +9960,7 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10205,7 +10245,7 @@
 	  state.g.visitors = visitors;
 
 	  if (options.sourceMap) {
-	    var SourceMapGenerator = __webpack_require__(152).SourceMapGenerator;
+	    var SourceMapGenerator = __webpack_require__(178).SourceMapGenerator;
 	    state.g.sourceMap = new SourceMapGenerator({file: options.filename || 'transformed.js'});
 	  }
 
@@ -10225,7 +10265,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10305,7 +10345,7 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10318,7 +10358,7 @@
 	 */
 	/*global exports:true*/
 	'use strict';
-	var Syntax = __webpack_require__(16).Syntax;
+	var Syntax = __webpack_require__(17).Syntax;
 	var utils = __webpack_require__(2);
 
 	function renderJSXLiteral(object, isLast, state, start, end) {
@@ -10422,7 +10462,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10449,7 +10489,41 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isArrayLike = __webpack_require__(13),
+	    isIndex = __webpack_require__(20),
+	    isObject = __webpack_require__(10);
+
+	/**
+	 * Checks if the provided arguments are from an iteratee call.
+	 *
+	 * @private
+	 * @param {*} value The potential iteratee value argument.
+	 * @param {*} index The potential iteratee index or key argument.
+	 * @param {*} object The potential iteratee object argument.
+	 * @returns {boolean} Returns `true` if the arguments are from an iteratee call, else `false`.
+	 */
+	function isIterateeCall(value, index, object) {
+	  if (!isObject(object)) {
+	    return false;
+	  }
+	  var type = typeof index;
+	  if (type == 'number'
+	      ? (isArrayLike(object) && isIndex(index, object.length))
+	      : (type == 'string' && index in object)) {
+	    var other = object[index];
+	    return value === value ? (value === other) : (other !== other);
+	  }
+	  return false;
+	}
+
+	module.exports = isIterateeCall;
+
+
+/***/ },
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Parse link label
@@ -10503,7 +10577,7 @@
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -10861,7 +10935,7 @@
 
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Token class
@@ -11016,13 +11090,13 @@
 
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports=/[!-#%-\*,-/:;\?@\[-\]_\{\}\xA1\xA7\xAB\xB6\xB7\xBB\xBF\u037E\u0387\u055A-\u055F\u0589\u058A\u05BE\u05C0\u05C3\u05C6\u05F3\u05F4\u0609\u060A\u060C\u060D\u061B\u061E\u061F\u066A-\u066D\u06D4\u0700-\u070D\u07F7-\u07F9\u0830-\u083E\u085E\u0964\u0965\u0970\u0AF0\u0DF4\u0E4F\u0E5A\u0E5B\u0F04-\u0F12\u0F14\u0F3A-\u0F3D\u0F85\u0FD0-\u0FD4\u0FD9\u0FDA\u104A-\u104F\u10FB\u1360-\u1368\u1400\u166D\u166E\u169B\u169C\u16EB-\u16ED\u1735\u1736\u17D4-\u17D6\u17D8-\u17DA\u1800-\u180A\u1944\u1945\u1A1E\u1A1F\u1AA0-\u1AA6\u1AA8-\u1AAD\u1B5A-\u1B60\u1BFC-\u1BFF\u1C3B-\u1C3F\u1C7E\u1C7F\u1CC0-\u1CC7\u1CD3\u2010-\u2027\u2030-\u2043\u2045-\u2051\u2053-\u205E\u207D\u207E\u208D\u208E\u2308-\u230B\u2329\u232A\u2768-\u2775\u27C5\u27C6\u27E6-\u27EF\u2983-\u2998\u29D8-\u29DB\u29FC\u29FD\u2CF9-\u2CFC\u2CFE\u2CFF\u2D70\u2E00-\u2E2E\u2E30-\u2E42\u3001-\u3003\u3008-\u3011\u3014-\u301F\u3030\u303D\u30A0\u30FB\uA4FE\uA4FF\uA60D-\uA60F\uA673\uA67E\uA6F2-\uA6F7\uA874-\uA877\uA8CE\uA8CF\uA8F8-\uA8FA\uA92E\uA92F\uA95F\uA9C1-\uA9CD\uA9DE\uA9DF\uAA5C-\uAA5F\uAADE\uAADF\uAAF0\uAAF1\uABEB\uFD3E\uFD3F\uFE10-\uFE19\uFE30-\uFE52\uFE54-\uFE61\uFE63\uFE68\uFE6A\uFE6B\uFF01-\uFF03\uFF05-\uFF0A\uFF0C-\uFF0F\uFF1A\uFF1B\uFF1F\uFF20\uFF3B-\uFF3D\uFF3F\uFF5B\uFF5D\uFF5F-\uFF65]|\uD800[\uDD00-\uDD02\uDF9F\uDFD0]|\uD801\uDD6F|\uD802[\uDC57\uDD1F\uDD3F\uDE50-\uDE58\uDE7F\uDEF0-\uDEF6\uDF39-\uDF3F\uDF99-\uDF9C]|\uD804[\uDC47-\uDC4D\uDCBB\uDCBC\uDCBE-\uDCC1\uDD40-\uDD43\uDD74\uDD75\uDDC5-\uDDC8\uDDCD\uDE38-\uDE3D]|\uD805[\uDCC6\uDDC1-\uDDC9\uDE41-\uDE43]|\uD809[\uDC70-\uDC74]|\uD81A[\uDE6E\uDE6F\uDEF5\uDF37-\uDF3B\uDF44]|\uD82F\uDC9F/
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11134,14 +11208,14 @@
 
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMatches = __webpack_require__(75),
-	    baseMatchesProperty = __webpack_require__(76),
-	    bindCallback = __webpack_require__(32),
+	var baseMatches = __webpack_require__(77),
+	    baseMatchesProperty = __webpack_require__(78),
+	    bindCallback = __webpack_require__(33),
 	    identity = __webpack_require__(43),
-	    property = __webpack_require__(95);
+	    property = __webpack_require__(103);
 
 	/**
 	 * The base implementation of `_.callback` which supports specifying the
@@ -11175,11 +11249,11 @@
 
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseForOwn = __webpack_require__(71),
-	    createBaseEach = __webpack_require__(83);
+	var baseForOwn = __webpack_require__(73),
+	    createBaseEach = __webpack_require__(85);
 
 	/**
 	 * The base implementation of `_.forEach` without support for callback
@@ -11196,10 +11270,10 @@
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createBaseFor = __webpack_require__(84);
+	var createBaseFor = __webpack_require__(86);
 
 	/**
 	 * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -11219,7 +11293,7 @@
 
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var toObject = __webpack_require__(5);
@@ -11254,10 +11328,10 @@
 
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqualDeep = __webpack_require__(72);
+	var baseIsEqualDeep = __webpack_require__(74);
 
 	/**
 	 * The base implementation of `_.isEqual` without support for `this` binding
@@ -11293,7 +11367,7 @@
 
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -11313,29 +11387,7 @@
 
 
 /***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Converts `value` to a string if it is not one. An empty string is returned
-	 * for `null` or `undefined` values.
-	 *
-	 * @private
-	 * @param {*} value The value to process.
-	 * @returns {string} Returns the string.
-	 */
-	function baseToString(value) {
-	  if (typeof value == 'string') {
-	    return value;
-	  }
-	  return value == null ? '' : (value + '');
-	}
-
-	module.exports = baseToString;
-
-
-/***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var identity = __webpack_require__(43);
@@ -11380,10 +11432,10 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(30);
+	var baseProperty = __webpack_require__(32);
 
 	/**
 	 * Gets the "length" property value of `object`.
@@ -11401,7 +11453,7 @@
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var constant = __webpack_require__(42),
@@ -11423,40 +11475,6 @@
 	};
 
 	module.exports = getSymbols;
-
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isArrayLike = __webpack_require__(12),
-	    isIndex = __webpack_require__(19),
-	    isObject = __webpack_require__(10);
-
-	/**
-	 * Checks if the provided arguments are from an iteratee call.
-	 *
-	 * @private
-	 * @param {*} value The potential iteratee value argument.
-	 * @param {*} index The potential iteratee index or key argument.
-	 * @param {*} object The potential iteratee object argument.
-	 * @returns {boolean} Returns `true` if the arguments are from an iteratee call, else `false`.
-	 */
-	function isIterateeCall(value, index, object) {
-	  if (!isObject(object)) {
-	    return false;
-	  }
-	  var type = typeof index;
-	  if (type == 'number'
-	      ? (isArrayLike(object) && isIndex(index, object.length))
-	      : (type == 'string' && index in object)) {
-	    var other = object[index];
-	    return value === value ? (value === other) : (other !== other);
-	  }
-	  return false;
-	}
-
-	module.exports = isIterateeCall;
 
 
 /***/ },
@@ -11518,7 +11536,7 @@
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(31),
+	var baseToString = __webpack_require__(12),
 	    isArray = __webpack_require__(4);
 
 	/** Used to match property names within property paths. */
@@ -11552,8 +11570,8 @@
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isArrayLike = __webpack_require__(12),
-	    isObjectLike = __webpack_require__(8);
+	var isArrayLike = __webpack_require__(13),
+	    isObjectLike = __webpack_require__(7);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]';
@@ -11596,7 +11614,7 @@
 
 	var isArguments = __webpack_require__(39),
 	    isArray = __webpack_require__(4),
-	    isIndex = __webpack_require__(19),
+	    isIndex = __webpack_require__(20),
 	    isLength = __webpack_require__(6),
 	    isObject = __webpack_require__(10),
 	    support = __webpack_require__(41);
@@ -11809,7 +11827,7 @@
 	'use strict';
 
 	/*eslint quotes:0*/
-	module.exports = __webpack_require__(59);
+	module.exports = __webpack_require__(60);
 
 
 /***/ },
@@ -11819,10 +11837,10 @@
 	'use strict';
 
 
-	module.exports.encode = __webpack_require__(143);
-	module.exports.decode = __webpack_require__(142);
-	module.exports.format = __webpack_require__(144);
-	module.exports.parse  = __webpack_require__(145);
+	module.exports.encode = __webpack_require__(164);
+	module.exports.decode = __webpack_require__(163);
+	module.exports.format = __webpack_require__(165);
+	module.exports.parse  = __webpack_require__(166);
 
 
 /***/ },
@@ -11847,931 +11865,6 @@
 /* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
-	/*
-	 * Copyright 2011 Mozilla Foundation and contributors
-	 * Licensed under the New BSD license. See LICENSE or:
-	 * http://opensource.org/licenses/BSD-3-Clause
-	 */
-	if (false) {
-	    var define = require('amdefine')(module, require);
-	}
-	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
-
-	  var util = __webpack_require__(15);
-
-	  /**
-	   * A data structure which is a combination of an array and a set. Adding a new
-	   * member is O(1), testing for membership is O(1), and finding the index of an
-	   * element is O(1). Removing elements from the set is not supported. Only
-	   * strings are supported for membership.
-	   */
-	  function ArraySet() {
-	    this._array = [];
-	    this._set = {};
-	  }
-
-	  /**
-	   * Static method for creating ArraySet instances from an existing array.
-	   */
-	  ArraySet.fromArray = function ArraySet_fromArray(aArray, aAllowDuplicates) {
-	    var set = new ArraySet();
-	    for (var i = 0, len = aArray.length; i < len; i++) {
-	      set.add(aArray[i], aAllowDuplicates);
-	    }
-	    return set;
-	  };
-
-	  /**
-	   * Add the given string to this set.
-	   *
-	   * @param String aStr
-	   */
-	  ArraySet.prototype.add = function ArraySet_add(aStr, aAllowDuplicates) {
-	    var isDuplicate = this.has(aStr);
-	    var idx = this._array.length;
-	    if (!isDuplicate || aAllowDuplicates) {
-	      this._array.push(aStr);
-	    }
-	    if (!isDuplicate) {
-	      this._set[util.toSetString(aStr)] = idx;
-	    }
-	  };
-
-	  /**
-	   * Is the given string a member of this set?
-	   *
-	   * @param String aStr
-	   */
-	  ArraySet.prototype.has = function ArraySet_has(aStr) {
-	    return Object.prototype.hasOwnProperty.call(this._set,
-	                                                util.toSetString(aStr));
-	  };
-
-	  /**
-	   * What is the index of the given string in the array?
-	   *
-	   * @param String aStr
-	   */
-	  ArraySet.prototype.indexOf = function ArraySet_indexOf(aStr) {
-	    if (this.has(aStr)) {
-	      return this._set[util.toSetString(aStr)];
-	    }
-	    throw new Error('"' + aStr + '" is not in the set.');
-	  };
-
-	  /**
-	   * What is the element at the given index?
-	   *
-	   * @param Number aIdx
-	   */
-	  ArraySet.prototype.at = function ArraySet_at(aIdx) {
-	    if (aIdx >= 0 && aIdx < this._array.length) {
-	      return this._array[aIdx];
-	    }
-	    throw new Error('No element indexed by ' + aIdx);
-	  };
-
-	  /**
-	   * Returns the array representation of this set (which has the proper indices
-	   * indicated by indexOf). Note that this is a copy of the internal array used
-	   * for storing the members so that no one can mess with internal state.
-	   */
-	  ArraySet.prototype.toArray = function ArraySet_toArray() {
-	    return this._array.slice();
-	  };
-
-	  exports.ArraySet = ArraySet;
-
-	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
-	/*
-	 * Copyright 2011 Mozilla Foundation and contributors
-	 * Licensed under the New BSD license. See LICENSE or:
-	 * http://opensource.org/licenses/BSD-3-Clause
-	 *
-	 * Based on the Base 64 VLQ implementation in Closure Compiler:
-	 * https://code.google.com/p/closure-compiler/source/browse/trunk/src/com/google/debugging/sourcemap/Base64VLQ.java
-	 *
-	 * Copyright 2011 The Closure Compiler Authors. All rights reserved.
-	 * Redistribution and use in source and binary forms, with or without
-	 * modification, are permitted provided that the following conditions are
-	 * met:
-	 *
-	 *  * Redistributions of source code must retain the above copyright
-	 *    notice, this list of conditions and the following disclaimer.
-	 *  * Redistributions in binary form must reproduce the above
-	 *    copyright notice, this list of conditions and the following
-	 *    disclaimer in the documentation and/or other materials provided
-	 *    with the distribution.
-	 *  * Neither the name of Google Inc. nor the names of its
-	 *    contributors may be used to endorse or promote products derived
-	 *    from this software without specific prior written permission.
-	 *
-	 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-	 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-	 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-	 * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-	 * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-	 * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-	 * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-	 * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-	 * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-	 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-	 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-	 */
-	if (false) {
-	    var define = require('amdefine')(module, require);
-	}
-	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
-
-	  var base64 = __webpack_require__(153);
-
-	  // A single base 64 digit can contain 6 bits of data. For the base 64 variable
-	  // length quantities we use in the source map spec, the first bit is the sign,
-	  // the next four bits are the actual value, and the 6th bit is the
-	  // continuation bit. The continuation bit tells us whether there are more
-	  // digits in this value following this digit.
-	  //
-	  //   Continuation
-	  //   |    Sign
-	  //   |    |
-	  //   V    V
-	  //   101011
-
-	  var VLQ_BASE_SHIFT = 5;
-
-	  // binary: 100000
-	  var VLQ_BASE = 1 << VLQ_BASE_SHIFT;
-
-	  // binary: 011111
-	  var VLQ_BASE_MASK = VLQ_BASE - 1;
-
-	  // binary: 100000
-	  var VLQ_CONTINUATION_BIT = VLQ_BASE;
-
-	  /**
-	   * Converts from a two-complement value to a value where the sign bit is
-	   * is placed in the least significant bit.  For example, as decimals:
-	   *   1 becomes 2 (10 binary), -1 becomes 3 (11 binary)
-	   *   2 becomes 4 (100 binary), -2 becomes 5 (101 binary)
-	   */
-	  function toVLQSigned(aValue) {
-	    return aValue < 0
-	      ? ((-aValue) << 1) + 1
-	      : (aValue << 1) + 0;
-	  }
-
-	  /**
-	   * Converts to a two-complement value from a value where the sign bit is
-	   * is placed in the least significant bit.  For example, as decimals:
-	   *   2 (10 binary) becomes 1, 3 (11 binary) becomes -1
-	   *   4 (100 binary) becomes 2, 5 (101 binary) becomes -2
-	   */
-	  function fromVLQSigned(aValue) {
-	    var isNegative = (aValue & 1) === 1;
-	    var shifted = aValue >> 1;
-	    return isNegative
-	      ? -shifted
-	      : shifted;
-	  }
-
-	  /**
-	   * Returns the base 64 VLQ encoded value.
-	   */
-	  exports.encode = function base64VLQ_encode(aValue) {
-	    var encoded = "";
-	    var digit;
-
-	    var vlq = toVLQSigned(aValue);
-
-	    do {
-	      digit = vlq & VLQ_BASE_MASK;
-	      vlq >>>= VLQ_BASE_SHIFT;
-	      if (vlq > 0) {
-	        // There are still more digits in this value, so we must make sure the
-	        // continuation bit is marked.
-	        digit |= VLQ_CONTINUATION_BIT;
-	      }
-	      encoded += base64.encode(digit);
-	    } while (vlq > 0);
-
-	    return encoded;
-	  };
-
-	  /**
-	   * Decodes the next base 64 VLQ value from the given string and returns the
-	   * value and the rest of the string.
-	   */
-	  exports.decode = function base64VLQ_decode(aStr) {
-	    var i = 0;
-	    var strLen = aStr.length;
-	    var result = 0;
-	    var shift = 0;
-	    var continuation, digit;
-
-	    do {
-	      if (i >= strLen) {
-	        throw new Error("Expected more digits in base 64 VLQ value.");
-	      }
-	      digit = base64.decode(aStr.charAt(i++));
-	      continuation = !!(digit & VLQ_CONTINUATION_BIT);
-	      digit &= VLQ_BASE_MASK;
-	      result = result + (digit << shift);
-	      shift += VLQ_BASE_SHIFT;
-	    } while (continuation);
-
-	    return {
-	      value: fromVLQSigned(result),
-	      rest: aStr.slice(i)
-	    };
-	  };
-
-	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
-	/*
-	 * Copyright 2011 Mozilla Foundation and contributors
-	 * Licensed under the New BSD license. See LICENSE or:
-	 * http://opensource.org/licenses/BSD-3-Clause
-	 */
-	if (false) {
-	    var define = require('amdefine')(module, require);
-	}
-	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
-
-	  var base64VLQ = __webpack_require__(50);
-	  var util = __webpack_require__(15);
-	  var ArraySet = __webpack_require__(49).ArraySet;
-
-	  /**
-	   * An instance of the SourceMapGenerator represents a source map which is
-	   * being built incrementally. To create a new one, you must pass an object
-	   * with the following properties:
-	   *
-	   *   - file: The filename of the generated source.
-	   *   - sourceRoot: An optional root for all URLs in this source map.
-	   */
-	  function SourceMapGenerator(aArgs) {
-	    this._file = util.getArg(aArgs, 'file');
-	    this._sourceRoot = util.getArg(aArgs, 'sourceRoot', null);
-	    this._sources = new ArraySet();
-	    this._names = new ArraySet();
-	    this._mappings = [];
-	    this._sourcesContents = null;
-	  }
-
-	  SourceMapGenerator.prototype._version = 3;
-
-	  /**
-	   * Creates a new SourceMapGenerator based on a SourceMapConsumer
-	   *
-	   * @param aSourceMapConsumer The SourceMap.
-	   */
-	  SourceMapGenerator.fromSourceMap =
-	    function SourceMapGenerator_fromSourceMap(aSourceMapConsumer) {
-	      var sourceRoot = aSourceMapConsumer.sourceRoot;
-	      var generator = new SourceMapGenerator({
-	        file: aSourceMapConsumer.file,
-	        sourceRoot: sourceRoot
-	      });
-	      aSourceMapConsumer.eachMapping(function (mapping) {
-	        var newMapping = {
-	          generated: {
-	            line: mapping.generatedLine,
-	            column: mapping.generatedColumn
-	          }
-	        };
-
-	        if (mapping.source) {
-	          newMapping.source = mapping.source;
-	          if (sourceRoot) {
-	            newMapping.source = util.relative(sourceRoot, newMapping.source);
-	          }
-
-	          newMapping.original = {
-	            line: mapping.originalLine,
-	            column: mapping.originalColumn
-	          };
-
-	          if (mapping.name) {
-	            newMapping.name = mapping.name;
-	          }
-	        }
-
-	        generator.addMapping(newMapping);
-	      });
-	      aSourceMapConsumer.sources.forEach(function (sourceFile) {
-	        var content = aSourceMapConsumer.sourceContentFor(sourceFile);
-	        if (content) {
-	          generator.setSourceContent(sourceFile, content);
-	        }
-	      });
-	      return generator;
-	    };
-
-	  /**
-	   * Add a single mapping from original source line and column to the generated
-	   * source's line and column for this source map being created. The mapping
-	   * object should have the following properties:
-	   *
-	   *   - generated: An object with the generated line and column positions.
-	   *   - original: An object with the original line and column positions.
-	   *   - source: The original source file (relative to the sourceRoot).
-	   *   - name: An optional original token name for this mapping.
-	   */
-	  SourceMapGenerator.prototype.addMapping =
-	    function SourceMapGenerator_addMapping(aArgs) {
-	      var generated = util.getArg(aArgs, 'generated');
-	      var original = util.getArg(aArgs, 'original', null);
-	      var source = util.getArg(aArgs, 'source', null);
-	      var name = util.getArg(aArgs, 'name', null);
-
-	      this._validateMapping(generated, original, source, name);
-
-	      if (source && !this._sources.has(source)) {
-	        this._sources.add(source);
-	      }
-
-	      if (name && !this._names.has(name)) {
-	        this._names.add(name);
-	      }
-
-	      this._mappings.push({
-	        generatedLine: generated.line,
-	        generatedColumn: generated.column,
-	        originalLine: original != null && original.line,
-	        originalColumn: original != null && original.column,
-	        source: source,
-	        name: name
-	      });
-	    };
-
-	  /**
-	   * Set the source content for a source file.
-	   */
-	  SourceMapGenerator.prototype.setSourceContent =
-	    function SourceMapGenerator_setSourceContent(aSourceFile, aSourceContent) {
-	      var source = aSourceFile;
-	      if (this._sourceRoot) {
-	        source = util.relative(this._sourceRoot, source);
-	      }
-
-	      if (aSourceContent !== null) {
-	        // Add the source content to the _sourcesContents map.
-	        // Create a new _sourcesContents map if the property is null.
-	        if (!this._sourcesContents) {
-	          this._sourcesContents = {};
-	        }
-	        this._sourcesContents[util.toSetString(source)] = aSourceContent;
-	      } else {
-	        // Remove the source file from the _sourcesContents map.
-	        // If the _sourcesContents map is empty, set the property to null.
-	        delete this._sourcesContents[util.toSetString(source)];
-	        if (Object.keys(this._sourcesContents).length === 0) {
-	          this._sourcesContents = null;
-	        }
-	      }
-	    };
-
-	  /**
-	   * Applies the mappings of a sub-source-map for a specific source file to the
-	   * source map being generated. Each mapping to the supplied source file is
-	   * rewritten using the supplied source map. Note: The resolution for the
-	   * resulting mappings is the minimium of this map and the supplied map.
-	   *
-	   * @param aSourceMapConsumer The source map to be applied.
-	   * @param aSourceFile Optional. The filename of the source file.
-	   *        If omitted, SourceMapConsumer's file property will be used.
-	   */
-	  SourceMapGenerator.prototype.applySourceMap =
-	    function SourceMapGenerator_applySourceMap(aSourceMapConsumer, aSourceFile) {
-	      // If aSourceFile is omitted, we will use the file property of the SourceMap
-	      if (!aSourceFile) {
-	        aSourceFile = aSourceMapConsumer.file;
-	      }
-	      var sourceRoot = this._sourceRoot;
-	      // Make "aSourceFile" relative if an absolute Url is passed.
-	      if (sourceRoot) {
-	        aSourceFile = util.relative(sourceRoot, aSourceFile);
-	      }
-	      // Applying the SourceMap can add and remove items from the sources and
-	      // the names array.
-	      var newSources = new ArraySet();
-	      var newNames = new ArraySet();
-
-	      // Find mappings for the "aSourceFile"
-	      this._mappings.forEach(function (mapping) {
-	        if (mapping.source === aSourceFile && mapping.originalLine) {
-	          // Check if it can be mapped by the source map, then update the mapping.
-	          var original = aSourceMapConsumer.originalPositionFor({
-	            line: mapping.originalLine,
-	            column: mapping.originalColumn
-	          });
-	          if (original.source !== null) {
-	            // Copy mapping
-	            if (sourceRoot) {
-	              mapping.source = util.relative(sourceRoot, original.source);
-	            } else {
-	              mapping.source = original.source;
-	            }
-	            mapping.originalLine = original.line;
-	            mapping.originalColumn = original.column;
-	            if (original.name !== null && mapping.name !== null) {
-	              // Only use the identifier name if it's an identifier
-	              // in both SourceMaps
-	              mapping.name = original.name;
-	            }
-	          }
-	        }
-
-	        var source = mapping.source;
-	        if (source && !newSources.has(source)) {
-	          newSources.add(source);
-	        }
-
-	        var name = mapping.name;
-	        if (name && !newNames.has(name)) {
-	          newNames.add(name);
-	        }
-
-	      }, this);
-	      this._sources = newSources;
-	      this._names = newNames;
-
-	      // Copy sourcesContents of applied map.
-	      aSourceMapConsumer.sources.forEach(function (sourceFile) {
-	        var content = aSourceMapConsumer.sourceContentFor(sourceFile);
-	        if (content) {
-	          if (sourceRoot) {
-	            sourceFile = util.relative(sourceRoot, sourceFile);
-	          }
-	          this.setSourceContent(sourceFile, content);
-	        }
-	      }, this);
-	    };
-
-	  /**
-	   * A mapping can have one of the three levels of data:
-	   *
-	   *   1. Just the generated position.
-	   *   2. The Generated position, original position, and original source.
-	   *   3. Generated and original position, original source, as well as a name
-	   *      token.
-	   *
-	   * To maintain consistency, we validate that any new mapping being added falls
-	   * in to one of these categories.
-	   */
-	  SourceMapGenerator.prototype._validateMapping =
-	    function SourceMapGenerator_validateMapping(aGenerated, aOriginal, aSource,
-	                                                aName) {
-	      if (aGenerated && 'line' in aGenerated && 'column' in aGenerated
-	          && aGenerated.line > 0 && aGenerated.column >= 0
-	          && !aOriginal && !aSource && !aName) {
-	        // Case 1.
-	        return;
-	      }
-	      else if (aGenerated && 'line' in aGenerated && 'column' in aGenerated
-	               && aOriginal && 'line' in aOriginal && 'column' in aOriginal
-	               && aGenerated.line > 0 && aGenerated.column >= 0
-	               && aOriginal.line > 0 && aOriginal.column >= 0
-	               && aSource) {
-	        // Cases 2 and 3.
-	        return;
-	      }
-	      else {
-	        throw new Error('Invalid mapping: ' + JSON.stringify({
-	          generated: aGenerated,
-	          source: aSource,
-	          orginal: aOriginal,
-	          name: aName
-	        }));
-	      }
-	    };
-
-	  /**
-	   * Serialize the accumulated mappings in to the stream of base 64 VLQs
-	   * specified by the source map format.
-	   */
-	  SourceMapGenerator.prototype._serializeMappings =
-	    function SourceMapGenerator_serializeMappings() {
-	      var previousGeneratedColumn = 0;
-	      var previousGeneratedLine = 1;
-	      var previousOriginalColumn = 0;
-	      var previousOriginalLine = 0;
-	      var previousName = 0;
-	      var previousSource = 0;
-	      var result = '';
-	      var mapping;
-
-	      // The mappings must be guaranteed to be in sorted order before we start
-	      // serializing them or else the generated line numbers (which are defined
-	      // via the ';' separators) will be all messed up. Note: it might be more
-	      // performant to maintain the sorting as we insert them, rather than as we
-	      // serialize them, but the big O is the same either way.
-	      this._mappings.sort(util.compareByGeneratedPositions);
-
-	      for (var i = 0, len = this._mappings.length; i < len; i++) {
-	        mapping = this._mappings[i];
-
-	        if (mapping.generatedLine !== previousGeneratedLine) {
-	          previousGeneratedColumn = 0;
-	          while (mapping.generatedLine !== previousGeneratedLine) {
-	            result += ';';
-	            previousGeneratedLine++;
-	          }
-	        }
-	        else {
-	          if (i > 0) {
-	            if (!util.compareByGeneratedPositions(mapping, this._mappings[i - 1])) {
-	              continue;
-	            }
-	            result += ',';
-	          }
-	        }
-
-	        result += base64VLQ.encode(mapping.generatedColumn
-	                                   - previousGeneratedColumn);
-	        previousGeneratedColumn = mapping.generatedColumn;
-
-	        if (mapping.source) {
-	          result += base64VLQ.encode(this._sources.indexOf(mapping.source)
-	                                     - previousSource);
-	          previousSource = this._sources.indexOf(mapping.source);
-
-	          // lines are stored 0-based in SourceMap spec version 3
-	          result += base64VLQ.encode(mapping.originalLine - 1
-	                                     - previousOriginalLine);
-	          previousOriginalLine = mapping.originalLine - 1;
-
-	          result += base64VLQ.encode(mapping.originalColumn
-	                                     - previousOriginalColumn);
-	          previousOriginalColumn = mapping.originalColumn;
-
-	          if (mapping.name) {
-	            result += base64VLQ.encode(this._names.indexOf(mapping.name)
-	                                       - previousName);
-	            previousName = this._names.indexOf(mapping.name);
-	          }
-	        }
-	      }
-
-	      return result;
-	    };
-
-	  SourceMapGenerator.prototype._generateSourcesContent =
-	    function SourceMapGenerator_generateSourcesContent(aSources, aSourceRoot) {
-	      return aSources.map(function (source) {
-	        if (!this._sourcesContents) {
-	          return null;
-	        }
-	        if (aSourceRoot) {
-	          source = util.relative(aSourceRoot, source);
-	        }
-	        var key = util.toSetString(source);
-	        return Object.prototype.hasOwnProperty.call(this._sourcesContents,
-	                                                    key)
-	          ? this._sourcesContents[key]
-	          : null;
-	      }, this);
-	    };
-
-	  /**
-	   * Externalize the source map.
-	   */
-	  SourceMapGenerator.prototype.toJSON =
-	    function SourceMapGenerator_toJSON() {
-	      var map = {
-	        version: this._version,
-	        file: this._file,
-	        sources: this._sources.toArray(),
-	        names: this._names.toArray(),
-	        mappings: this._serializeMappings()
-	      };
-	      if (this._sourceRoot) {
-	        map.sourceRoot = this._sourceRoot;
-	      }
-	      if (this._sourcesContents) {
-	        map.sourcesContent = this._generateSourcesContent(map.sources, map.sourceRoot);
-	      }
-
-	      return map;
-	    };
-
-	  /**
-	   * Render the source map being generated to a string.
-	   */
-	  SourceMapGenerator.prototype.toString =
-	    function SourceMapGenerator_toString() {
-	      return JSON.stringify(this);
-	    };
-
-	  exports.SourceMapGenerator = SourceMapGenerator;
-
-	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright 2014 Facebook, Inc.
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 * http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 */
-	/*global exports:true*/
-
-	/**
-	 * Implements ES6 destructuring assignment and pattern matchng.
-	 *
-	 * function init({port, ip, coords: [x, y]}) {
-	 *   return (x && y) ? {id, port} : {ip};
-	 * };
-	 *
-	 * function init($__0) {
-	 *   var
-	 *    port = $__0.port,
-	 *    ip = $__0.ip,
-	 *    $__1 = $__0.coords,
-	 *    x = $__1[0],
-	 *    y = $__1[1];
-	 *   return (x && y) ? {id, port} : {ip};
-	 * }
-	 *
-	 * var x, {ip, port} = init({ip, port});
-	 *
-	 * var x, $__0 = init({ip, port}), ip = $__0.ip, port = $__0.port;
-	 *
-	 */
-	var Syntax = __webpack_require__(3).Syntax;
-	var utils = __webpack_require__(2);
-
-	var reservedWordsHelper = __webpack_require__(17);
-	var restParamVisitors = __webpack_require__(24);
-	var restPropertyHelpers = __webpack_require__(164);
-
-	// -------------------------------------------------------
-	// 1. Structured variable declarations.
-	//
-	// var [a, b] = [b, a];
-	// var {x, y} = {y, x};
-	// -------------------------------------------------------
-
-	function visitStructuredVariable(traverse, node, path, state) {
-	  // Allocate new temp for the pattern.
-	  utils.append(utils.getTempVar(state.localScope.tempVarIndex) + '=', state);
-	  // Skip the pattern and assign the init to the temp.
-	  utils.catchupWhiteSpace(node.init.range[0], state);
-	  traverse(node.init, path, state);
-	  utils.catchup(node.init.range[1], state);
-	  // Render the destructured data.
-	  utils.append(',' + getDestructuredComponents(node.id, state), state);
-	  state.localScope.tempVarIndex++;
-	  return false;
-	}
-
-	visitStructuredVariable.test = function(node, path, state) {
-	  return node.type === Syntax.VariableDeclarator &&
-	    isStructuredPattern(node.id);
-	};
-
-	function isStructuredPattern(node) {
-	  return node.type === Syntax.ObjectPattern ||
-	    node.type === Syntax.ArrayPattern;
-	}
-
-	// Main function which does actual recursive destructuring
-	// of nested complex structures.
-	function getDestructuredComponents(node, state) {
-	  var tmpIndex = state.localScope.tempVarIndex;
-	  var components = [];
-	  var patternItems = getPatternItems(node);
-
-	  for (var idx = 0; idx < patternItems.length; idx++) {
-	    var item = patternItems[idx];
-	    if (!item) {
-	      continue;
-	    }
-
-	    if (item.type === Syntax.SpreadElement) {
-	      // Spread/rest of an array.
-	      // TODO(dmitrys): support spread in the middle of a pattern
-	      // and also for function param patterns: [x, ...xs, y]
-	      components.push(item.argument.name +
-	        '=Array.prototype.slice.call(' +
-	        utils.getTempVar(tmpIndex) + ',' + idx + ')'
-	      );
-	      continue;
-	    }
-
-	    if (item.type === Syntax.SpreadProperty) {
-	      var restExpression = restPropertyHelpers.renderRestExpression(
-	        utils.getTempVar(tmpIndex),
-	        patternItems
-	      );
-	      components.push(item.argument.name + '=' + restExpression);
-	      continue;
-	    }
-
-	    // Depending on pattern type (Array or Object), we get
-	    // corresponding pattern item parts.
-	    var accessor = getPatternItemAccessor(node, item, tmpIndex, idx);
-	    var value = getPatternItemValue(node, item);
-
-	    // TODO(dmitrys): implement default values: {x, y=5}
-	    if (value.type === Syntax.Identifier) {
-	      // Simple pattern item.
-	      components.push(value.name + '=' + accessor);
-	    } else {
-	      // Complex sub-structure.
-	      components.push(
-	        utils.getTempVar(++state.localScope.tempVarIndex) + '=' + accessor +
-	        ',' + getDestructuredComponents(value, state)
-	      );
-	    }
-	  }
-
-	  return components.join(',');
-	}
-
-	function getPatternItems(node) {
-	  return node.properties || node.elements;
-	}
-
-	function getPatternItemAccessor(node, patternItem, tmpIndex, idx) {
-	  var tmpName = utils.getTempVar(tmpIndex);
-	  if (node.type === Syntax.ObjectPattern) {
-	    if (reservedWordsHelper.isReservedWord(patternItem.key.name)) {
-	      return tmpName + '["' + patternItem.key.name + '"]';
-	    } else if (patternItem.key.type === Syntax.Literal) {
-	      return tmpName + '[' + JSON.stringify(patternItem.key.value) + ']';
-	    } else if (patternItem.key.type === Syntax.Identifier) {
-	      return tmpName + '.' + patternItem.key.name;
-	    }
-	  } else if (node.type === Syntax.ArrayPattern) {
-	    return tmpName + '[' + idx + ']';
-	  }
-	}
-
-	function getPatternItemValue(node, patternItem) {
-	  return node.type === Syntax.ObjectPattern
-	    ? patternItem.value
-	    : patternItem;
-	}
-
-	// -------------------------------------------------------
-	// 2. Assignment expression.
-	//
-	// [a, b] = [b, a];
-	// ({x, y} = {y, x});
-	// -------------------------------------------------------
-
-	function visitStructuredAssignment(traverse, node, path, state) {
-	  var exprNode = node.expression;
-	  utils.append('var ' + utils.getTempVar(state.localScope.tempVarIndex) + '=', state);
-
-	  utils.catchupWhiteSpace(exprNode.right.range[0], state);
-	  traverse(exprNode.right, path, state);
-	  utils.catchup(exprNode.right.range[1], state);
-
-	  utils.append(
-	    ';' + getDestructuredComponents(exprNode.left, state) + ';',
-	    state
-	  );
-
-	  utils.catchupWhiteSpace(node.range[1], state);
-	  state.localScope.tempVarIndex++;
-	  return false;
-	}
-
-	visitStructuredAssignment.test = function(node, path, state) {
-	  // We consider the expression statement rather than just assignment
-	  // expression to cover case with object patters which should be
-	  // wrapped in grouping operator: ({x, y} = {y, x});
-	  return node.type === Syntax.ExpressionStatement &&
-	    node.expression.type === Syntax.AssignmentExpression &&
-	    isStructuredPattern(node.expression.left);
-	};
-
-	// -------------------------------------------------------
-	// 3. Structured parameter.
-	//
-	// function foo({x, y}) { ... }
-	// -------------------------------------------------------
-
-	function visitStructuredParameter(traverse, node, path, state) {
-	  utils.append(utils.getTempVar(getParamIndex(node, path)), state);
-	  utils.catchupWhiteSpace(node.range[1], state);
-	  return true;
-	}
-
-	function getParamIndex(paramNode, path) {
-	  var funcNode = path[0];
-	  var tmpIndex = 0;
-	  for (var k = 0; k < funcNode.params.length; k++) {
-	    var param = funcNode.params[k];
-	    if (param === paramNode) {
-	      break;
-	    }
-	    if (isStructuredPattern(param)) {
-	      tmpIndex++;
-	    }
-	  }
-	  return tmpIndex;
-	}
-
-	visitStructuredParameter.test = function(node, path, state) {
-	  return isStructuredPattern(node) && isFunctionNode(path[0]);
-	};
-
-	function isFunctionNode(node) {
-	  return (node.type == Syntax.FunctionDeclaration ||
-	    node.type == Syntax.FunctionExpression ||
-	    node.type == Syntax.MethodDefinition ||
-	    node.type == Syntax.ArrowFunctionExpression);
-	}
-
-	// -------------------------------------------------------
-	// 4. Function body for structured parameters.
-	//
-	// function foo({x, y}) { x; y; }
-	// -------------------------------------------------------
-
-	function visitFunctionBodyForStructuredParameter(traverse, node, path, state) {
-	  var funcNode = path[0];
-
-	  utils.catchup(funcNode.body.range[0] + 1, state);
-	  renderDestructuredComponents(funcNode, state);
-
-	  if (funcNode.rest) {
-	    utils.append(
-	      restParamVisitors.renderRestParamSetup(funcNode, state),
-	      state
-	    );
-	  }
-
-	  return true;
-	}
-
-	function renderDestructuredComponents(funcNode, state) {
-	  var destructuredComponents = [];
-
-	  for (var k = 0; k < funcNode.params.length; k++) {
-	    var param = funcNode.params[k];
-	    if (isStructuredPattern(param)) {
-	      destructuredComponents.push(
-	        getDestructuredComponents(param, state)
-	      );
-	      state.localScope.tempVarIndex++;
-	    }
-	  }
-
-	  if (destructuredComponents.length) {
-	    utils.append('var ' + destructuredComponents.join(',') + ';', state);
-	  }
-	}
-
-	visitFunctionBodyForStructuredParameter.test = function(node, path, state) {
-	  return node.type === Syntax.BlockStatement && isFunctionNode(path[0]);
-	};
-
-	exports.visitorList = [
-	  visitStructuredVariable,
-	  visitStructuredAssignment,
-	  visitStructuredParameter,
-	  visitFunctionBodyForStructuredParameter
-	];
-
-	exports.renderDestructuredComponents = renderDestructuredComponents;
-
-
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(Buffer) {/*!
 	 * The buffer module from node.js, for the browser.
 	 *
@@ -12779,9 +11872,9 @@
 	 * @license  MIT
 	 */
 
-	var base64 = __webpack_require__(173)
-	var ieee754 = __webpack_require__(174)
-	var isArray = __webpack_require__(175)
+	var base64 = __webpack_require__(170)
+	var ieee754 = __webpack_require__(171)
+	var isArray = __webpack_require__(172)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -14187,7 +13280,932 @@
 	  }
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49).Buffer))
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
+	/*
+	 * Copyright 2011 Mozilla Foundation and contributors
+	 * Licensed under the New BSD license. See LICENSE or:
+	 * http://opensource.org/licenses/BSD-3-Clause
+	 */
+	if (false) {
+	    var define = require('amdefine')(module, require);
+	}
+	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+
+	  var util = __webpack_require__(16);
+
+	  /**
+	   * A data structure which is a combination of an array and a set. Adding a new
+	   * member is O(1), testing for membership is O(1), and finding the index of an
+	   * element is O(1). Removing elements from the set is not supported. Only
+	   * strings are supported for membership.
+	   */
+	  function ArraySet() {
+	    this._array = [];
+	    this._set = {};
+	  }
+
+	  /**
+	   * Static method for creating ArraySet instances from an existing array.
+	   */
+	  ArraySet.fromArray = function ArraySet_fromArray(aArray, aAllowDuplicates) {
+	    var set = new ArraySet();
+	    for (var i = 0, len = aArray.length; i < len; i++) {
+	      set.add(aArray[i], aAllowDuplicates);
+	    }
+	    return set;
+	  };
+
+	  /**
+	   * Add the given string to this set.
+	   *
+	   * @param String aStr
+	   */
+	  ArraySet.prototype.add = function ArraySet_add(aStr, aAllowDuplicates) {
+	    var isDuplicate = this.has(aStr);
+	    var idx = this._array.length;
+	    if (!isDuplicate || aAllowDuplicates) {
+	      this._array.push(aStr);
+	    }
+	    if (!isDuplicate) {
+	      this._set[util.toSetString(aStr)] = idx;
+	    }
+	  };
+
+	  /**
+	   * Is the given string a member of this set?
+	   *
+	   * @param String aStr
+	   */
+	  ArraySet.prototype.has = function ArraySet_has(aStr) {
+	    return Object.prototype.hasOwnProperty.call(this._set,
+	                                                util.toSetString(aStr));
+	  };
+
+	  /**
+	   * What is the index of the given string in the array?
+	   *
+	   * @param String aStr
+	   */
+	  ArraySet.prototype.indexOf = function ArraySet_indexOf(aStr) {
+	    if (this.has(aStr)) {
+	      return this._set[util.toSetString(aStr)];
+	    }
+	    throw new Error('"' + aStr + '" is not in the set.');
+	  };
+
+	  /**
+	   * What is the element at the given index?
+	   *
+	   * @param Number aIdx
+	   */
+	  ArraySet.prototype.at = function ArraySet_at(aIdx) {
+	    if (aIdx >= 0 && aIdx < this._array.length) {
+	      return this._array[aIdx];
+	    }
+	    throw new Error('No element indexed by ' + aIdx);
+	  };
+
+	  /**
+	   * Returns the array representation of this set (which has the proper indices
+	   * indicated by indexOf). Note that this is a copy of the internal array used
+	   * for storing the members so that no one can mess with internal state.
+	   */
+	  ArraySet.prototype.toArray = function ArraySet_toArray() {
+	    return this._array.slice();
+	  };
+
+	  exports.ArraySet = ArraySet;
+
+	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
+	/*
+	 * Copyright 2011 Mozilla Foundation and contributors
+	 * Licensed under the New BSD license. See LICENSE or:
+	 * http://opensource.org/licenses/BSD-3-Clause
+	 *
+	 * Based on the Base 64 VLQ implementation in Closure Compiler:
+	 * https://code.google.com/p/closure-compiler/source/browse/trunk/src/com/google/debugging/sourcemap/Base64VLQ.java
+	 *
+	 * Copyright 2011 The Closure Compiler Authors. All rights reserved.
+	 * Redistribution and use in source and binary forms, with or without
+	 * modification, are permitted provided that the following conditions are
+	 * met:
+	 *
+	 *  * Redistributions of source code must retain the above copyright
+	 *    notice, this list of conditions and the following disclaimer.
+	 *  * Redistributions in binary form must reproduce the above
+	 *    copyright notice, this list of conditions and the following
+	 *    disclaimer in the documentation and/or other materials provided
+	 *    with the distribution.
+	 *  * Neither the name of Google Inc. nor the names of its
+	 *    contributors may be used to endorse or promote products derived
+	 *    from this software without specific prior written permission.
+	 *
+	 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+	 * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+	 * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+	 * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+	 * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+	 * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+	 * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+	 * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+	 * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	 * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+	 * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	 */
+	if (false) {
+	    var define = require('amdefine')(module, require);
+	}
+	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+
+	  var base64 = __webpack_require__(179);
+
+	  // A single base 64 digit can contain 6 bits of data. For the base 64 variable
+	  // length quantities we use in the source map spec, the first bit is the sign,
+	  // the next four bits are the actual value, and the 6th bit is the
+	  // continuation bit. The continuation bit tells us whether there are more
+	  // digits in this value following this digit.
+	  //
+	  //   Continuation
+	  //   |    Sign
+	  //   |    |
+	  //   V    V
+	  //   101011
+
+	  var VLQ_BASE_SHIFT = 5;
+
+	  // binary: 100000
+	  var VLQ_BASE = 1 << VLQ_BASE_SHIFT;
+
+	  // binary: 011111
+	  var VLQ_BASE_MASK = VLQ_BASE - 1;
+
+	  // binary: 100000
+	  var VLQ_CONTINUATION_BIT = VLQ_BASE;
+
+	  /**
+	   * Converts from a two-complement value to a value where the sign bit is
+	   * is placed in the least significant bit.  For example, as decimals:
+	   *   1 becomes 2 (10 binary), -1 becomes 3 (11 binary)
+	   *   2 becomes 4 (100 binary), -2 becomes 5 (101 binary)
+	   */
+	  function toVLQSigned(aValue) {
+	    return aValue < 0
+	      ? ((-aValue) << 1) + 1
+	      : (aValue << 1) + 0;
+	  }
+
+	  /**
+	   * Converts to a two-complement value from a value where the sign bit is
+	   * is placed in the least significant bit.  For example, as decimals:
+	   *   2 (10 binary) becomes 1, 3 (11 binary) becomes -1
+	   *   4 (100 binary) becomes 2, 5 (101 binary) becomes -2
+	   */
+	  function fromVLQSigned(aValue) {
+	    var isNegative = (aValue & 1) === 1;
+	    var shifted = aValue >> 1;
+	    return isNegative
+	      ? -shifted
+	      : shifted;
+	  }
+
+	  /**
+	   * Returns the base 64 VLQ encoded value.
+	   */
+	  exports.encode = function base64VLQ_encode(aValue) {
+	    var encoded = "";
+	    var digit;
+
+	    var vlq = toVLQSigned(aValue);
+
+	    do {
+	      digit = vlq & VLQ_BASE_MASK;
+	      vlq >>>= VLQ_BASE_SHIFT;
+	      if (vlq > 0) {
+	        // There are still more digits in this value, so we must make sure the
+	        // continuation bit is marked.
+	        digit |= VLQ_CONTINUATION_BIT;
+	      }
+	      encoded += base64.encode(digit);
+	    } while (vlq > 0);
+
+	    return encoded;
+	  };
+
+	  /**
+	   * Decodes the next base 64 VLQ value from the given string and returns the
+	   * value and the rest of the string.
+	   */
+	  exports.decode = function base64VLQ_decode(aStr) {
+	    var i = 0;
+	    var strLen = aStr.length;
+	    var result = 0;
+	    var shift = 0;
+	    var continuation, digit;
+
+	    do {
+	      if (i >= strLen) {
+	        throw new Error("Expected more digits in base 64 VLQ value.");
+	      }
+	      digit = base64.decode(aStr.charAt(i++));
+	      continuation = !!(digit & VLQ_CONTINUATION_BIT);
+	      digit &= VLQ_BASE_MASK;
+	      result = result + (digit << shift);
+	      shift += VLQ_BASE_SHIFT;
+	    } while (continuation);
+
+	    return {
+	      value: fromVLQSigned(result),
+	      rest: aStr.slice(i)
+	    };
+	  };
+
+	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
+	/*
+	 * Copyright 2011 Mozilla Foundation and contributors
+	 * Licensed under the New BSD license. See LICENSE or:
+	 * http://opensource.org/licenses/BSD-3-Clause
+	 */
+	if (false) {
+	    var define = require('amdefine')(module, require);
+	}
+	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
+
+	  var base64VLQ = __webpack_require__(51);
+	  var util = __webpack_require__(16);
+	  var ArraySet = __webpack_require__(50).ArraySet;
+
+	  /**
+	   * An instance of the SourceMapGenerator represents a source map which is
+	   * being built incrementally. To create a new one, you must pass an object
+	   * with the following properties:
+	   *
+	   *   - file: The filename of the generated source.
+	   *   - sourceRoot: An optional root for all URLs in this source map.
+	   */
+	  function SourceMapGenerator(aArgs) {
+	    this._file = util.getArg(aArgs, 'file');
+	    this._sourceRoot = util.getArg(aArgs, 'sourceRoot', null);
+	    this._sources = new ArraySet();
+	    this._names = new ArraySet();
+	    this._mappings = [];
+	    this._sourcesContents = null;
+	  }
+
+	  SourceMapGenerator.prototype._version = 3;
+
+	  /**
+	   * Creates a new SourceMapGenerator based on a SourceMapConsumer
+	   *
+	   * @param aSourceMapConsumer The SourceMap.
+	   */
+	  SourceMapGenerator.fromSourceMap =
+	    function SourceMapGenerator_fromSourceMap(aSourceMapConsumer) {
+	      var sourceRoot = aSourceMapConsumer.sourceRoot;
+	      var generator = new SourceMapGenerator({
+	        file: aSourceMapConsumer.file,
+	        sourceRoot: sourceRoot
+	      });
+	      aSourceMapConsumer.eachMapping(function (mapping) {
+	        var newMapping = {
+	          generated: {
+	            line: mapping.generatedLine,
+	            column: mapping.generatedColumn
+	          }
+	        };
+
+	        if (mapping.source) {
+	          newMapping.source = mapping.source;
+	          if (sourceRoot) {
+	            newMapping.source = util.relative(sourceRoot, newMapping.source);
+	          }
+
+	          newMapping.original = {
+	            line: mapping.originalLine,
+	            column: mapping.originalColumn
+	          };
+
+	          if (mapping.name) {
+	            newMapping.name = mapping.name;
+	          }
+	        }
+
+	        generator.addMapping(newMapping);
+	      });
+	      aSourceMapConsumer.sources.forEach(function (sourceFile) {
+	        var content = aSourceMapConsumer.sourceContentFor(sourceFile);
+	        if (content) {
+	          generator.setSourceContent(sourceFile, content);
+	        }
+	      });
+	      return generator;
+	    };
+
+	  /**
+	   * Add a single mapping from original source line and column to the generated
+	   * source's line and column for this source map being created. The mapping
+	   * object should have the following properties:
+	   *
+	   *   - generated: An object with the generated line and column positions.
+	   *   - original: An object with the original line and column positions.
+	   *   - source: The original source file (relative to the sourceRoot).
+	   *   - name: An optional original token name for this mapping.
+	   */
+	  SourceMapGenerator.prototype.addMapping =
+	    function SourceMapGenerator_addMapping(aArgs) {
+	      var generated = util.getArg(aArgs, 'generated');
+	      var original = util.getArg(aArgs, 'original', null);
+	      var source = util.getArg(aArgs, 'source', null);
+	      var name = util.getArg(aArgs, 'name', null);
+
+	      this._validateMapping(generated, original, source, name);
+
+	      if (source && !this._sources.has(source)) {
+	        this._sources.add(source);
+	      }
+
+	      if (name && !this._names.has(name)) {
+	        this._names.add(name);
+	      }
+
+	      this._mappings.push({
+	        generatedLine: generated.line,
+	        generatedColumn: generated.column,
+	        originalLine: original != null && original.line,
+	        originalColumn: original != null && original.column,
+	        source: source,
+	        name: name
+	      });
+	    };
+
+	  /**
+	   * Set the source content for a source file.
+	   */
+	  SourceMapGenerator.prototype.setSourceContent =
+	    function SourceMapGenerator_setSourceContent(aSourceFile, aSourceContent) {
+	      var source = aSourceFile;
+	      if (this._sourceRoot) {
+	        source = util.relative(this._sourceRoot, source);
+	      }
+
+	      if (aSourceContent !== null) {
+	        // Add the source content to the _sourcesContents map.
+	        // Create a new _sourcesContents map if the property is null.
+	        if (!this._sourcesContents) {
+	          this._sourcesContents = {};
+	        }
+	        this._sourcesContents[util.toSetString(source)] = aSourceContent;
+	      } else {
+	        // Remove the source file from the _sourcesContents map.
+	        // If the _sourcesContents map is empty, set the property to null.
+	        delete this._sourcesContents[util.toSetString(source)];
+	        if (Object.keys(this._sourcesContents).length === 0) {
+	          this._sourcesContents = null;
+	        }
+	      }
+	    };
+
+	  /**
+	   * Applies the mappings of a sub-source-map for a specific source file to the
+	   * source map being generated. Each mapping to the supplied source file is
+	   * rewritten using the supplied source map. Note: The resolution for the
+	   * resulting mappings is the minimium of this map and the supplied map.
+	   *
+	   * @param aSourceMapConsumer The source map to be applied.
+	   * @param aSourceFile Optional. The filename of the source file.
+	   *        If omitted, SourceMapConsumer's file property will be used.
+	   */
+	  SourceMapGenerator.prototype.applySourceMap =
+	    function SourceMapGenerator_applySourceMap(aSourceMapConsumer, aSourceFile) {
+	      // If aSourceFile is omitted, we will use the file property of the SourceMap
+	      if (!aSourceFile) {
+	        aSourceFile = aSourceMapConsumer.file;
+	      }
+	      var sourceRoot = this._sourceRoot;
+	      // Make "aSourceFile" relative if an absolute Url is passed.
+	      if (sourceRoot) {
+	        aSourceFile = util.relative(sourceRoot, aSourceFile);
+	      }
+	      // Applying the SourceMap can add and remove items from the sources and
+	      // the names array.
+	      var newSources = new ArraySet();
+	      var newNames = new ArraySet();
+
+	      // Find mappings for the "aSourceFile"
+	      this._mappings.forEach(function (mapping) {
+	        if (mapping.source === aSourceFile && mapping.originalLine) {
+	          // Check if it can be mapped by the source map, then update the mapping.
+	          var original = aSourceMapConsumer.originalPositionFor({
+	            line: mapping.originalLine,
+	            column: mapping.originalColumn
+	          });
+	          if (original.source !== null) {
+	            // Copy mapping
+	            if (sourceRoot) {
+	              mapping.source = util.relative(sourceRoot, original.source);
+	            } else {
+	              mapping.source = original.source;
+	            }
+	            mapping.originalLine = original.line;
+	            mapping.originalColumn = original.column;
+	            if (original.name !== null && mapping.name !== null) {
+	              // Only use the identifier name if it's an identifier
+	              // in both SourceMaps
+	              mapping.name = original.name;
+	            }
+	          }
+	        }
+
+	        var source = mapping.source;
+	        if (source && !newSources.has(source)) {
+	          newSources.add(source);
+	        }
+
+	        var name = mapping.name;
+	        if (name && !newNames.has(name)) {
+	          newNames.add(name);
+	        }
+
+	      }, this);
+	      this._sources = newSources;
+	      this._names = newNames;
+
+	      // Copy sourcesContents of applied map.
+	      aSourceMapConsumer.sources.forEach(function (sourceFile) {
+	        var content = aSourceMapConsumer.sourceContentFor(sourceFile);
+	        if (content) {
+	          if (sourceRoot) {
+	            sourceFile = util.relative(sourceRoot, sourceFile);
+	          }
+	          this.setSourceContent(sourceFile, content);
+	        }
+	      }, this);
+	    };
+
+	  /**
+	   * A mapping can have one of the three levels of data:
+	   *
+	   *   1. Just the generated position.
+	   *   2. The Generated position, original position, and original source.
+	   *   3. Generated and original position, original source, as well as a name
+	   *      token.
+	   *
+	   * To maintain consistency, we validate that any new mapping being added falls
+	   * in to one of these categories.
+	   */
+	  SourceMapGenerator.prototype._validateMapping =
+	    function SourceMapGenerator_validateMapping(aGenerated, aOriginal, aSource,
+	                                                aName) {
+	      if (aGenerated && 'line' in aGenerated && 'column' in aGenerated
+	          && aGenerated.line > 0 && aGenerated.column >= 0
+	          && !aOriginal && !aSource && !aName) {
+	        // Case 1.
+	        return;
+	      }
+	      else if (aGenerated && 'line' in aGenerated && 'column' in aGenerated
+	               && aOriginal && 'line' in aOriginal && 'column' in aOriginal
+	               && aGenerated.line > 0 && aGenerated.column >= 0
+	               && aOriginal.line > 0 && aOriginal.column >= 0
+	               && aSource) {
+	        // Cases 2 and 3.
+	        return;
+	      }
+	      else {
+	        throw new Error('Invalid mapping: ' + JSON.stringify({
+	          generated: aGenerated,
+	          source: aSource,
+	          orginal: aOriginal,
+	          name: aName
+	        }));
+	      }
+	    };
+
+	  /**
+	   * Serialize the accumulated mappings in to the stream of base 64 VLQs
+	   * specified by the source map format.
+	   */
+	  SourceMapGenerator.prototype._serializeMappings =
+	    function SourceMapGenerator_serializeMappings() {
+	      var previousGeneratedColumn = 0;
+	      var previousGeneratedLine = 1;
+	      var previousOriginalColumn = 0;
+	      var previousOriginalLine = 0;
+	      var previousName = 0;
+	      var previousSource = 0;
+	      var result = '';
+	      var mapping;
+
+	      // The mappings must be guaranteed to be in sorted order before we start
+	      // serializing them or else the generated line numbers (which are defined
+	      // via the ';' separators) will be all messed up. Note: it might be more
+	      // performant to maintain the sorting as we insert them, rather than as we
+	      // serialize them, but the big O is the same either way.
+	      this._mappings.sort(util.compareByGeneratedPositions);
+
+	      for (var i = 0, len = this._mappings.length; i < len; i++) {
+	        mapping = this._mappings[i];
+
+	        if (mapping.generatedLine !== previousGeneratedLine) {
+	          previousGeneratedColumn = 0;
+	          while (mapping.generatedLine !== previousGeneratedLine) {
+	            result += ';';
+	            previousGeneratedLine++;
+	          }
+	        }
+	        else {
+	          if (i > 0) {
+	            if (!util.compareByGeneratedPositions(mapping, this._mappings[i - 1])) {
+	              continue;
+	            }
+	            result += ',';
+	          }
+	        }
+
+	        result += base64VLQ.encode(mapping.generatedColumn
+	                                   - previousGeneratedColumn);
+	        previousGeneratedColumn = mapping.generatedColumn;
+
+	        if (mapping.source) {
+	          result += base64VLQ.encode(this._sources.indexOf(mapping.source)
+	                                     - previousSource);
+	          previousSource = this._sources.indexOf(mapping.source);
+
+	          // lines are stored 0-based in SourceMap spec version 3
+	          result += base64VLQ.encode(mapping.originalLine - 1
+	                                     - previousOriginalLine);
+	          previousOriginalLine = mapping.originalLine - 1;
+
+	          result += base64VLQ.encode(mapping.originalColumn
+	                                     - previousOriginalColumn);
+	          previousOriginalColumn = mapping.originalColumn;
+
+	          if (mapping.name) {
+	            result += base64VLQ.encode(this._names.indexOf(mapping.name)
+	                                       - previousName);
+	            previousName = this._names.indexOf(mapping.name);
+	          }
+	        }
+	      }
+
+	      return result;
+	    };
+
+	  SourceMapGenerator.prototype._generateSourcesContent =
+	    function SourceMapGenerator_generateSourcesContent(aSources, aSourceRoot) {
+	      return aSources.map(function (source) {
+	        if (!this._sourcesContents) {
+	          return null;
+	        }
+	        if (aSourceRoot) {
+	          source = util.relative(aSourceRoot, source);
+	        }
+	        var key = util.toSetString(source);
+	        return Object.prototype.hasOwnProperty.call(this._sourcesContents,
+	                                                    key)
+	          ? this._sourcesContents[key]
+	          : null;
+	      }, this);
+	    };
+
+	  /**
+	   * Externalize the source map.
+	   */
+	  SourceMapGenerator.prototype.toJSON =
+	    function SourceMapGenerator_toJSON() {
+	      var map = {
+	        version: this._version,
+	        file: this._file,
+	        sources: this._sources.toArray(),
+	        names: this._names.toArray(),
+	        mappings: this._serializeMappings()
+	      };
+	      if (this._sourceRoot) {
+	        map.sourceRoot = this._sourceRoot;
+	      }
+	      if (this._sourcesContents) {
+	        map.sourcesContent = this._generateSourcesContent(map.sources, map.sourceRoot);
+	      }
+
+	      return map;
+	    };
+
+	  /**
+	   * Render the source map being generated to a string.
+	   */
+	  SourceMapGenerator.prototype.toString =
+	    function SourceMapGenerator_toString() {
+	      return JSON.stringify(this);
+	    };
+
+	  exports.SourceMapGenerator = SourceMapGenerator;
+
+	}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright 2014 Facebook, Inc.
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+	/*global exports:true*/
+
+	/**
+	 * Implements ES6 destructuring assignment and pattern matchng.
+	 *
+	 * function init({port, ip, coords: [x, y]}) {
+	 *   return (x && y) ? {id, port} : {ip};
+	 * };
+	 *
+	 * function init($__0) {
+	 *   var
+	 *    port = $__0.port,
+	 *    ip = $__0.ip,
+	 *    $__1 = $__0.coords,
+	 *    x = $__1[0],
+	 *    y = $__1[1];
+	 *   return (x && y) ? {id, port} : {ip};
+	 * }
+	 *
+	 * var x, {ip, port} = init({ip, port});
+	 *
+	 * var x, $__0 = init({ip, port}), ip = $__0.ip, port = $__0.port;
+	 *
+	 */
+	var Syntax = __webpack_require__(3).Syntax;
+	var utils = __webpack_require__(2);
+
+	var reservedWordsHelper = __webpack_require__(18);
+	var restParamVisitors = __webpack_require__(26);
+	var restPropertyHelpers = __webpack_require__(190);
+
+	// -------------------------------------------------------
+	// 1. Structured variable declarations.
+	//
+	// var [a, b] = [b, a];
+	// var {x, y} = {y, x};
+	// -------------------------------------------------------
+
+	function visitStructuredVariable(traverse, node, path, state) {
+	  // Allocate new temp for the pattern.
+	  utils.append(utils.getTempVar(state.localScope.tempVarIndex) + '=', state);
+	  // Skip the pattern and assign the init to the temp.
+	  utils.catchupWhiteSpace(node.init.range[0], state);
+	  traverse(node.init, path, state);
+	  utils.catchup(node.init.range[1], state);
+	  // Render the destructured data.
+	  utils.append(',' + getDestructuredComponents(node.id, state), state);
+	  state.localScope.tempVarIndex++;
+	  return false;
+	}
+
+	visitStructuredVariable.test = function(node, path, state) {
+	  return node.type === Syntax.VariableDeclarator &&
+	    isStructuredPattern(node.id);
+	};
+
+	function isStructuredPattern(node) {
+	  return node.type === Syntax.ObjectPattern ||
+	    node.type === Syntax.ArrayPattern;
+	}
+
+	// Main function which does actual recursive destructuring
+	// of nested complex structures.
+	function getDestructuredComponents(node, state) {
+	  var tmpIndex = state.localScope.tempVarIndex;
+	  var components = [];
+	  var patternItems = getPatternItems(node);
+
+	  for (var idx = 0; idx < patternItems.length; idx++) {
+	    var item = patternItems[idx];
+	    if (!item) {
+	      continue;
+	    }
+
+	    if (item.type === Syntax.SpreadElement) {
+	      // Spread/rest of an array.
+	      // TODO(dmitrys): support spread in the middle of a pattern
+	      // and also for function param patterns: [x, ...xs, y]
+	      components.push(item.argument.name +
+	        '=Array.prototype.slice.call(' +
+	        utils.getTempVar(tmpIndex) + ',' + idx + ')'
+	      );
+	      continue;
+	    }
+
+	    if (item.type === Syntax.SpreadProperty) {
+	      var restExpression = restPropertyHelpers.renderRestExpression(
+	        utils.getTempVar(tmpIndex),
+	        patternItems
+	      );
+	      components.push(item.argument.name + '=' + restExpression);
+	      continue;
+	    }
+
+	    // Depending on pattern type (Array or Object), we get
+	    // corresponding pattern item parts.
+	    var accessor = getPatternItemAccessor(node, item, tmpIndex, idx);
+	    var value = getPatternItemValue(node, item);
+
+	    // TODO(dmitrys): implement default values: {x, y=5}
+	    if (value.type === Syntax.Identifier) {
+	      // Simple pattern item.
+	      components.push(value.name + '=' + accessor);
+	    } else {
+	      // Complex sub-structure.
+	      components.push(
+	        utils.getTempVar(++state.localScope.tempVarIndex) + '=' + accessor +
+	        ',' + getDestructuredComponents(value, state)
+	      );
+	    }
+	  }
+
+	  return components.join(',');
+	}
+
+	function getPatternItems(node) {
+	  return node.properties || node.elements;
+	}
+
+	function getPatternItemAccessor(node, patternItem, tmpIndex, idx) {
+	  var tmpName = utils.getTempVar(tmpIndex);
+	  if (node.type === Syntax.ObjectPattern) {
+	    if (reservedWordsHelper.isReservedWord(patternItem.key.name)) {
+	      return tmpName + '["' + patternItem.key.name + '"]';
+	    } else if (patternItem.key.type === Syntax.Literal) {
+	      return tmpName + '[' + JSON.stringify(patternItem.key.value) + ']';
+	    } else if (patternItem.key.type === Syntax.Identifier) {
+	      return tmpName + '.' + patternItem.key.name;
+	    }
+	  } else if (node.type === Syntax.ArrayPattern) {
+	    return tmpName + '[' + idx + ']';
+	  }
+	}
+
+	function getPatternItemValue(node, patternItem) {
+	  return node.type === Syntax.ObjectPattern
+	    ? patternItem.value
+	    : patternItem;
+	}
+
+	// -------------------------------------------------------
+	// 2. Assignment expression.
+	//
+	// [a, b] = [b, a];
+	// ({x, y} = {y, x});
+	// -------------------------------------------------------
+
+	function visitStructuredAssignment(traverse, node, path, state) {
+	  var exprNode = node.expression;
+	  utils.append('var ' + utils.getTempVar(state.localScope.tempVarIndex) + '=', state);
+
+	  utils.catchupWhiteSpace(exprNode.right.range[0], state);
+	  traverse(exprNode.right, path, state);
+	  utils.catchup(exprNode.right.range[1], state);
+
+	  utils.append(
+	    ';' + getDestructuredComponents(exprNode.left, state) + ';',
+	    state
+	  );
+
+	  utils.catchupWhiteSpace(node.range[1], state);
+	  state.localScope.tempVarIndex++;
+	  return false;
+	}
+
+	visitStructuredAssignment.test = function(node, path, state) {
+	  // We consider the expression statement rather than just assignment
+	  // expression to cover case with object patters which should be
+	  // wrapped in grouping operator: ({x, y} = {y, x});
+	  return node.type === Syntax.ExpressionStatement &&
+	    node.expression.type === Syntax.AssignmentExpression &&
+	    isStructuredPattern(node.expression.left);
+	};
+
+	// -------------------------------------------------------
+	// 3. Structured parameter.
+	//
+	// function foo({x, y}) { ... }
+	// -------------------------------------------------------
+
+	function visitStructuredParameter(traverse, node, path, state) {
+	  utils.append(utils.getTempVar(getParamIndex(node, path)), state);
+	  utils.catchupWhiteSpace(node.range[1], state);
+	  return true;
+	}
+
+	function getParamIndex(paramNode, path) {
+	  var funcNode = path[0];
+	  var tmpIndex = 0;
+	  for (var k = 0; k < funcNode.params.length; k++) {
+	    var param = funcNode.params[k];
+	    if (param === paramNode) {
+	      break;
+	    }
+	    if (isStructuredPattern(param)) {
+	      tmpIndex++;
+	    }
+	  }
+	  return tmpIndex;
+	}
+
+	visitStructuredParameter.test = function(node, path, state) {
+	  return isStructuredPattern(node) && isFunctionNode(path[0]);
+	};
+
+	function isFunctionNode(node) {
+	  return (node.type == Syntax.FunctionDeclaration ||
+	    node.type == Syntax.FunctionExpression ||
+	    node.type == Syntax.MethodDefinition ||
+	    node.type == Syntax.ArrowFunctionExpression);
+	}
+
+	// -------------------------------------------------------
+	// 4. Function body for structured parameters.
+	//
+	// function foo({x, y}) { x; y; }
+	// -------------------------------------------------------
+
+	function visitFunctionBodyForStructuredParameter(traverse, node, path, state) {
+	  var funcNode = path[0];
+
+	  utils.catchup(funcNode.body.range[0] + 1, state);
+	  renderDestructuredComponents(funcNode, state);
+
+	  if (funcNode.rest) {
+	    utils.append(
+	      restParamVisitors.renderRestParamSetup(funcNode, state),
+	      state
+	    );
+	  }
+
+	  return true;
+	}
+
+	function renderDestructuredComponents(funcNode, state) {
+	  var destructuredComponents = [];
+
+	  for (var k = 0; k < funcNode.params.length; k++) {
+	    var param = funcNode.params[k];
+	    if (isStructuredPattern(param)) {
+	      destructuredComponents.push(
+	        getDestructuredComponents(param, state)
+	      );
+	      state.localScope.tempVarIndex++;
+	    }
+	  }
+
+	  if (destructuredComponents.length) {
+	    utils.append('var ' + destructuredComponents.join(',') + ';', state);
+	  }
+	}
+
+	visitFunctionBodyForStructuredParameter.test = function(node, path, state) {
+	  return node.type === Syntax.BlockStatement && isFunctionNode(path[0]);
+	};
+
+	exports.visitorList = [
+	  visitStructuredVariable,
+	  visitStructuredAssignment,
+	  visitStructuredParameter,
+	  visitFunctionBodyForStructuredParameter
+	];
+
+	exports.renderDestructuredComponents = renderDestructuredComponents;
+
+
 
 /***/ },
 /* 54 */
@@ -14205,7 +14223,7 @@
 
 	var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
-	var _React = __webpack_require__(7);
+	var _React = __webpack_require__(8);
 
 	var _React2 = _interopRequireDefault(_React);
 
@@ -14339,7 +14357,7 @@
 	  value: true
 	});
 
-	var _React = __webpack_require__(7);
+	var _React = __webpack_require__(8);
 
 	var _React2 = _interopRequireDefault(_React);
 
@@ -14400,7 +14418,7 @@
 	  value: true
 	});
 
-	var _React = __webpack_require__(7);
+	var _React = __webpack_require__(8);
 
 	var _React2 = _interopRequireDefault(_React);
 
@@ -14507,15 +14525,15 @@
 	  value: true
 	});
 
-	var _React = __webpack_require__(7);
+	var _React = __webpack_require__(8);
 
 	var _React2 = _interopRequireDefault(_React);
 
-	var _JSXTransform = __webpack_require__(150);
+	var _JSXTransform = __webpack_require__(176);
 
 	var _JSXTransform2 = _interopRequireDefault(_JSXTransform);
 
-	var _babel = __webpack_require__(177);
+	var _babel = __webpack_require__(199);
 
 	var _babel2 = _interopRequireDefault(_babel);
 
@@ -14614,6 +14632,1194 @@
 
 /***/ },
 /* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+		"100": "💯",
+		"911": "🚨",
+		"1234": "🔢",
+		"smile": "😀",
+		"happy": "😆",
+		"joy": "😂",
+		"pleased": "☺️",
+		"smiley": "😃",
+		"haha": "😆",
+		"grinning": "😀",
+		"blush": "☺️",
+		"proud": "😊",
+		"relaxed": "☺️",
+		"wink": "😉",
+		"flirt": "😘",
+		"heart_eyes": "😍",
+		"love": "💘",
+		"crush": "😍",
+		"kissing_heart": "😘",
+		"kissing_closed_eyes": "😚",
+		"kissing": "😗",
+		"kissing_smiling_eyes": "😙",
+		"stuck_out_tongue_winking_eye": "😜",
+		"prank": "😝",
+		"silly": "😜",
+		"stuck_out_tongue_closed_eyes": "😝",
+		"stuck_out_tongue": "😛",
+		"flushed": "😳",
+		"grin": "😁",
+		"pensive": "😔",
+		"relieved": "😌",
+		"whew": "😌",
+		"unamused": "😒",
+		"meh": "😐",
+		"disappointed": "😞",
+		"sad": "🙍",
+		"persevere": "😣",
+		"struggling": "😣",
+		"cry": "😭",
+		"tear": "😿",
+		"tears": "😂",
+		"sob": "😭",
+		"bawling": "😭",
+		"sleepy": "😪",
+		"tired": "😩",
+		"disappointed_relieved": "😥",
+		"phew": "😥",
+		"sweat": "😓",
+		"nervous": "😟",
+		"cold_sweat": "😰",
+		"sweat_smile": "😅",
+		"hot": "😅",
+		"weary": "😩",
+		"tired_face": "😫",
+		"upset": "😫",
+		"whine": "😫",
+		"fearful": "😨",
+		"scared": "😨",
+		"shocked": "😱",
+		"oops": "😨",
+		"scream": "😱",
+		"horror": "🙀",
+		"angry": "💢",
+		"mad": "😠",
+		"annoyed": "😠",
+		"rage": "😡",
+		"triumph": "😤",
+		"smug": "😏",
+		"confounded": "😖",
+		"laughing": "😆",
+		"satisfied": "😆",
+		"yum": "😋",
+		"tongue": "👅",
+		"lick": "😋",
+		"mask": "😷",
+		"sick": "😷",
+		"ill": "😷",
+		"sunglasses": "😎",
+		"cool": "🆒",
+		"sleeping": "💤",
+		"zzz": "💤",
+		"dizzy_face": "😵",
+		"astonished": "😲",
+		"amazed": "😲",
+		"gasp": "😲",
+		"worried": "😟",
+		"frowning": "😦",
+		"anguished": "😧",
+		"stunned": "😧",
+		"smiling_imp": "😈",
+		"devil": "👿",
+		"evil": "👿",
+		"horns": "👿",
+		"imp": "👿",
+		"open_mouth": "😮",
+		"surprise": "😮",
+		"impressed": "😮",
+		"wow": "😮",
+		"grimacing": "😬",
+		"neutral_face": "😐",
+		"confused": "❓",
+		"hushed": "😯",
+		"silence": "😶",
+		"speechless": "😯",
+		"no_mouth": "😶",
+		"mute": "📴",
+		"innocent": "😇",
+		"angel": "👼",
+		"smirk": "😏",
+		"expressionless": "😑",
+		"man_with_gua_pi_mao": "👲",
+		"man_with_turban": "👳",
+		"cop": "👮",
+		"police": "👮",
+		"law": "👮",
+		"construction_worker": "👷",
+		"helmet": "👷",
+		"guardsman": "💂",
+		"baby": "👶",
+		"child": "👪",
+		"newborn": "👶",
+		"boy": "👱",
+		"girl": "👧",
+		"man": "👨",
+		"mustache": "👨",
+		"father": "👨",
+		"dad": "👨",
+		"woman": "👩",
+		"girls": "👩",
+		"older_man": "👴",
+		"older_woman": "👵",
+		"person_with_blond_hair": "👱",
+		"princess": "👸",
+		"blonde": "👸",
+		"crown": "👑",
+		"royal": "👑",
+		"smiley_cat": "😺",
+		"smile_cat": "😸",
+		"heart_eyes_cat": "😻",
+		"kissing_cat": "😽",
+		"smirk_cat": "😼",
+		"scream_cat": "🙀",
+		"crying_cat_face": "😿",
+		"joy_cat": "😹",
+		"pouting_cat": "😾",
+		"japanese_ogre": "👹",
+		"monster": "👹",
+		"japanese_goblin": "👺",
+		"see_no_evil": "🙈",
+		"monkey": "🐒",
+		"blind": "🙈",
+		"ignore": "🙈",
+		"hear_no_evil": "🙉",
+		"deaf": "🙉",
+		"speak_no_evil": "🙊",
+		"hush": "🙊",
+		"skull": "💀",
+		"dead": "💀",
+		"danger": "💀",
+		"poison": "💀",
+		"alien": "👽",
+		"ufo": "👽",
+		"hankey": "💩",
+		"poop": "💩",
+		"shit": "💩",
+		"crap": "💩",
+		"fire": "🔥",
+		"burn": "🔥",
+		"sparkles": "✨",
+		"shiny": "✨",
+		"star2": "🌟",
+		"dizzy": "💫",
+		"star": "⭐",
+		"boom": "💣",
+		"collision": "💥",
+		"explode": "💥",
+		"anger": "💢",
+		"sweat_drops": "💦",
+		"water": "💧",
+		"workout": "🏃",
+		"droplet": "💧",
+		"dash": "💨",
+		"wind": "💨",
+		"blow": "💨",
+		"fast": "💨",
+		"ear": "👂",
+		"hear": "👂",
+		"sound": "🔔",
+		"listen": "👂",
+		"eyes": "👀",
+		"look": "👀",
+		"see": "👀",
+		"watch": "⌚",
+		"nose": "👃",
+		"smell": "👃",
+		"taste": "👅",
+		"lips": "👄",
+		"kiss": "💋",
+		"+1": "👍",
+		"thumbsup": "👍",
+		"approve": "👍",
+		"ok": "🆗",
+		"-1": "👎",
+		"thumbsdown": "👎",
+		"disapprove": "👎",
+		"bury": "👎",
+		"ok_hand": "👌",
+		"facepunch": "👊",
+		"punch": "👊",
+		"attack": "👊",
+		"fist": "✊",
+		"power": "🔋",
+		"v": "✌️",
+		"victory": "✌️",
+		"peace": "✌️",
+		"wave": "👋",
+		"goodbye": "👋",
+		"hand": "✋",
+		"raised_hand": "✋",
+		"highfive": "✋",
+		"stop": "🙅",
+		"open_hands": "👐",
+		"point_up_2": "👆",
+		"point_down": "👇",
+		"point_right": "👉",
+		"point_left": "👈",
+		"raised_hands": "🙌",
+		"hooray": "🙌",
+		"pray": "🙏",
+		"please": "🙏",
+		"hope": "🙏",
+		"wish": "🙏",
+		"point_up": "☝️",
+		"clap": "👏",
+		"praise": "👏",
+		"applause": "👏",
+		"muscle": "💪",
+		"flex": "💪",
+		"bicep": "💪",
+		"strong": "💪",
+		"walking": "🚶",
+		"runner": "🏃",
+		"running": "👟",
+		"exercise": "🏃",
+		"marathon": "🎽",
+		"dancer": "💃",
+		"dress": "👗",
+		"couple": "👭",
+		"date": "📅",
+		"family": "👪",
+		"home": "👪",
+		"parents": "👪",
+		"two_men_holding_hands": "👬",
+		"two_women_holding_hands": "👭",
+		"couplekiss": "💏",
+		"couple_with_heart": "💑",
+		"dancers": "👯",
+		"bunny": "🐰",
+		"ok_woman": "🙆",
+		"no_good": "🙅",
+		"halt": "🙅",
+		"information_desk_person": "💁",
+		"raising_hand": "🙋",
+		"massage": "💆",
+		"spa": "💆",
+		"haircut": "💇",
+		"beauty": "💅",
+		"nail_care": "💅",
+		"manicure": "💅",
+		"bride_with_veil": "👰",
+		"marriage": "💒",
+		"wedding": "💒",
+		"person_with_pouting_face": "🙎",
+		"person_frowning": "🙍",
+		"bow": "🙇",
+		"respect": "🙇",
+		"thanks": "🙇",
+		"tophat": "🎩",
+		"hat": "🎩",
+		"classy": "🎩",
+		"king": "👑",
+		"queen": "👑",
+		"womans_hat": "👒",
+		"athletic_shoe": "👟",
+		"sneaker": "👟",
+		"sport": "👟",
+		"mans_shoe": "👞",
+		"shoe": "👠",
+		"sandal": "👡",
+		"high_heel": "👠",
+		"boot": "👢",
+		"shirt": "👔",
+		"tshirt": "👕",
+		"necktie": "👔",
+		"formal": "👔",
+		"womans_clothes": "👚",
+		"running_shirt_with_sash": "🎽",
+		"jeans": "👖",
+		"pants": "👖",
+		"kimono": "👘",
+		"bikini": "👙",
+		"beach": "🐚",
+		"briefcase": "💼",
+		"business": "💼",
+		"handbag": "👜",
+		"bag": "👝",
+		"pouch": "👝",
+		"purse": "👛",
+		"eyeglasses": "👓",
+		"glasses": "👓",
+		"ribbon": "🎀",
+		"closed_umbrella": "🌂",
+		"weather": "❄️",
+		"rain": "☔",
+		"lipstick": "💋",
+		"makeup": "💄",
+		"yellow_heart": "💛",
+		"blue_heart": "💙",
+		"purple_heart": "💜",
+		"green_heart": "💚",
+		"heart": "💘",
+		"broken_heart": "💔",
+		"heartpulse": "💗",
+		"heartbeat": "💓",
+		"two_hearts": "💕",
+		"sparkling_heart": "💖",
+		"revolving_hearts": "💞",
+		"cupid": "💘",
+		"love_letter": "💌",
+		"email": "✉️",
+		"envelope": "✉️",
+		"ring": "💍",
+		"engaged": "💍",
+		"gem": "💎",
+		"diamond": "💎",
+		"bust_in_silhouette": "👤",
+		"user": "👤",
+		"busts_in_silhouette": "👥",
+		"users": "👥",
+		"group": "👥",
+		"team": "👥",
+		"speech_balloon": "💬",
+		"comment": "💬",
+		"footprints": "👣",
+		"feet": "🐾",
+		"tracks": "👣",
+		"thought_balloon": "💭",
+		"thinking": "💭",
+		"dog": "🐩",
+		"pet": "🐹",
+		"wolf": "🐺",
+		"cat": "🐱",
+		"mouse": "🐭",
+		"hamster": "🐹",
+		"rabbit": "🐰",
+		"frog": "🐸",
+		"tiger": "🐯",
+		"koala": "🐨",
+		"bear": "🐻",
+		"pig": "🐷",
+		"pig_nose": "🐽",
+		"cow": "🐮",
+		"boar": "🐗",
+		"monkey_face": "🐵",
+		"horse": "🐴",
+		"sheep": "🐑",
+		"elephant": "🐘",
+		"panda_face": "🐼",
+		"penguin": "🐧",
+		"bird": "🐦",
+		"baby_chick": "🐤",
+		"hatched_chick": "🐥",
+		"hatching_chick": "🐣",
+		"chicken": "🍗",
+		"snake": "🐍",
+		"turtle": "🐢",
+		"slow": "🐌",
+		"bug": "🐞",
+		"bee": "🐝",
+		"honeybee": "🐝",
+		"ant": "🐜",
+		"beetle": "🐞",
+		"snail": "🐌",
+		"octopus": "🐙",
+		"shell": "🐚",
+		"sea": "🌊",
+		"tropical_fish": "🐠",
+		"fish": "🐟",
+		"dolphin": "🐬",
+		"flipper": "🐬",
+		"whale": "🐳",
+		"whale2": "🐋",
+		"cow2": "🐄",
+		"ram": "🐏",
+		"rat": "🐀",
+		"water_buffalo": "🐃",
+		"tiger2": "🐅",
+		"rabbit2": "🐇",
+		"dragon": "🐉",
+		"racehorse": "🐎",
+		"speed": "🐎",
+		"goat": "🐐",
+		"rooster": "🐓",
+		"dog2": "🐕",
+		"pig2": "🐖",
+		"mouse2": "🐁",
+		"ox": "🐂",
+		"dragon_face": "🐲",
+		"blowfish": "🐡",
+		"crocodile": "🐊",
+		"camel": "🐫",
+		"dromedary_camel": "🐪",
+		"desert": "🐪",
+		"leopard": "🐆",
+		"cat2": "🐈",
+		"poodle": "🐩",
+		"paw_prints": "🐾",
+		"bouquet": "💐",
+		"flowers": "💐",
+		"cherry_blossom": "🌸",
+		"flower": "🌹",
+		"spring": "🌸",
+		"tulip": "🌷",
+		"four_leaf_clover": "🍀",
+		"luck": "🍀",
+		"rose": "🌹",
+		"sunflower": "🌻",
+		"hibiscus": "🌺",
+		"maple_leaf": "🍁",
+		"canada": "🍁",
+		"leaves": "🍃",
+		"leaf": "🍃",
+		"fallen_leaf": "🍂",
+		"autumn": "🍂",
+		"herb": "🌿",
+		"ear_of_rice": "🌾",
+		"mushroom": "🍄",
+		"cactus": "🌵",
+		"palm_tree": "🌴",
+		"evergreen_tree": "🌲",
+		"wood": "🌳",
+		"deciduous_tree": "🌳",
+		"chestnut": "🌰",
+		"seedling": "🌱",
+		"plant": "🌱",
+		"blossom": "🌼",
+		"globe_with_meridians": "🌐",
+		"world": "🌏",
+		"global": "🌐",
+		"international": "🌏",
+		"sun_with_face": "🌞",
+		"summer": "🍹",
+		"full_moon_with_face": "🌝",
+		"new_moon_with_face": "🌚",
+		"new_moon": "🌑",
+		"waxing_crescent_moon": "🌒",
+		"first_quarter_moon": "🌓",
+		"moon": "🌔",
+		"waxing_gibbous_moon": "🌔",
+		"full_moon": "🌕",
+		"waning_gibbous_moon": "🌖",
+		"last_quarter_moon": "🌗",
+		"waning_crescent_moon": "🌘",
+		"last_quarter_moon_with_face": "🌜",
+		"first_quarter_moon_with_face": "🌛",
+		"crescent_moon": "🌙",
+		"night": "🌙",
+		"earth_africa": "🌍",
+		"globe": "🌏",
+		"earth_americas": "🌎",
+		"earth_asia": "🌏",
+		"volcano": "🌋",
+		"milky_way": "🌌",
+		"stars": "🌠",
+		"sunny": "☀️",
+		"partly_sunny": "⛅",
+		"cloud": "☁️",
+		"zap": "⚡",
+		"lightning": "⚡",
+		"thunder": "⚡",
+		"umbrella": "☔",
+		"snowflake": "❄️",
+		"winter": "⛄",
+		"cold": "❄️",
+		"snowman": "⛄",
+		"christmas": "🎁",
+		"cyclone": "🌀",
+		"swirl": "🌀",
+		"foggy": "🌁",
+		"karl": "🌁",
+		"rainbow": "🌈",
+		"pride": "🌈",
+		"ocean": "🌊",
+		"bamboo": "🎍",
+		"gift_heart": "💝",
+		"chocolates": "💝",
+		"dolls": "🎎",
+		"school_satchel": "🎒",
+		"mortar_board": "🎓",
+		"education": "🎓",
+		"college": "🎓",
+		"university": "🎓",
+		"graduation": "🎓",
+		"flags": "🎏",
+		"fireworks": "🎆",
+		"festival": "🎆",
+		"celebration": "🎆",
+		"sparkler": "🎇",
+		"wind_chime": "🎐",
+		"rice_scene": "🎑",
+		"jack_o_lantern": "🎃",
+		"halloween": "👻",
+		"ghost": "👻",
+		"santa": "🎅",
+		"christmas_tree": "🎄",
+		"gift": "🎁",
+		"present": "🎁",
+		"birthday": "🎂",
+		"tanabata_tree": "🎋",
+		"tada": "🎉",
+		"party": "🎂",
+		"confetti_ball": "🎊",
+		"balloon": "🎈",
+		"crossed_flags": "🎌",
+		"crystal_ball": "🔮",
+		"fortune": "🔮",
+		"movie_camera": "🎥",
+		"film": "🎦",
+		"video": "🎥",
+		"camera": "📷",
+		"photo": "📷",
+		"video_camera": "📹",
+		"vhs": "📼",
+		"cd": "💿",
+		"dvd": "📀",
+		"minidisc": "💽",
+		"floppy_disk": "💾",
+		"save": "💾",
+		"computer": "💻",
+		"desktop": "💻",
+		"screen": "💻",
+		"iphone": "📱",
+		"smartphone": "📱",
+		"mobile": "📱",
+		"phone": "📞",
+		"telephone": "☎️",
+		"telephone_receiver": "📞",
+		"call": "📲",
+		"pager": "📟",
+		"fax": "📠",
+		"satellite": "📡",
+		"signal": "📡",
+		"tv": "📺",
+		"radio": "📻",
+		"podcast": "📻",
+		"loud_sound": "🔊",
+		"volume": "🔕",
+		"speaker": "🔈",
+		"bell": "🔔",
+		"notification": "🔔",
+		"no_bell": "🔕",
+		"off": "📴",
+		"loudspeaker": "📢",
+		"announcement": "📢",
+		"mega": "📣",
+		"hourglass_flowing_sand": "⏳",
+		"time": "⌚",
+		"hourglass": "⌛",
+		"alarm_clock": "⏰",
+		"morning": "⏰",
+		"unlock": "🔓",
+		"security": "🔐",
+		"lock": "🔑",
+		"private": "🔒",
+		"lock_with_ink_pen": "🔏",
+		"closed_lock_with_key": "🔐",
+		"key": "🔑",
+		"password": "🔑",
+		"mag_right": "🔎",
+		"bulb": "💡",
+		"idea": "💡",
+		"light": "💡",
+		"flashlight": "🔦",
+		"high_brightness": "🔆",
+		"low_brightness": "🔅",
+		"electric_plug": "🔌",
+		"battery": "🔋",
+		"mag": "🔍",
+		"search": "🔍",
+		"zoom": "🔍",
+		"bathtub": "🛁",
+		"bath": "🚿",
+		"shower": "🚿",
+		"toilet": "🚾",
+		"wc": "🚾",
+		"wrench": "🔧",
+		"tool": "🔨",
+		"nut_and_bolt": "🔩",
+		"hammer": "🔨",
+		"door": "🚪",
+		"smoking": "🚬",
+		"cigarette": "🚬",
+		"bomb": "💣",
+		"gun": "🔫",
+		"shoot": "🔫",
+		"weapon": "🔫",
+		"hocho": "🔪",
+		"knife": "🔪",
+		"cut": "✂️",
+		"chop": "🔪",
+		"pill": "💊",
+		"health": "💉",
+		"medicine": "💊",
+		"syringe": "💉",
+		"hospital": "🏥",
+		"needle": "💉",
+		"moneybag": "💰",
+		"dollar": "💸",
+		"cream": "💰",
+		"yen": "💴",
+		"money": "💵",
+		"pound": "💷",
+		"euro": "💶",
+		"credit_card": "💳",
+		"subscription": "💳",
+		"money_with_wings": "💸",
+		"calling": "📲",
+		"incoming": "📲",
+		"e-mail": "📧",
+		"inbox_tray": "📥",
+		"outbox_tray": "📤",
+		"letter": "✉️",
+		"envelope_with_arrow": "📩",
+		"incoming_envelope": "📨",
+		"postal_horn": "📯",
+		"mailbox": "📫",
+		"mailbox_closed": "📪",
+		"mailbox_with_mail": "📬",
+		"mailbox_with_no_mail": "📭",
+		"postbox": "📮",
+		"package": "📦",
+		"shipping": "📦",
+		"memo": "📝",
+		"pencil": "📝",
+		"document": "📜",
+		"note": "📝",
+		"page_facing_up": "📄",
+		"page_with_curl": "📃",
+		"bookmark_tabs": "📑",
+		"bar_chart": "📊",
+		"stats": "📊",
+		"metrics": "📉",
+		"chart_with_upwards_trend": "📈",
+		"graph": "📉",
+		"chart_with_downwards_trend": "📉",
+		"scroll": "📜",
+		"clipboard": "📋",
+		"calendar": "📆",
+		"schedule": "📆",
+		"card_index": "📇",
+		"file_folder": "📁",
+		"directory": "📁",
+		"open_file_folder": "📂",
+		"scissors": "✂️",
+		"pushpin": "📌",
+		"location": "📍",
+		"paperclip": "📎",
+		"black_nib": "✒️",
+		"pencil2": "✏️",
+		"straight_ruler": "📏",
+		"triangular_ruler": "📐",
+		"closed_book": "📕",
+		"green_book": "📗",
+		"blue_book": "📘",
+		"orange_book": "📙",
+		"notebook": "📓",
+		"notebook_with_decorative_cover": "📔",
+		"ledger": "📒",
+		"books": "📚",
+		"library": "📚",
+		"book": "📖",
+		"open_book": "📖",
+		"bookmark": "🔖",
+		"name_badge": "📛",
+		"microscope": "🔬",
+		"science": "🔬",
+		"laboratory": "🔬",
+		"investigate": "🔬",
+		"telescope": "🔭",
+		"newspaper": "📰",
+		"press": "📰",
+		"art": "🎨",
+		"design": "🎨",
+		"paint": "🎨",
+		"clapper": "🎬",
+		"microphone": "🎤",
+		"sing": "🎤",
+		"headphones": "🎧",
+		"music": "🎶",
+		"earphones": "🎧",
+		"musical_score": "🎼",
+		"musical_note": "🎵",
+		"notes": "🎶",
+		"musical_keyboard": "🎹",
+		"piano": "🎹",
+		"violin": "🎻",
+		"trumpet": "🎺",
+		"saxophone": "🎷",
+		"guitar": "🎸",
+		"rock": "🎸",
+		"space_invader": "👾",
+		"game": "👾",
+		"retro": "👾",
+		"video_game": "🎮",
+		"play": "🎮",
+		"controller": "🎮",
+		"console": "🎮",
+		"black_joker": "🃏",
+		"flower_playing_cards": "🎴",
+		"mahjong": "🀄",
+		"game_die": "🎲",
+		"dice": "🎲",
+		"gambling": "🎲",
+		"dart": "🎯",
+		"target": "🎯",
+		"football": "🏈",
+		"sports": "🎾",
+		"basketball": "🏀",
+		"soccer": "⚽",
+		"baseball": "⚾️",
+		"tennis": "🎾",
+		"8ball": "🎱",
+		"pool": "🎱",
+		"billiards": "🎱",
+		"rugby_football": "🏉",
+		"bowling": "🎳",
+		"golf": "⛳",
+		"mountain_bicyclist": "🚵",
+		"bicyclist": "🚴",
+		"checkered_flag": "🏁",
+		"milestone": "🏁",
+		"finish": "🏁",
+		"horse_racing": "🏇",
+		"trophy": "🏆",
+		"award": "🏆",
+		"contest": "🏆",
+		"winner": "🏆",
+		"ski": "🎿",
+		"snowboarder": "🏂",
+		"swimmer": "🏊",
+		"surfer": "🏄",
+		"fishing_pole_and_fish": "🎣",
+		"coffee": "☕",
+		"cafe": "☕",
+		"espresso": "☕",
+		"tea": "🍵",
+		"green": "♻️",
+		"breakfast": "🍳",
+		"sake": "🍶",
+		"baby_bottle": "🍼",
+		"milk": "🍼",
+		"beer": "🍺",
+		"drink": "🍸",
+		"beers": "🍻",
+		"drinks": "🍻",
+		"cocktail": "🍸",
+		"tropical_drink": "🍹",
+		"vacation": "🍹",
+		"wine_glass": "🍷",
+		"fork_and_knife": "🍴",
+		"cutlery": "🍴",
+		"pizza": "🍕",
+		"hamburger": "🍔",
+		"burger": "🍔",
+		"fries": "🍟",
+		"poultry_leg": "🍗",
+		"meat": "🍗",
+		"meat_on_bone": "🍖",
+		"spaghetti": "🍝",
+		"pasta": "🍝",
+		"curry": "🍛",
+		"fried_shrimp": "🍤",
+		"tempura": "🍤",
+		"bento": "🍱",
+		"sushi": "🍣",
+		"fish_cake": "🍥",
+		"rice_ball": "🍙",
+		"rice_cracker": "🍘",
+		"rice": "🍚",
+		"ramen": "🍜",
+		"noodle": "🍜",
+		"stew": "🍲",
+		"oden": "🍢",
+		"dango": "🍡",
+		"egg": "🍳",
+		"bread": "🍞",
+		"toast": "🍞",
+		"doughnut": "🍩",
+		"custard": "🍮",
+		"icecream": "🍦",
+		"ice_cream": "🍨",
+		"shaved_ice": "🍧",
+		"cake": "🍰",
+		"dessert": "🍰",
+		"cookie": "🍪",
+		"chocolate_bar": "🍫",
+		"candy": "🍬",
+		"sweet": "🍬",
+		"lollipop": "🍭",
+		"honey_pot": "🍯",
+		"apple": "🍎",
+		"green_apple": "🍏",
+		"fruit": "🍌",
+		"tangerine": "🍊",
+		"lemon": "🍋",
+		"cherries": "🍒",
+		"grapes": "🍇",
+		"watermelon": "🍉",
+		"strawberry": "🍓",
+		"peach": "🍑",
+		"melon": "🍈",
+		"banana": "🍌",
+		"pear": "🍐",
+		"pineapple": "🍍",
+		"sweet_potato": "🍠",
+		"eggplant": "🍆",
+		"aubergine": "🍆",
+		"tomato": "🍅",
+		"corn": "🌽",
+		"house": "🏠",
+		"house_with_garden": "🏡",
+		"school": "🏫",
+		"office": "🏢",
+		"post_office": "🏣",
+		"bank": "🏦",
+		"convenience_store": "🏪",
+		"love_hotel": "🏩",
+		"hotel": "🏨",
+		"church": "⛪",
+		"department_store": "🏬",
+		"european_post_office": "🏤",
+		"city_sunrise": "🌇",
+		"city_sunset": "🌆",
+		"japanese_castle": "🏯",
+		"european_castle": "🏰",
+		"tent": "⛺",
+		"camping": "⛺",
+		"factory": "🏭",
+		"tokyo_tower": "🗼",
+		"japan": "🇯🇵",
+		"mount_fuji": "🗻",
+		"sunrise_over_mountains": "🌄",
+		"sunrise": "🌅",
+		"night_with_stars": "🌃",
+		"statue_of_liberty": "🗽",
+		"bridge_at_night": "🌉",
+		"carousel_horse": "🎠",
+		"ferris_wheel": "🎡",
+		"fountain": "⛲",
+		"roller_coaster": "🎢",
+		"ship": "🚀",
+		"boat": "⛵",
+		"sailboat": "⛵",
+		"speedboat": "🚤",
+		"rowboat": "🚣",
+		"anchor": "⚓",
+		"rocket": "🚀",
+		"launch": "🚀",
+		"airplane": "✈️",
+		"flight": "✈️",
+		"seat": "💺",
+		"helicopter": "🚁",
+		"steam_locomotive": "🚂",
+		"train": "🚋",
+		"tram": "🚊",
+		"station": "🚉",
+		"mountain_railway": "🚞",
+		"train2": "🚆",
+		"bullettrain_side": "🚄",
+		"bullettrain_front": "🚅",
+		"light_rail": "🚈",
+		"metro": "🚇",
+		"monorail": "🚝",
+		"railway_car": "🚃",
+		"trolleybus": "🚎",
+		"bus": "🚌",
+		"oncoming_bus": "🚍",
+		"blue_car": "🚙",
+		"oncoming_automobile": "🚘",
+		"car": "🚗",
+		"red_car": "🚗",
+		"taxi": "🚕",
+		"oncoming_taxi": "🚖",
+		"articulated_lorry": "🚛",
+		"truck": "🚚",
+		"rotating_light": "🚨",
+		"emergency": "🆘",
+		"police_car": "🚓",
+		"oncoming_police_car": "🚔",
+		"fire_engine": "🚒",
+		"ambulance": "🚑",
+		"minibus": "🚐",
+		"bike": "🚲",
+		"bicycle": "🚲",
+		"aerial_tramway": "🚡",
+		"suspension_railway": "🚟",
+		"mountain_cableway": "🚠",
+		"tractor": "🚜",
+		"barber": "💈",
+		"busstop": "🚏",
+		"ticket": "🎫",
+		"vertical_traffic_light": "🚦",
+		"semaphore": "🚦",
+		"traffic_light": "🚥",
+		"warning": "⚠️",
+		"wip": "🚧",
+		"construction": "🚧",
+		"beginner": "🔰",
+		"fuelpump": "⛽",
+		"izakaya_lantern": "🏮",
+		"lantern": "🏮",
+		"slot_machine": "🎰",
+		"hotsprings": "♨️",
+		"moyai": "🗿",
+		"stone": "🗿",
+		"circus_tent": "🎪",
+		"performing_arts": "🎭",
+		"theater": "🎭",
+		"drama": "🎭",
+		"round_pushpin": "📍",
+		"triangular_flag_on_post": "🚩",
+		"jp": "🇯🇵",
+		"kr": "🇰🇷",
+		"korea": "🇰🇷",
+		"de": "🇩🇪",
+		"flag": "🇬🇧",
+		"germany": "🇩🇪",
+		"cn": "🇨🇳",
+		"china": "🇨🇳",
+		"us": "🇺🇸",
+		"united": "🇺🇸",
+		"america": "🇺🇸",
+		"fr": "🇫🇷",
+		"france": "🇫🇷",
+		"french": "🇫🇷",
+		"es": "🇪🇸",
+		"spain": "🇪🇸",
+		"it": "🇮🇹",
+		"italy": "🇮🇹",
+		"ru": "🇷🇺",
+		"russia": "🇷🇺",
+		"gb": "🇬🇧",
+		"uk": "🇬🇧",
+		"british": "🇬🇧",
+		"one": "1️⃣",
+		"two": "2️⃣",
+		"three": "3️⃣",
+		"four": "4️⃣",
+		"five": "5️⃣",
+		"six": "6️⃣",
+		"seven": "7️⃣",
+		"eight": "8️⃣",
+		"nine": "9️⃣",
+		"zero": "0️⃣",
+		"keycap_ten": "🔟",
+		"numbers": "🔢",
+		"hash": "#️⃣",
+		"number": "#️⃣",
+		"symbols": "🔣",
+		"arrow_up": "⬆️",
+		"arrow_down": "⬇️",
+		"arrow_left": "⬅️",
+		"arrow_right": "➡️",
+		"capital_abcd": "🔠",
+		"letters": "🔠",
+		"abcd": "🔡",
+		"abc": "🔤",
+		"alphabet": "🔤",
+		"arrow_upper_right": "↗️",
+		"arrow_upper_left": "↖️",
+		"arrow_lower_right": "↘️",
+		"arrow_lower_left": "↙️",
+		"left_right_arrow": "↔️",
+		"arrow_up_down": "↕️",
+		"arrows_counterclockwise": "🔄",
+		"sync": "🔄",
+		"arrow_backward": "◀️",
+		"arrow_forward": "▶️",
+		"arrow_up_small": "🔼",
+		"arrow_down_small": "🔽",
+		"leftwards_arrow_with_hook": "↩️",
+		"return": "↩️",
+		"arrow_right_hook": "↪️",
+		"information_source": "ℹ️",
+		"rewind": "⏪",
+		"fast_forward": "⏩",
+		"arrow_double_up": "⏫",
+		"arrow_double_down": "⏬",
+		"arrow_heading_down": "⤵️",
+		"arrow_heading_up": "⤴️",
+		"yes": "🆗",
+		"twisted_rightwards_arrows": "🔀",
+		"shuffle": "🔀",
+		"repeat": "🔁",
+		"loop": "➿",
+		"repeat_one": "🔂",
+		"new": "🆕",
+		"fresh": "🆕",
+		"up": "🆙",
+		"free": "🆓",
+		"ng": "🆖",
+		"signal_strength": "📶",
+		"wifi": "📶",
+		"cinema": "🎦",
+		"movie": "🎦",
+		"koko": "🈁",
+		"u6307": "🈯",
+		"u7a7a": "🈳",
+		"u6e80": "🈵",
+		"u5408": "🈴",
+		"u7981": "🈲",
+		"ideograph_advantage": "🉐",
+		"u5272": "🈹",
+		"u55b6": "🈺",
+		"u6709": "🈶",
+		"u7121": "🈚",
+		"restroom": "🚾",
+		"mens": "🚹",
+		"womens": "🚺",
+		"baby_symbol": "🚼",
+		"potable_water": "🚰",
+		"put_litter_in_its_place": "🚮",
+		"parking": "🅿️",
+		"wheelchair": "♿",
+		"accessibility": "♿",
+		"no_smoking": "🚭",
+		"u6708": "🈷️",
+		"u7533": "🈸",
+		"sa": "🈂️",
+		"m": "Ⓜ️",
+		"passport_control": "🛂",
+		"baggage_claim": "🛄",
+		"airport": "🛄",
+		"left_luggage": "🛅",
+		"customs": "🛃",
+		"accept": "🉑",
+		"secret": "㊙️",
+		"congratulations": "㊗️",
+		"cl": "🆑",
+		"sos": "🆘",
+		"help": "🆘",
+		"id": "🆔",
+		"no_entry_sign": "🚫",
+		"block": "🚫",
+		"forbidden": "🚫",
+		"underage": "🔞",
+		"no_mobile_phones": "📵",
+		"do_not_litter": "🚯",
+		"non-potable_water": "🚱",
+		"no_bicycles": "🚳",
+		"no_pedestrians": "🚷",
+		"children_crossing": "🚸",
+		"no_entry": "⛔",
+		"limit": "⛔",
+		"eight_spoked_asterisk": "✳️",
+		"sparkle": "❇️",
+		"negative_squared_cross_mark": "❎",
+		"white_check_mark": "✅",
+		"eight_pointed_black_star": "✴️",
+		"heart_decoration": "💟",
+		"vs": "🆚",
+		"vibration_mode": "📳",
+		"mobile_phone_off": "📴",
+		"a": "🅰️",
+		"b": "🅱️",
+		"ab": "🆎",
+		"o2": "🅾️",
+		"diamond_shape_with_a_dot_inside": "💠",
+		"recycle": "♻️",
+		"environment": "♻️",
+		"aries": "♈",
+		"taurus": "♉",
+		"gemini": "♊",
+		"cancer": "♋",
+		"leo": "♌",
+		"virgo": "♍",
+		"libra": "♎",
+		"scorpius": "♏",
+		"sagittarius": "♐",
+		"capricorn": "♑",
+		"aquarius": "♒",
+		"pisces": "♓",
+		"ophiuchus": "⛎",
+		"six_pointed_star": "🔯",
+		"atm": "🏧",
+		"chart": "💹",
+		"heavy_dollar_sign": "💲",
+		"currency_exchange": "💱",
+		"copyright": "©️",
+		"registered": "®️",
+		"tm": "™️",
+		"trademark": "™️",
+		"x": "❌",
+		"bangbang": "‼️",
+		"interrobang": "⁉️",
+		"exclamation": "❗",
+		"heavy_exclamation_mark": "❗",
+		"bang": "❗",
+		"question": "❓",
+		"grey_exclamation": "❕",
+		"grey_question": "❔",
+		"o": "⭕",
+		"top": "🔝",
+		"end": "🔚",
+		"back": "🔙",
+		"on": "🔛",
+		"soon": "🔜",
+		"arrows_clockwise": "🔃",
+		"clock12": "🕛",
+		"clock1230": "🕧",
+		"clock1": "🕐",
+		"clock130": "🕜",
+		"clock2": "🕑",
+		"clock230": "🕝",
+		"clock3": "🕒",
+		"clock330": "🕞",
+		"clock4": "🕓",
+		"clock430": "🕟",
+		"clock5": "🕔",
+		"clock530": "🕠",
+		"clock6": "🕕",
+		"clock7": "🕖",
+		"clock8": "🕗",
+		"clock9": "🕘",
+		"clock10": "🕙",
+		"clock11": "🕚",
+		"clock630": "🕡",
+		"clock730": "🕢",
+		"clock830": "🕣",
+		"clock930": "🕤",
+		"clock1030": "🕥",
+		"clock1130": "🕦",
+		"heavy_multiplication_x": "✖️",
+		"heavy_plus_sign": "➕",
+		"heavy_minus_sign": "➖",
+		"heavy_division_sign": "➗",
+		"spades": "♠️",
+		"hearts": "♥️",
+		"clubs": "♣️",
+		"diamonds": "♦️",
+		"white_flower": "💮",
+		"score": "💯",
+		"perfect": "💯",
+		"heavy_check_mark": "✔️",
+		"ballot_box_with_check": "☑️",
+		"radio_button": "🔘",
+		"link": "🔗",
+		"curly_loop": "➰",
+		"wavy_dash": "〰️",
+		"part_alternation_mark": "〽️",
+		"trident": "🔱",
+		"black_medium_square": "◼️",
+		"white_medium_square": "◻️",
+		"black_medium_small_square": "◾",
+		"white_medium_small_square": "◽",
+		"black_small_square": "▪️",
+		"white_small_square": "▫️",
+		"small_red_triangle": "🔺",
+		"black_square_button": "🔲",
+		"white_square_button": "🔳",
+		"black_circle": "⚫",
+		"white_circle": "⚪",
+		"red_circle": "🔴",
+		"large_blue_circle": "🔵",
+		"small_red_triangle_down": "🔻",
+		"white_large_square": "⬜",
+		"black_large_square": "⬛",
+		"large_orange_diamond": "🔶",
+		"large_blue_diamond": "🔷",
+		"small_orange_diamond": "🔸",
+		"small_blue_diamond": "🔹"
+	}
+
+/***/ },
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
@@ -16745,7 +17951,43 @@
 	}
 
 /***/ },
-/* 60 */
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Creates an array with all falsey values removed. The values `false`, `null`,
+	 * `0`, `""`, `undefined`, and `NaN` are falsey.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Array
+	 * @param {Array} array The array to compact.
+	 * @returns {Array} Returns the new array of filtered values.
+	 * @example
+	 *
+	 * _.compact([0, 1, false, 2, '', 3]);
+	 * // => [1, 2, 3]
+	 */
+	function compact(array) {
+	  var index = -1,
+	      length = array ? array.length : 0,
+	      resIndex = -1,
+	      result = [];
+
+	  while (++index < length) {
+	    var value = array[index];
+	    if (value) {
+	      result[++resIndex] = value;
+	    }
+	  }
+	  return result;
+	}
+
+	module.exports = compact;
+
+
+/***/ },
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -16770,7 +18012,7 @@
 
 
 /***/ },
-/* 61 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isArray = __webpack_require__(4);
@@ -16819,12 +18061,12 @@
 
 
 /***/ },
-/* 62 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayReduce = __webpack_require__(65),
-	    baseEach = __webpack_require__(26),
-	    createReduce = __webpack_require__(85);
+	var arrayReduce = __webpack_require__(67),
+	    baseEach = __webpack_require__(28),
+	    createReduce = __webpack_require__(88);
 
 	/**
 	 * Reduces `collection` to a value which is the accumulated result of running
@@ -16868,14 +18110,14 @@
 
 
 /***/ },
-/* 63 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(25),
-	    baseMap = __webpack_require__(74),
-	    baseSortBy = __webpack_require__(80),
-	    compareAscending = __webpack_require__(81),
-	    isIterateeCall = __webpack_require__(35);
+	var baseCallback = __webpack_require__(27),
+	    baseMap = __webpack_require__(76),
+	    baseSortBy = __webpack_require__(82),
+	    compareAscending = __webpack_require__(83),
+	    isIterateeCall = __webpack_require__(21);
 
 	/**
 	 * Creates an array of elements, sorted in ascending order by the results of
@@ -16945,7 +18187,7 @@
 
 
 /***/ },
-/* 64 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -17009,7 +18251,7 @@
 
 
 /***/ },
-/* 65 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17041,10 +18283,10 @@
 
 
 /***/ },
-/* 66 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getSymbols = __webpack_require__(34),
+	var getSymbols = __webpack_require__(35),
 	    keys = __webpack_require__(11);
 
 	/** Used for native method references. */
@@ -17088,11 +18330,11 @@
 
 
 /***/ },
-/* 67 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCopy = __webpack_require__(69),
-	    getSymbols = __webpack_require__(34),
+	var baseCopy = __webpack_require__(71),
+	    getSymbols = __webpack_require__(35),
 	    isNative = __webpack_require__(9),
 	    keys = __webpack_require__(11);
 
@@ -17141,7 +18383,7 @@
 
 
 /***/ },
-/* 68 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17172,7 +18414,7 @@
 
 
 /***/ },
-/* 69 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17201,10 +18443,10 @@
 
 
 /***/ },
-/* 70 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(27),
+	var baseFor = __webpack_require__(29),
 	    keysIn = __webpack_require__(40);
 
 	/**
@@ -17224,10 +18466,10 @@
 
 
 /***/ },
-/* 71 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFor = __webpack_require__(27),
+	var baseFor = __webpack_require__(29),
 	    keys = __webpack_require__(11);
 
 	/**
@@ -17247,14 +18489,14 @@
 
 
 /***/ },
-/* 72 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var equalArrays = __webpack_require__(86),
-	    equalByTag = __webpack_require__(87),
-	    equalObjects = __webpack_require__(88),
+	var equalArrays = __webpack_require__(90),
+	    equalByTag = __webpack_require__(91),
+	    equalObjects = __webpack_require__(92),
 	    isArray = __webpack_require__(4),
-	    isTypedArray = __webpack_require__(92);
+	    isTypedArray = __webpack_require__(97);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -17355,10 +18597,10 @@
 
 
 /***/ },
-/* 73 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsEqual = __webpack_require__(29);
+	var baseIsEqual = __webpack_require__(31);
 
 	/**
 	 * The base implementation of `_.isMatch` without support for callback
@@ -17410,11 +18652,11 @@
 
 
 /***/ },
-/* 74 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseEach = __webpack_require__(26),
-	    isArrayLike = __webpack_require__(12);
+	var baseEach = __webpack_require__(28),
+	    isArrayLike = __webpack_require__(13);
 
 	/**
 	 * The base implementation of `_.map` without support for callback shorthands
@@ -17439,10 +18681,10 @@
 
 
 /***/ },
-/* 75 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIsMatch = __webpack_require__(73),
+	var baseIsMatch = __webpack_require__(75),
 	    constant = __webpack_require__(42),
 	    isStrictComparable = __webpack_require__(37),
 	    keys = __webpack_require__(11),
@@ -17492,16 +18734,16 @@
 
 
 /***/ },
-/* 76 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(28),
-	    baseIsEqual = __webpack_require__(29),
-	    baseSlice = __webpack_require__(79),
+	var baseGet = __webpack_require__(30),
+	    baseIsEqual = __webpack_require__(31),
+	    baseSlice = __webpack_require__(81),
 	    isArray = __webpack_require__(4),
 	    isKey = __webpack_require__(36),
 	    isStrictComparable = __webpack_require__(37),
-	    last = __webpack_require__(60),
+	    last = __webpack_require__(62),
 	    toObject = __webpack_require__(5),
 	    toPath = __webpack_require__(38);
 
@@ -17544,10 +18786,10 @@
 
 
 /***/ },
-/* 77 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(28),
+	var baseGet = __webpack_require__(30),
 	    toPath = __webpack_require__(38);
 
 	/**
@@ -17569,7 +18811,7 @@
 
 
 /***/ },
-/* 78 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17599,7 +18841,7 @@
 
 
 /***/ },
-/* 79 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17637,7 +18879,7 @@
 
 
 /***/ },
-/* 80 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17664,10 +18906,10 @@
 
 
 /***/ },
-/* 81 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCompareAscending = __webpack_require__(68);
+	var baseCompareAscending = __webpack_require__(70);
 
 	/**
 	 * Used by `_.sortBy` to compare transformed elements of a collection and stable
@@ -17686,12 +18928,12 @@
 
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var bindCallback = __webpack_require__(32),
-	    isIterateeCall = __webpack_require__(35),
-	    restParam = __webpack_require__(64);
+	var bindCallback = __webpack_require__(33),
+	    isIterateeCall = __webpack_require__(21),
+	    restParam = __webpack_require__(66);
 
 	/**
 	 * Creates a function that assigns properties of source object(s) to a given
@@ -17736,10 +18978,10 @@
 
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getLength = __webpack_require__(33),
+	var getLength = __webpack_require__(34),
 	    isLength = __webpack_require__(6),
 	    toObject = __webpack_require__(5);
 
@@ -17773,7 +19015,7 @@
 
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var toObject = __webpack_require__(5);
@@ -17806,11 +19048,43 @@
 
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCallback = __webpack_require__(25),
-	    baseReduce = __webpack_require__(78),
+	var deburr = __webpack_require__(100),
+	    words = __webpack_require__(102);
+
+	/**
+	 * Creates a function that produces compound words out of the words in a
+	 * given string.
+	 *
+	 * @private
+	 * @param {Function} callback The function to combine each word.
+	 * @returns {Function} Returns the new compounder function.
+	 */
+	function createCompounder(callback) {
+	  return function(string) {
+	    var index = -1,
+	        array = words(deburr(string)),
+	        length = array.length,
+	        result = '';
+
+	    while (++index < length) {
+	      result = callback(result, array[index], index);
+	    }
+	    return result;
+	  };
+	}
+
+	module.exports = createCompounder;
+
+
+/***/ },
+/* 88 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseCallback = __webpack_require__(27),
+	    baseReduce = __webpack_require__(80),
 	    isArray = __webpack_require__(4);
 
 	/**
@@ -17834,7 +19108,46 @@
 
 
 /***/ },
-/* 86 */
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** Used to map latin-1 supplementary letters to basic latin letters. */
+	var deburredLetters = {
+	  '\xc0': 'A',  '\xc1': 'A', '\xc2': 'A', '\xc3': 'A', '\xc4': 'A', '\xc5': 'A',
+	  '\xe0': 'a',  '\xe1': 'a', '\xe2': 'a', '\xe3': 'a', '\xe4': 'a', '\xe5': 'a',
+	  '\xc7': 'C',  '\xe7': 'c',
+	  '\xd0': 'D',  '\xf0': 'd',
+	  '\xc8': 'E',  '\xc9': 'E', '\xca': 'E', '\xcb': 'E',
+	  '\xe8': 'e',  '\xe9': 'e', '\xea': 'e', '\xeb': 'e',
+	  '\xcC': 'I',  '\xcd': 'I', '\xce': 'I', '\xcf': 'I',
+	  '\xeC': 'i',  '\xed': 'i', '\xee': 'i', '\xef': 'i',
+	  '\xd1': 'N',  '\xf1': 'n',
+	  '\xd2': 'O',  '\xd3': 'O', '\xd4': 'O', '\xd5': 'O', '\xd6': 'O', '\xd8': 'O',
+	  '\xf2': 'o',  '\xf3': 'o', '\xf4': 'o', '\xf5': 'o', '\xf6': 'o', '\xf8': 'o',
+	  '\xd9': 'U',  '\xda': 'U', '\xdb': 'U', '\xdc': 'U',
+	  '\xf9': 'u',  '\xfa': 'u', '\xfb': 'u', '\xfc': 'u',
+	  '\xdd': 'Y',  '\xfd': 'y', '\xff': 'y',
+	  '\xc6': 'Ae', '\xe6': 'ae',
+	  '\xde': 'Th', '\xfe': 'th',
+	  '\xdf': 'ss'
+	};
+
+	/**
+	 * Used by `_.deburr` to convert latin-1 supplementary letters to basic latin letters.
+	 *
+	 * @private
+	 * @param {string} letter The matched letter to deburr.
+	 * @returns {string} Returns the deburred letter.
+	 */
+	function deburrLetter(letter) {
+	  return deburredLetters[letter];
+	}
+
+	module.exports = deburrLetter;
+
+
+/***/ },
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -17894,7 +19207,7 @@
 
 
 /***/ },
-/* 87 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** `Object#toString` result references. */
@@ -17948,7 +19261,7 @@
 
 
 /***/ },
-/* 88 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var keys = __webpack_require__(11);
@@ -18028,11 +19341,11 @@
 
 
 /***/ },
-/* 89 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseForIn = __webpack_require__(70),
-	    isObjectLike = __webpack_require__(8);
+	var baseForIn = __webpack_require__(72),
+	    isObjectLike = __webpack_require__(7);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -18084,12 +19397,12 @@
 
 
 /***/ },
-/* 90 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isArguments = __webpack_require__(39),
 	    isArray = __webpack_require__(4),
-	    isIndex = __webpack_require__(19),
+	    isIndex = __webpack_require__(20),
 	    isLength = __webpack_require__(6),
 	    keysIn = __webpack_require__(40),
 	    support = __webpack_require__(41);
@@ -18132,11 +19445,11 @@
 
 
 /***/ },
-/* 91 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isNative = __webpack_require__(9),
-	    shimIsPlainObject = __webpack_require__(89);
+	    shimIsPlainObject = __webpack_require__(93);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -18199,11 +19512,52 @@
 
 
 /***/ },
-/* 92 */
+/* 96 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObjectLike = __webpack_require__(7);
+
+	/** `Object#toString` result references. */
+	var stringTag = '[object String]';
+
+	/** Used for native method references. */
+	var objectProto = Object.prototype;
+
+	/**
+	 * Used to resolve the [`toStringTag`](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is classified as a `String` primitive or object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @example
+	 *
+	 * _.isString('abc');
+	 * // => true
+	 *
+	 * _.isString(1);
+	 * // => false
+	 */
+	function isString(value) {
+	  return typeof value == 'string' || (isObjectLike(value) && objToString.call(value) == stringTag);
+	}
+
+	module.exports = isString;
+
+
+/***/ },
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isLength = __webpack_require__(6),
-	    isObjectLike = __webpack_require__(8);
+	    isObjectLike = __webpack_require__(7);
 
 	/** `Object#toString` result references. */
 	var argsTag = '[object Arguments]',
@@ -18279,12 +19633,12 @@
 
 
 /***/ },
-/* 93 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignWith = __webpack_require__(66),
-	    baseAssign = __webpack_require__(67),
-	    createAssigner = __webpack_require__(82);
+	var assignWith = __webpack_require__(68),
+	    baseAssign = __webpack_require__(69),
+	    createAssigner = __webpack_require__(84);
 
 	/**
 	 * Assigns own enumerable properties of source object(s) to the destination
@@ -18328,10 +19682,78 @@
 
 
 /***/ },
-/* 94 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(31);
+	var createCompounder = __webpack_require__(87);
+
+	/**
+	 * Converts `string` to [camel case](https://en.wikipedia.org/wiki/CamelCase).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to convert.
+	 * @returns {string} Returns the camel cased string.
+	 * @example
+	 *
+	 * _.camelCase('Foo Bar');
+	 * // => 'fooBar'
+	 *
+	 * _.camelCase('--foo-bar');
+	 * // => 'fooBar'
+	 *
+	 * _.camelCase('__foo_bar__');
+	 * // => 'fooBar'
+	 */
+	var camelCase = createCompounder(function(result, word, index) {
+	  word = word.toLowerCase();
+	  return result + (index ? (word.charAt(0).toUpperCase() + word.slice(1)) : word);
+	});
+
+	module.exports = camelCase;
+
+
+/***/ },
+/* 100 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseToString = __webpack_require__(12),
+	    deburrLetter = __webpack_require__(89);
+
+	/** Used to match [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks). */
+	var reComboMark = /[\u0300-\u036f\ufe20-\ufe23]/g;
+
+	/** Used to match latin-1 supplementary letters (excluding mathematical operators). */
+	var reLatin1 = /[\xc0-\xd6\xd8-\xde\xdf-\xf6\xf8-\xff]/g;
+
+	/**
+	 * Deburrs `string` by converting [latin-1 supplementary letters](https://en.wikipedia.org/wiki/Latin-1_Supplement_(Unicode_block)#Character_table)
+	 * to basic latin letters and removing [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to deburr.
+	 * @returns {string} Returns the deburred string.
+	 * @example
+	 *
+	 * _.deburr('déjà vu');
+	 * // => 'deja vu'
+	 */
+	function deburr(string) {
+	  string = baseToString(string);
+	  return string && string.replace(reLatin1, deburrLetter).replace(reComboMark, '');
+	}
+
+	module.exports = deburr;
+
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseToString = __webpack_require__(12);
 
 	/**
 	 * Used to match `RegExp` [special characters](http://www.regular-expressions.info/characters.html#special).
@@ -18366,11 +19788,55 @@
 
 
 /***/ },
-/* 95 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseProperty = __webpack_require__(30),
-	    basePropertyDeep = __webpack_require__(77),
+	var baseToString = __webpack_require__(12),
+	    isIterateeCall = __webpack_require__(21);
+
+	/** Used to match words to create compound words. */
+	var reWords = (function() {
+	  var upper = '[A-Z\\xc0-\\xd6\\xd8-\\xde]',
+	      lower = '[a-z\\xdf-\\xf6\\xf8-\\xff]+';
+
+	  return RegExp(upper + '+(?=' + upper + lower + ')|' + upper + '?' + lower + '|' + upper + '+|[0-9]+', 'g');
+	}());
+
+	/**
+	 * Splits `string` into an array of its words.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @category String
+	 * @param {string} [string=''] The string to inspect.
+	 * @param {RegExp|string} [pattern] The pattern to match words.
+	 * @param- {Object} [guard] Enables use as a callback for functions like `_.map`.
+	 * @returns {Array} Returns the words of `string`.
+	 * @example
+	 *
+	 * _.words('fred, barney, & pebbles');
+	 * // => ['fred', 'barney', 'pebbles']
+	 *
+	 * _.words('fred, barney, & pebbles', /[^, ]+/g);
+	 * // => ['fred', 'barney', '&', 'pebbles']
+	 */
+	function words(string, pattern, guard) {
+	  if (guard && isIterateeCall(string, pattern, guard)) {
+	    pattern = null;
+	  }
+	  string = baseToString(string);
+	  return string.match(pattern || reWords) || [];
+	}
+
+	module.exports = words;
+
+
+/***/ },
+/* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var baseProperty = __webpack_require__(32),
+	    basePropertyDeep = __webpack_require__(79),
 	    isKey = __webpack_require__(36);
 
 	/**
@@ -18403,17 +19869,1471 @@
 
 
 /***/ },
-/* 96 */
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Enclose abbreviations in <abbr> tags
+	//
+	'use strict';
+
+
+	var PUNCT_CHARS = ' \n()[]\'".,!?-';
+
+
+	module.exports = function sub_plugin(md) {
+	  var escapeRE        = md.utils.escapeRE,
+	      arrayReplaceAt  = md.utils.arrayReplaceAt;
+
+
+	  function abbr_def(state, startLine, endLine, silent) {
+	    var label, title, ch, labelStart, labelEnd,
+	        pos = state.bMarks[startLine] + state.tShift[startLine],
+	        max = state.eMarks[startLine];
+
+	    if (pos + 2 >= max) { return false; }
+
+	    if (state.src.charCodeAt(pos++) !== 0x2A/* * */) { return false; }
+	    if (state.src.charCodeAt(pos++) !== 0x5B/* [ */) { return false; }
+
+	    labelStart = pos;
+
+	    for (; pos < max; pos++) {
+	      ch = state.src.charCodeAt(pos);
+	      if (ch === 0x5B /* [ */) {
+	        return false;
+	      } else if (ch === 0x5D /* ] */) {
+	        labelEnd = pos;
+	        break;
+	      } else if (ch === 0x5C /* \ */) {
+	        pos++;
+	      }
+	    }
+
+	    if (labelEnd < 0 || state.src.charCodeAt(labelEnd + 1) !== 0x3A/* : */) {
+	      return false;
+	    }
+
+	    if (silent) { return true; }
+
+	    label = state.src.slice(labelStart, labelEnd).replace(/\\(.)/g, '$1');
+	    title = state.src.slice(labelEnd + 2, max).trim();
+	    if (title.length === 0) { return false; }
+	    if (!state.env.abbreviations) { state.env.abbreviations = {}; }
+	    // prepend ':' to avoid conflict with Object.prototype members
+	    if (typeof state.env.abbreviations[':' + label] === 'undefined') {
+	      state.env.abbreviations[':' + label] = title;
+	    }
+
+	    state.line = startLine + 1;
+	    return true;
+	  }
+
+
+	  function abbr_replace(state) {
+	    var i, j, l, tokens, token, text, nodes, pos, reg, m, regText,
+	        currentToken,
+	        blockTokens = state.tokens;
+
+	    if (!state.env.abbreviations) { return; }
+	    if (!state.env.abbrRegExp) {
+	      regText = '(^|[' + PUNCT_CHARS.split('').map(escapeRE).join('') + '])'
+	              + '(' + Object.keys(state.env.abbreviations).map(function (x) {
+	                        return x.substr(1);
+	                      }).sort(function (a, b) {
+	                        return b.length - a.length;
+	                      }).map(escapeRE).join('|') + ')'
+	              + '($|[' + PUNCT_CHARS.split('').map(escapeRE).join('') + '])';
+	      state.env.abbrRegExp = new RegExp(regText, 'g');
+	    }
+	    reg = state.env.abbrRegExp;
+
+	    for (j = 0, l = blockTokens.length; j < l; j++) {
+	      if (blockTokens[j].type !== 'inline') { continue; }
+	      tokens = blockTokens[j].children;
+
+	      // We scan from the end, to keep position when new tags added.
+	      for (i = tokens.length - 1; i >= 0; i--) {
+	        currentToken = tokens[i];
+	        if (currentToken.type !== 'text') { continue; }
+
+	        pos = 0;
+	        text = currentToken.content;
+	        reg.lastIndex = 0;
+	        nodes = [];
+
+	        while ((m = reg.exec(text))) {
+	          if (reg.lastIndex > pos) {
+	            token         = new state.Token('text', '', 0);
+	            token.content = text.slice(pos, m.index + m[1].length);
+	            nodes.push(token);
+	          }
+
+	          token         = new state.Token('abbr_open', 'abbr', 1);
+	          token.attrs   = [ [ 'title', state.env.abbreviations[':' + m[2]] ] ];
+	          nodes.push(token);
+
+	          token         = new state.Token('text', '', 0);
+	          token.content = m[2];
+	          nodes.push(token);
+
+	          token         = new state.Token('abbr_close', 'abbr', -1);
+	          nodes.push(token);
+
+	          pos = reg.lastIndex - m[3].length;
+	        }
+
+	        if (!nodes.length) { continue; }
+
+	        if (pos < text.length) {
+	          token         = new state.Token('text', '', 0);
+	          token.content = text.slice(pos);
+	          nodes.push(token);
+	        }
+
+	        // replace current node
+	        blockTokens[j].children = tokens = arrayReplaceAt(tokens, i, nodes);
+	      }
+	    }
+	  }
+
+	  md.block.ruler.before('reference', 'abbr_def', abbr_def, { alt: [ 'paragraph', 'reference' ] });
+	  md.core.ruler.after('inline', 'abbr_replace', abbr_replace);
+	};
+
+
+/***/ },
+/* 105 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Process block-level custom containers
+	//
+	'use strict';
+
+
+	module.exports = function container_plugin(md, name, options) {
+
+	  function validateDefault(params) {
+	    return params.trim().split(' ', 2)[0] === name;
+	  }
+
+	  function renderDefault(tokens, idx, _options, env, self) {
+
+	    // add a class to the opening tag
+	    if (tokens[idx].nesting === 1) {
+	      tokens[idx].attrPush([ 'class', name ]);
+	    }
+
+	    return self.renderToken(tokens, idx, _options, env, self);
+	  }
+
+	  options = options || {};
+
+	  var min_markers = 3,
+	      marker_str  = options.marker || ':',
+	      marker_char = marker_str.charCodeAt(0),
+	      marker_len  = marker_str.length,
+	      validate    = options.validate || validateDefault,
+	      render      = options.render || renderDefault;
+
+	  function container(state, startLine, endLine, silent) {
+	    var pos, nextLine, marker_count, markup, params, token,
+	        old_parent, old_line_max,
+	        auto_closed = false,
+	        start = state.bMarks[startLine] + state.tShift[startLine],
+	        max = state.eMarks[startLine];
+
+	    // Check out the first character quickly,
+	    // this should filter out most of non-containers
+	    //
+	    if (marker_char !== state.src.charCodeAt(start)) { return false; }
+
+	    // Check out the rest of the marker string
+	    //
+	    for (pos = start + 1; pos <= max; pos++) {
+	      if (marker_str[(pos - start) % marker_len] !== state.src[pos]) {
+	        break;
+	      }
+	    }
+
+	    marker_count = Math.floor((pos - start) / marker_len);
+	    if (marker_count < min_markers) { return false; }
+	    pos -= (pos - start) % marker_len;
+
+	    markup = state.src.slice(start, pos);
+	    params = state.src.slice(pos, max);
+	    if (!validate(params)) { return false; }
+
+	    // Since start is found, we can report success here in validation mode
+	    //
+	    if (silent) { return true; }
+
+	    // Search for the end of the block
+	    //
+	    nextLine = startLine;
+
+	    for (;;) {
+	      nextLine++;
+	      if (nextLine >= endLine) {
+	        // unclosed block should be autoclosed by end of document.
+	        // also block seems to be autoclosed by end of parent
+	        break;
+	      }
+
+	      start = state.bMarks[nextLine] + state.tShift[nextLine];
+	      max = state.eMarks[nextLine];
+
+	      if (start < max && state.tShift[nextLine] < state.blkIndent) {
+	        // non-empty line with negative indent should stop the list:
+	        // - ```
+	        //  test
+	        break;
+	      }
+
+	      if (marker_char !== state.src.charCodeAt(start)) { continue; }
+
+	      if (state.tShift[nextLine] - state.blkIndent >= 4) {
+	        // closing fence should be indented less than 4 spaces
+	        continue;
+	      }
+
+	      for (pos = start + 1; pos <= max; pos++) {
+	        if (marker_str[(pos - start) % marker_len] !== state.src[pos]) {
+	          break;
+	        }
+	      }
+
+	      // closing code fence must be at least as long as the opening one
+	      if (Math.floor((pos - start) / marker_len) < marker_count) { continue; }
+
+	      // make sure tail has spaces only
+	      pos -= (pos - start) % marker_len;
+	      pos = state.skipSpaces(pos);
+
+	      if (pos < max) { continue; }
+
+	      // found!
+	      auto_closed = true;
+	      break;
+	    }
+
+	    old_parent = state.parentType;
+	    old_line_max = state.lineMax;
+	    state.parentType = 'container';
+
+	    // this will prevent lazy continuations from ever going past our end marker
+	    state.lineMax = nextLine;
+
+	    token        = state.push('container_' + name + '_open', 'div', 1);
+	    token.markup = markup;
+	    token.block  = true;
+	    token.info   = params;
+	    token.map    = [ startLine, nextLine ];
+
+	    state.md.block.tokenize(state, startLine + 1, nextLine);
+
+	    token        = state.push('container_' + name + '_close', 'div', -1);
+	    token.markup = state.src.slice(start, pos);
+	    token.block  = true;
+
+	    state.parentType = old_parent;
+	    state.lineMax = old_line_max;
+	    state.line = nextLine + (auto_closed ? 1 : 0);
+
+	    return true;
+	  }
+
+	  md.block.ruler.before('fence', 'container_' + name, container, {
+	    alt: [ 'paragraph', 'reference', 'blockquote', 'list' ]
+	  });
+	  md.renderer.rules['container_' + name + '_open'] = render;
+	  md.renderer.rules['container_' + name + '_close'] = render;
+	};
+
+
+/***/ },
+/* 106 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Process definition lists
+	//
+	'use strict';
+
+
+	// Search `[:~][\n ]`, returns next pos after marker on success
+	// or -1 on fail.
+	function skipMarker(state, line) {
+	  var pos, marker,
+	      start = state.bMarks[line] + state.tShift[line],
+	      max = state.eMarks[line];
+
+	  if (start >= max) { return -1; }
+
+	  // Check bullet
+	  marker = state.src.charCodeAt(start++);
+	  if (marker !== 0x7E/* ~ */ && marker !== 0x3A/* : */) { return -1; }
+
+	  pos = state.skipSpaces(start);
+
+	  // require space after ":"
+	  if (start === pos) { return -1; }
+
+	  // no empty definitions, e.g. "  : "
+	  if (pos >= max) { return -1; }
+
+	  return pos;
+	}
+
+	function markTightParagraphs(state, idx) {
+	  var i, l,
+	      level = state.level + 2;
+
+	  for (i = idx + 2, l = state.tokens.length - 2; i < l; i++) {
+	    if (state.tokens[i].level === level && state.tokens[i].type === 'paragraph_open') {
+	      state.tokens[i + 2].hidden = true;
+	      state.tokens[i].hidden = true;
+	      i += 2;
+	    }
+	  }
+	}
+
+	function deflist(state, startLine, endLine, silent) {
+	  var contentStart,
+	      ddLine,
+	      dtLine,
+	      itemLines,
+	      listLines,
+	      listTokIdx,
+	      nextLine,
+	      oldIndent,
+	      oldDDIndent,
+	      oldParentType,
+	      oldTShift,
+	      oldTight,
+	      prevEmptyEnd,
+	      tight,
+	      token;
+
+	  if (silent) {
+	    // quirk: validation mode validates a dd block only, not a whole deflist
+	    if (state.ddIndent < 0) { return false; }
+	    return skipMarker(state, startLine) >= 0;
+	  }
+
+	  nextLine = startLine + 1;
+	  if (state.isEmpty(nextLine)) {
+	    if (++nextLine > endLine) { return false; }
+	  }
+
+	  if (state.tShift[nextLine] < state.blkIndent) { return false; }
+	  contentStart = skipMarker(state, nextLine);
+	  if (contentStart < 0) { return false; }
+
+	  // Start list
+	  listTokIdx = state.tokens.length;
+
+	  token     = state.push('dl_open', 'dl', 1);
+	  token.map = listLines = [ startLine, 0 ];
+
+	  //
+	  // Iterate list items
+	  //
+
+	  dtLine = startLine;
+	  ddLine = nextLine;
+
+	  // One definition list can contain multiple DTs,
+	  // and one DT can be followed by multiple DDs.
+	  //
+	  // Thus, there is two loops here, and label is
+	  // needed to break out of the second one
+	  //
+	  /*eslint no-labels:0,block-scoped-var:0*/
+	  OUTER:
+	  for (;;) {
+	    tight = true;
+	    prevEmptyEnd = false;
+
+	    token          = state.push('dt_open', 'dt', 1);
+	    token.map      = [ dtLine, dtLine ];
+
+	    token          = state.push('inline', '', 0);
+	    token.map      = [ dtLine, dtLine ];
+	    token.content  = state.getLines(dtLine, dtLine + 1, state.blkIndent, false).trim();
+	    token.children = [];
+
+	    token          = state.push('dt_close', 'dt', -1);
+
+	    for (;;) {
+	      token     = state.push('dd_open', 'dd', 1);
+	      token.map = itemLines = [ nextLine, 0 ];
+
+	      oldTight = state.tight;
+	      oldDDIndent = state.ddIndent;
+	      oldIndent = state.blkIndent;
+	      oldTShift = state.tShift[ddLine];
+	      oldParentType = state.parentType;
+	      state.blkIndent = state.ddIndent = state.tShift[ddLine] + 2;
+	      state.tShift[ddLine] = contentStart - state.bMarks[ddLine];
+	      state.tight = true;
+	      state.parentType = 'deflist';
+
+	      state.md.block.tokenize(state, ddLine, endLine, true);
+
+	      // If any of list item is tight, mark list as tight
+	      if (!state.tight || prevEmptyEnd) {
+	        tight = false;
+	      }
+	      // Item become loose if finish with empty line,
+	      // but we should filter last element, because it means list finish
+	      prevEmptyEnd = (state.line - ddLine) > 1 && state.isEmpty(state.line - 1);
+
+	      state.tShift[ddLine] = oldTShift;
+	      state.tight = oldTight;
+	      state.parentType = oldParentType;
+	      state.blkIndent = oldIndent;
+	      state.ddIndent = oldDDIndent;
+
+	      token = state.push('dd_close', 'dd', -1);
+
+	      itemLines[1] = nextLine = state.line;
+
+	      if (nextLine >= endLine) { break OUTER; }
+
+	      if (state.tShift[nextLine] < state.blkIndent) { break OUTER; }
+	      contentStart = skipMarker(state, nextLine);
+	      if (contentStart < 0) { break; }
+
+	      ddLine = nextLine;
+
+	      // go to the next loop iteration:
+	      // insert DD tag and repeat checking
+	    }
+
+	    if (nextLine >= endLine) { break; }
+	    dtLine = nextLine;
+
+	    if (state.isEmpty(dtLine)) { break; }
+	    if (state.tShift[dtLine] < state.blkIndent) { break; }
+
+	    ddLine = dtLine + 1;
+	    if (ddLine >= endLine) { break; }
+	    if (state.isEmpty(ddLine)) { ddLine++; }
+	    if (ddLine >= endLine) { break; }
+
+	    if (state.tShift[ddLine] < state.blkIndent) { break; }
+	    contentStart = skipMarker(state, ddLine);
+	    if (contentStart < 0) { break; }
+
+	    // go to the next loop iteration:
+	    // insert DT and DD tags and repeat checking
+	  }
+
+	  // Finilize list
+	  token = state.push('dl_close', 'dl', -1);
+
+	  listLines[1] = nextLine;
+
+	  state.line = nextLine;
+
+	  // mark paragraphs tight if needed
+	  if (tight) {
+	    markTightParagraphs(state, listTokIdx);
+	  }
+
+	  return true;
+	}
+
+
+	module.exports = function sub_plugin(md) {
+	  md.block.ruler.before('paragraph', 'deflist', deflist, { alt: [ 'paragraph', 'reference' ] });
+	};
+
+
+/***/ },
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	module.exports = __webpack_require__(101);
+	var emojies_full      = __webpack_require__(59);
+	var emojies_shortcuts = __webpack_require__(108);
+	var emoji_html        = __webpack_require__(110);
+	var emoji_replace     = __webpack_require__(111);
+	var normalize_opts    = __webpack_require__(109);
+
+
+	module.exports = function emoji_plugin(md, options) {
+	  var conf = options || {};
+
+	  var opts = normalize_opts({
+	    emojies: conf.defs || emojies_full,
+	    shortcuts: conf.shortcuts || emojies_shortcuts,
+	    enabled: conf.enabled || []
+	  });
+
+	  md.renderer.rules.emoji = emoji_html;
+
+	  md.core.ruler.push('emoji', emoji_replace(md, opts.emojies, opts.shortcuts, opts.scanRE));
+	};
 
 
 /***/ },
-/* 97 */
+/* 108 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Emoticons -> Emoji mapping.
+	//
+	// (!) Some patterns skipped, to avoid collisions
+	// without increase matcher complicity. Than can change in future.
+	//
+	// Places to look for more emoticons info:
+	//
+	// - http://en.wikipedia.org/wiki/List_of_emoticons#Western
+	// - https://github.com/wooorm/emoticon/blob/master/Support.md
+	// - http://factoryjoe.com/projects/emoticons/
+	//
+	'use strict';
+
+	module.exports = {
+	  mad:              [ '>:(', '>:-(' ], // angry
+	  blush:            [ ':")', ':-")' ],
+	  broken_heart:     [ '</3', '<\\3' ],
+	  // :/ & :\ disabled due conflicts, untill logic improved
+	  confused:         [ /*':\\',*/ ':-\\', /*':/',*/ ':-/' ], // twemoji shows question
+	  cry:              [ ":'(", ":'-(", ':,(', ':,-(' ],
+	  frowning:         [ ':(', ':-(' ],
+	  heart:            [ '<3' ],
+	  imp:              [ ']:(', ']:-(' ],
+	  innocent:         [ 'o:)', 'O:)', 'o:-)', 'O:-)', '0:)', '0:-)' ],
+	  joy:              [ ":')", ":'-)", ':,)', ':,-)', ":'D", ":'-D", ':,D', ':,-D' ],
+	  kissing:          [ ':*', ':-*' ],
+	  laughing:         [ 'x-)', 'X-)' ],
+	  neutral_face:     [ ':|', ':-|' ],
+	  open_mouth:       [ ':o', ':-o', ':O', ':-O' ],
+	  rage:             [ ':@', ':-@' ],
+	  smile:            [ ':D', ':-D' ],
+	  smiley:           [ ':)', ':-)' ],
+	  smiling_imp:      [ ']:)', ']:-)' ],
+	  sob:              [ ":,'(", ":,'-(", ';(', ';-(' ],
+	  stuck_out_tongue: [ ':P', ':-P' ],
+	  sunglasses:       [ '8-)', 'B-)' ],
+	  sweat:            [ ',:(', ',:-(' ],
+	  sweat_smile:      [ ',:)', ',:-)' ],
+	  unamused:         [ ':s', ':-S', ':z', ':-Z', ':$', ':-$' ],
+	  wink:             [ ';)', ';-)' ]
+	};
+
+
+/***/ },
+/* 109 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Convert input options to more useable format
+	// and compile search regexp
+
+	'use strict';
+
+
+	function quoteRE (str) {
+	  return str.replace(/[.?*+^$[\]\\(){}|-]/g, '\\$&');
+	}
+
+
+	module.exports = function normalize_opts(options) {
+	  var emojies = options.emojies,
+	      shortcuts;
+
+	  // Filter emojies by whitelist, if needed
+	  if (options.enabled.length) {
+	    emojies = Object.keys(emojies).reduce(function (acc, key) {
+	      if (options.enabled.indexOf(key) >= 0) {
+	        acc[key] = emojies[key];
+	      }
+	      return acc;
+	    }, {});
+	  }
+
+	  // Flatten shortcuts to simple object: { alias: emoji_name }
+	  shortcuts = Object.keys(options.shortcuts).reduce(function (acc, key) {
+	    // Skip aliases for filtered emojies, to reduce regexp
+	    if (!emojies[key]) { return acc; }
+
+	    if (Array.isArray(options.shortcuts[key])) {
+	      options.shortcuts[key].forEach(function (alias) {
+	        acc[alias] = key;
+	      });
+	      return acc;
+	    }
+
+	    acc[options.shortcuts[key]] = key;
+	    return acc;
+	  }, {});
+
+	  // Compile regexp
+	  var names = Object.keys(emojies)
+	                .map(function (name) { return ':' + name + ':'; })
+	                .concat(Object.keys(shortcuts))
+	                .map(function (name) { return quoteRE(name); })
+	                .sort()
+	                .reverse()
+	                .join('|');
+	  var scanRE = RegExp(names, 'g');
+
+
+	  return {
+	    emojies: emojies,
+	    shortcuts: shortcuts,
+	    scanRE: scanRE
+	  };
+	};
+
+
+/***/ },
+/* 110 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = function emoji_html(tokens, idx /*, options, env */) {
+	  return tokens[idx].content;
+	};
+
+
+/***/ },
+/* 111 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Emojies & shortcuts replacement logic.
+	//
+	// Note: In theory, it could be faster to parse :smile: in inline chain and
+	// leave only shortcuts here. But, who care...
+	//
+
+	'use strict';
+
+
+	module.exports = function create_rule(md, emojies, shortcuts, compiledRE) {
+	  var arrayReplaceAt = md.utils.arrayReplaceAt;
+
+	  function splitTextToken(text, level, Token) {
+	    var token, last_pos = 0, nodes = [];
+
+	    text.replace(compiledRE, function(match, offset) {
+	      var emoji_name;
+	      // Validate emoji name
+	      if (shortcuts.hasOwnProperty(match)) {
+	        // replace shortcut with full name
+	        emoji_name = shortcuts[match];
+	      } else {
+	        emoji_name = match.slice(1, -1);
+	      }
+
+	      // Add new tokens to pending list
+	      if (offset > last_pos) {
+	        token         = new Token('text', '', 0);
+	        token.content = text.slice(last_pos, offset);
+	        nodes.push(token);
+	      }
+
+	      token         = new Token('emoji', '', 0);
+	      token.markup  = emoji_name;
+	      token.content = emojies[emoji_name];
+	      nodes.push(token);
+
+	      last_pos = offset + match.length;
+	    });
+
+	    if (last_pos < text.length) {
+	      token         = new Token('text', '', 0);
+	      token.content = text.slice(last_pos);
+	      nodes.push(token);
+	    }
+
+	    return nodes;
+	  }
+
+	  return function emoji_replace(state) {
+	    var i, j, l, tokens, token,
+	        blockTokens = state.tokens;
+
+	    for (j = 0, l = blockTokens.length; j < l; j++) {
+	      if (blockTokens[j].type !== 'inline') { continue; }
+	      tokens = blockTokens[j].children;
+
+	      // We scan from the end, to keep position when new tags added.
+	      // Use reversed logic in links start/end match
+	      for (i = tokens.length - 1; i >= 0; i--) {
+	        token = tokens[i];
+
+	        if (token.type === 'text' && compiledRE.test(token.content)) {
+	          // replace current node
+	          blockTokens[j].children = tokens = arrayReplaceAt(
+	            tokens, i, splitTextToken(token.content, token.level, state.Token)
+	          );
+	        }
+	      }
+	    }
+	  };
+	};
+
+
+/***/ },
+/* 112 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Process footnotes
+	//
+	'use strict';
+
+	////////////////////////////////////////////////////////////////////////////////
+	// Renderer partials
+
+	function _footnote_ref(tokens, idx) {
+	  var n = Number(tokens[idx].meta.id + 1).toString();
+	  var id = 'fnref' + n;
+	  if (tokens[idx].meta.subId > 0) {
+	    id += ':' + tokens[idx].meta.subId;
+	  }
+	  return '<sup class="footnote-ref"><a href="#fn' + n + '" id="' + id + '">[' + n + ']</a></sup>';
+	}
+	function _footnote_block_open(tokens, idx, options) {
+	  return (options.xhtmlOut ? '<hr class="footnotes-sep" />\n' : '<hr class="footnotes-sep">\n') +
+	         '<section class="footnotes">\n' +
+	         '<ol class="footnotes-list">\n';
+	}
+	function _footnote_block_close() {
+	  return '</ol>\n</section>\n';
+	}
+	function _footnote_open(tokens, idx) {
+	  var id = Number(tokens[idx].meta.id + 1).toString();
+	  return '<li id="fn' + id + '"  class="footnote-item">';
+	}
+	function _footnote_close() {
+	  return '</li>\n';
+	}
+	function _footnote_anchor(tokens, idx) {
+	  var n = Number(tokens[idx].meta.id + 1).toString();
+	  var id = 'fnref' + n;
+	  if (tokens[idx].meta.subId > 0) {
+	    id += ':' + tokens[idx].meta.subId;
+	  }
+	  return ' <a href="#' + id + '" class="footnote-backref">\u21a9</a>'; /* ↩ */
+	}
+
+	////////////////////////////////////////////////////////////////////////////////
+
+
+	module.exports = function sub_plugin(md) {
+	  var parseLinkLabel = md.helpers.parseLinkLabel;
+
+	  md.renderer.rules.footnote_ref          = _footnote_ref;
+	  md.renderer.rules.footnote_block_open   = _footnote_block_open;
+	  md.renderer.rules.footnote_block_close  = _footnote_block_close;
+	  md.renderer.rules.footnote_open         = _footnote_open;
+	  md.renderer.rules.footnote_close        = _footnote_close;
+	  md.renderer.rules.footnote_anchor       = _footnote_anchor;
+
+	  // Process footnote block definition
+	  function footnote_def(state, startLine, endLine, silent) {
+	    var oldBMark, oldTShift, oldParentType, pos, label, token,
+	        start = state.bMarks[startLine] + state.tShift[startLine],
+	        max = state.eMarks[startLine];
+
+	    // line should be at least 5 chars - "[^x]:"
+	    if (start + 4 > max) { return false; }
+
+	    if (state.src.charCodeAt(start) !== 0x5B/* [ */) { return false; }
+	    if (state.src.charCodeAt(start + 1) !== 0x5E/* ^ */) { return false; }
+
+	    for (pos = start + 2; pos < max; pos++) {
+	      if (state.src.charCodeAt(pos) === 0x20) { return false; }
+	      if (state.src.charCodeAt(pos) === 0x5D /* ] */) {
+	        break;
+	      }
+	    }
+
+	    if (pos === start + 2) { return false; } // no empty footnote labels
+	    if (pos + 1 >= max || state.src.charCodeAt(++pos) !== 0x3A /* : */) { return false; }
+	    if (silent) { return true; }
+	    pos++;
+
+	    if (!state.env.footnotes) { state.env.footnotes = {}; }
+	    if (!state.env.footnotes.refs) { state.env.footnotes.refs = {}; }
+	    label = state.src.slice(start + 2, pos - 2);
+	    state.env.footnotes.refs[':' + label] = -1;
+
+	    token       = new state.Token('footnote_reference_open', '', 1);
+	    token.meta  = { label: label };
+	    token.level = state.level++;
+	    state.tokens.push(token);
+
+	    oldBMark = state.bMarks[startLine];
+	    oldTShift = state.tShift[startLine];
+	    oldParentType = state.parentType;
+	    state.tShift[startLine] = state.skipSpaces(pos) - pos;
+	    state.bMarks[startLine] = pos;
+	    state.blkIndent += 4;
+	    state.parentType = 'footnote';
+
+	    if (state.tShift[startLine] < state.blkIndent) {
+	      state.tShift[startLine] += state.blkIndent;
+	      state.bMarks[startLine] -= state.blkIndent;
+	    }
+
+	    state.md.block.tokenize(state, startLine, endLine, true);
+
+	    state.parentType = oldParentType;
+	    state.blkIndent -= 4;
+	    state.tShift[startLine] = oldTShift;
+	    state.bMarks[startLine] = oldBMark;
+
+	    token       = new state.Token('footnote_reference_close', '', -1);
+	    token.level = --state.level;
+	    state.tokens.push(token);
+
+	    return true;
+	  }
+
+	  // Process inline footnotes (^[...])
+	  function footnote_inline(state, silent) {
+	    var labelStart,
+	        labelEnd,
+	        footnoteId,
+	        oldLength,
+	        token,
+	        max = state.posMax,
+	        start = state.pos;
+
+	    if (start + 2 >= max) { return false; }
+	    if (state.src.charCodeAt(start) !== 0x5E/* ^ */) { return false; }
+	    if (state.src.charCodeAt(start + 1) !== 0x5B/* [ */) { return false; }
+
+	    labelStart = start + 2;
+	    labelEnd = parseLinkLabel(state, start + 1);
+
+	    // parser failed to find ']', so it's not a valid note
+	    if (labelEnd < 0) { return false; }
+
+	    // We found the end of the link, and know for a fact it's a valid link;
+	    // so all that's left to do is to call tokenizer.
+	    //
+	    if (!silent) {
+	      if (!state.env.footnotes) { state.env.footnotes = {}; }
+	      if (!state.env.footnotes.list) { state.env.footnotes.list = []; }
+	      footnoteId = state.env.footnotes.list.length;
+
+	      state.pos = labelStart;
+	      state.posMax = labelEnd;
+
+	      token      = state.push('footnote_ref', '', 0);
+	      token.meta = { id: footnoteId };
+
+	      oldLength = state.tokens.length;
+	      state.md.inline.tokenize(state);
+	      state.env.footnotes.list[footnoteId] = { tokens: state.tokens.splice(oldLength) };
+	    }
+
+	    state.pos = labelEnd + 1;
+	    state.posMax = max;
+	    return true;
+	  }
+
+	  // Process footnote references ([^...])
+	  function footnote_ref(state, silent) {
+	    var label,
+	        pos,
+	        footnoteId,
+	        footnoteSubId,
+	        token,
+	        max = state.posMax,
+	        start = state.pos;
+
+	    // should be at least 4 chars - "[^x]"
+	    if (start + 3 > max) { return false; }
+
+	    if (!state.env.footnotes || !state.env.footnotes.refs) { return false; }
+	    if (state.src.charCodeAt(start) !== 0x5B/* [ */) { return false; }
+	    if (state.src.charCodeAt(start + 1) !== 0x5E/* ^ */) { return false; }
+
+	    for (pos = start + 2; pos < max; pos++) {
+	      if (state.src.charCodeAt(pos) === 0x20) { return false; }
+	      if (state.src.charCodeAt(pos) === 0x0A) { return false; }
+	      if (state.src.charCodeAt(pos) === 0x5D /* ] */) {
+	        break;
+	      }
+	    }
+
+	    if (pos === start + 2) { return false; } // no empty footnote labels
+	    if (pos >= max) { return false; }
+	    pos++;
+
+	    label = state.src.slice(start + 2, pos - 1);
+	    if (typeof state.env.footnotes.refs[':' + label] === 'undefined') { return false; }
+
+	    if (!silent) {
+	      if (!state.env.footnotes.list) { state.env.footnotes.list = []; }
+
+	      if (state.env.footnotes.refs[':' + label] < 0) {
+	        footnoteId = state.env.footnotes.list.length;
+	        state.env.footnotes.list[footnoteId] = { label: label, count: 0 };
+	        state.env.footnotes.refs[':' + label] = footnoteId;
+	      } else {
+	        footnoteId = state.env.footnotes.refs[':' + label];
+	      }
+
+	      footnoteSubId = state.env.footnotes.list[footnoteId].count;
+	      state.env.footnotes.list[footnoteId].count++;
+
+	      token      = state.push('footnote_ref', '', 0);
+	      token.meta = { id: footnoteId, subId: footnoteSubId };
+	    }
+
+	    state.pos = pos;
+	    state.posMax = max;
+	    return true;
+	  }
+
+	  // Glue footnote tokens to end of token stream
+	  function footnote_tail(state) {
+	    var i, l, j, t, lastParagraph, list, token, tokens, current, currentLabel,
+	        insideRef = false,
+	        refTokens = {};
+
+	    if (!state.env.footnotes) { return; }
+
+	    state.tokens = state.tokens.filter(function(tok) {
+	      if (tok.type === 'footnote_reference_open') {
+	        insideRef = true;
+	        current = [];
+	        currentLabel = tok.meta.label;
+	        return false;
+	      }
+	      if (tok.type === 'footnote_reference_close') {
+	        insideRef = false;
+	        // prepend ':' to avoid conflict with Object.prototype members
+	        refTokens[':' + currentLabel] = current;
+	        return false;
+	      }
+	      if (insideRef) { current.push(tok); }
+	      return !insideRef;
+	    });
+
+	    if (!state.env.footnotes.list) { return; }
+	    list = state.env.footnotes.list;
+
+	    token = new state.Token('footnote_block_open', '', 1);
+	    state.tokens.push(token);
+
+	    for (i = 0, l = list.length; i < l; i++) {
+	      token      = new state.Token('footnote_open', '', 1);
+	      token.meta = { id: i };
+	      state.tokens.push(token);
+
+	      if (list[i].tokens) {
+	        tokens = [];
+
+	        token          = new state.Token('paragraph_open', 'p', 1);
+	        token.block    = true;
+	        tokens.push(token);
+
+	        token          = new state.Token('inline', '', 0);
+	        token.children = list[i].tokens;
+	        token.content  = '';
+	        tokens.push(token);
+
+	        token          = new state.Token('paragraph_close', 'p', -1);
+	        token.block    = true;
+	        tokens.push(token);
+
+	      } else if (list[i].label) {
+	        tokens = refTokens[':' + list[i].label];
+	      }
+
+	      state.tokens = state.tokens.concat(tokens);
+	      if (state.tokens[state.tokens.length - 1].type === 'paragraph_close') {
+	        lastParagraph = state.tokens.pop();
+	      } else {
+	        lastParagraph = null;
+	      }
+
+	      t = list[i].count > 0 ? list[i].count : 1;
+	      for (j = 0; j < t; j++) {
+	        token      = new state.Token('footnote_anchor', '', 0);
+	        token.meta = { id: i, subId: j };
+	        state.tokens.push(token);
+	      }
+
+	      if (lastParagraph) {
+	        state.tokens.push(lastParagraph);
+	      }
+
+	      token = new state.Token('footnote_close', '', -1);
+	      state.tokens.push(token);
+	    }
+
+	    token = new state.Token('footnote_block_close', '', -1);
+	    state.tokens.push(token);
+	  }
+
+	  md.block.ruler.before('reference', 'footnote_def', footnote_def, { alt: [ 'paragraph', 'reference' ] });
+	  md.inline.ruler.after('image', 'footnote_inline', footnote_inline);
+	  md.inline.ruler.after('footnote_inline', 'footnote_ref', footnote_ref);
+	  md.core.ruler.after('inline', 'footnote_tail', footnote_tail);
+	};
+
+
+/***/ },
+/* 113 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+
+	// parse sequence of markers,
+	// "start" should point at a valid marker
+	function scanDelims(state, start) {
+	  var pos = start, lastChar, nextChar, count,
+	      isLastWhiteSpace, isLastPunctChar,
+	      isNextWhiteSpace, isNextPunctChar,
+	      can_open = true,
+	      can_close = true,
+	      max = state.posMax,
+	      marker = state.src.charCodeAt(start),
+	      isWhiteSpace = state.md.utils.isWhiteSpace,
+	      isPunctChar = state.md.utils.isPunctChar,
+	      isMdAsciiPunct = state.md.utils.isMdAsciiPunct;
+
+	  // treat beginning of the line as a whitespace
+	  lastChar = start > 0 ? state.src.charCodeAt(start - 1) : 0x20;
+
+	  while (pos < max && state.src.charCodeAt(pos) === marker) { pos++; }
+
+	  if (pos >= max) {
+	    can_open = false;
+	  }
+
+	  count = pos - start;
+
+	  // treat end of the line as a whitespace
+	  nextChar = pos < max ? state.src.charCodeAt(pos) : 0x20;
+
+	  isLastPunctChar = isMdAsciiPunct(lastChar) || isPunctChar(String.fromCharCode(lastChar));
+	  isNextPunctChar = isMdAsciiPunct(nextChar) || isPunctChar(String.fromCharCode(nextChar));
+
+	  isLastWhiteSpace = isWhiteSpace(lastChar);
+	  isNextWhiteSpace = isWhiteSpace(nextChar);
+
+	  if (isNextWhiteSpace) {
+	    can_open = false;
+	  } else if (isNextPunctChar) {
+	    if (!(isLastWhiteSpace || isLastPunctChar)) {
+	      can_open = false;
+	    }
+	  }
+
+	  if (isLastWhiteSpace) {
+	    can_close = false;
+	  } else if (isLastPunctChar) {
+	    if (!(isNextWhiteSpace || isNextPunctChar)) {
+	      can_close = false;
+	    }
+	  }
+
+	  return {
+	    can_open: can_open,
+	    can_close: can_close,
+	    delims: count
+	  };
+	}
+
+
+	function insert(state, silent) {
+	  var startCount,
+	      count,
+	      tagCount,
+	      found,
+	      stack,
+	      res,
+	      token,
+	      max = state.posMax,
+	      start = state.pos,
+	      marker = state.src.charCodeAt(start);
+
+	  if (marker !== 0x2B/* + */) { return false; }
+	  if (silent) { return false; } // don't run any pairs in validation mode
+
+	  res = scanDelims(state, start);
+	  startCount = res.delims;
+
+	  if (!res.can_open) {
+	    state.pos += startCount;
+	    // Earlier we checked !silent, but this implementation does not need it
+	    state.pending += state.src.slice(start, state.pos);
+	    return true;
+	  }
+
+	  stack = Math.floor(startCount / 2);
+	  if (stack <= 0) { return false; }
+	  state.pos = start + startCount;
+
+	  while (state.pos < max) {
+	    if (state.src.charCodeAt(state.pos) === marker) {
+	      res = scanDelims(state, state.pos);
+	      count = res.delims;
+	      tagCount = Math.floor(count / 2);
+	      if (res.can_close) {
+	        if (tagCount >= stack) {
+	          state.pos += count - 2;
+	          found = true;
+	          break;
+	        }
+	        stack -= tagCount;
+	        state.pos += count;
+	        continue;
+	      }
+
+	      if (res.can_open) { stack += tagCount; }
+	      state.pos += count;
+	      continue;
+	    }
+
+	    state.md.inline.skipToken(state);
+	  }
+
+	  if (!found) {
+	    // parser failed to find ending tag, so it's not valid emphasis
+	    state.pos = start;
+	    return false;
+	  }
+
+	  // found!
+	  state.posMax = state.pos;
+	  state.pos = start + 2;
+
+	  // Earlier we checked !silent, but this implementation does not need it
+	  token        = state.push('ins_open', 'ins', 1);
+	  token.markup = String.fromCharCode(marker) + String.fromCharCode(marker);
+
+	  state.md.inline.tokenize(state);
+
+	  token        = state.push('ins_close', 'ins', -1);
+	  token.markup = String.fromCharCode(marker) + String.fromCharCode(marker);
+
+	  state.pos = state.posMax + 2;
+	  state.posMax = max;
+	  return true;
+	}
+
+
+	module.exports = function ins_plugin(md) {
+	  md.inline.ruler.before('emphasis', 'ins', insert);
+	};
+
+
+/***/ },
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+
+	// parse sequence of markers,
+	// "start" should point at a valid marker
+	function scanDelims(state, start) {
+	  var pos = start, lastChar, nextChar, count,
+	      isLastWhiteSpace, isLastPunctChar,
+	      isNextWhiteSpace, isNextPunctChar,
+	      can_open = true,
+	      can_close = true,
+	      max = state.posMax,
+	      marker = state.src.charCodeAt(start),
+	      isWhiteSpace = state.md.utils.isWhiteSpace,
+	      isPunctChar = state.md.utils.isPunctChar,
+	      isMdAsciiPunct = state.md.utils.isMdAsciiPunct;
+
+	  // treat beginning of the line as a whitespace
+	  lastChar = start > 0 ? state.src.charCodeAt(start - 1) : 0x20;
+
+	  while (pos < max && state.src.charCodeAt(pos) === marker) { pos++; }
+
+	  if (pos >= max) {
+	    can_open = false;
+	  }
+
+	  count = pos - start;
+
+	  // treat end of the line as a whitespace
+	  nextChar = pos < max ? state.src.charCodeAt(pos) : 0x20;
+
+	  isLastPunctChar = isMdAsciiPunct(lastChar) || isPunctChar(String.fromCharCode(lastChar));
+	  isNextPunctChar = isMdAsciiPunct(nextChar) || isPunctChar(String.fromCharCode(nextChar));
+
+	  isLastWhiteSpace = isWhiteSpace(lastChar);
+	  isNextWhiteSpace = isWhiteSpace(nextChar);
+
+	  if (isNextWhiteSpace) {
+	    can_open = false;
+	  } else if (isNextPunctChar) {
+	    if (!(isLastWhiteSpace || isLastPunctChar)) {
+	      can_open = false;
+	    }
+	  }
+
+	  if (isLastWhiteSpace) {
+	    can_close = false;
+	  } else if (isLastPunctChar) {
+	    if (!(isNextWhiteSpace || isNextPunctChar)) {
+	      can_close = false;
+	    }
+	  }
+
+	  return {
+	    can_open: can_open,
+	    can_close: can_close,
+	    delims: count
+	  };
+	}
+
+
+	function mark(state, silent) {
+	  var startCount,
+	      count,
+	      tagCount,
+	      found,
+	      stack,
+	      res,
+	      token,
+	      max = state.posMax,
+	      start = state.pos,
+	      marker = state.src.charCodeAt(start);
+
+	  if (marker !== 0x3D/* = */) { return false; }
+	  if (silent) { return false; } // don't run any pairs in validation mode
+
+	  res = scanDelims(state, start);
+	  startCount = res.delims;
+
+	  if (!res.can_open) {
+	    state.pos += startCount;
+	    // Earlier we checked !silent, but this implementation does not need it
+	    state.pending += state.src.slice(start, state.pos);
+	    return true;
+	  }
+
+	  stack = Math.floor(startCount / 2);
+	  if (stack <= 0) { return false; }
+	  state.pos = start + startCount;
+
+	  while (state.pos < max) {
+	    if (state.src.charCodeAt(state.pos) === marker) {
+	      res = scanDelims(state, state.pos);
+	      count = res.delims;
+	      tagCount = Math.floor(count / 2);
+	      if (res.can_close) {
+	        if (tagCount >= stack) {
+	          state.pos += count - 2;
+	          found = true;
+	          break;
+	        }
+	        stack -= tagCount;
+	        state.pos += count;
+	        continue;
+	      }
+
+	      if (res.can_open) { stack += tagCount; }
+	      state.pos += count;
+	      continue;
+	    }
+
+	    state.md.inline.skipToken(state);
+	  }
+
+	  if (!found) {
+	    // parser failed to find ending tag, so it's not valid emphasis
+	    state.pos = start;
+	    return false;
+	  }
+
+	  // found!
+	  state.posMax = state.pos;
+	  state.pos = start + 2;
+
+	  // Earlier we checked !silent, but this implementation does not need it
+	  token        = state.push('mark_open', 'mark', 1);
+	  token.markup = String.fromCharCode(marker) + String.fromCharCode(marker);
+
+	  state.md.inline.tokenize(state);
+
+	  token        = state.push('mark_close', 'mark', -1);
+	  token.markup = String.fromCharCode(marker) + String.fromCharCode(marker);
+
+	  state.pos = state.posMax + 2;
+	  state.posMax = max;
+	  return true;
+	}
+
+
+	module.exports = function mark_plugin(md) {
+	  md.inline.ruler.before('emphasis', 'mark', mark);
+	};
+
+
+/***/ },
+/* 115 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Process ~subscript~
+
+	'use strict';
+
+	// same as UNESCAPE_MD_RE plus a space
+	var UNESCAPE_RE = /\\([ \\!"#$%&'()*+,.\/:;<=>?@[\]^_`{|}~-])/g;
+
+
+	function subscript(state, silent) {
+	  var found,
+	      content,
+	      token,
+	      max = state.posMax,
+	      start = state.pos;
+
+	  if (state.src.charCodeAt(start) !== 0x7E/* ~ */) { return false; }
+	  if (silent) { return false; } // don't run any pairs in validation mode
+	  if (start + 2 >= max) { return false; }
+
+	  state.pos = start + 1;
+
+	  while (state.pos < max) {
+	    if (state.src.charCodeAt(state.pos) === 0x7E/* ~ */) {
+	      found = true;
+	      break;
+	    }
+
+	    state.md.inline.skipToken(state);
+	  }
+
+	  if (!found || start + 1 === state.pos) {
+	    state.pos = start;
+	    return false;
+	  }
+
+	  content = state.src.slice(start + 1, state.pos);
+
+	  // don't allow unescaped spaces/newlines inside
+	  if (content.match(/(^|[^\\])(\\\\)*\s/)) {
+	    state.pos = start;
+	    return false;
+	  }
+
+	  // found!
+	  state.posMax = state.pos;
+	  state.pos = start + 1;
+
+	  // Earlier we checked !silent, but this implementation does not need it
+	  token         = state.push('sub_open', 'sub', 1);
+	  token.markup  = '~';
+
+	  token         = state.push('text', '', 0);
+	  token.content = content.replace(UNESCAPE_RE, '$1');
+
+	  token         = state.push('sub_close', 'sub', -1);
+	  token.markup  = '~';
+
+	  state.pos = state.posMax + 1;
+	  state.posMax = max;
+	  return true;
+	}
+
+
+	module.exports = function sub_plugin(md) {
+	  md.inline.ruler.after('emphasis', 'sub', subscript);
+	};
+
+
+/***/ },
+/* 116 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Process ^superscript^
+
+	'use strict';
+
+	// same as UNESCAPE_MD_RE plus a space
+	var UNESCAPE_RE = /\\([ \\!"#$%&'()*+,.\/:;<=>?@[\]^_`{|}~-])/g;
+
+	function superscript(state, silent) {
+	  var found,
+	      content,
+	      token,
+	      max = state.posMax,
+	      start = state.pos;
+
+	  if (state.src.charCodeAt(start) !== 0x5E/* ^ */) { return false; }
+	  if (silent) { return false; } // don't run any pairs in validation mode
+	  if (start + 2 >= max) { return false; }
+
+	  state.pos = start + 1;
+
+	  while (state.pos < max) {
+	    if (state.src.charCodeAt(state.pos) === 0x5E/* ^ */) {
+	      found = true;
+	      break;
+	    }
+
+	    state.md.inline.skipToken(state);
+	  }
+
+	  if (!found || start + 1 === state.pos) {
+	    state.pos = start;
+	    return false;
+	  }
+
+	  content = state.src.slice(start + 1, state.pos);
+
+	  // don't allow unescaped spaces/newlines inside
+	  if (content.match(/(^|[^\\])(\\\\)*\s/)) {
+	    state.pos = start;
+	    return false;
+	  }
+
+	  // found!
+	  state.posMax = state.pos;
+	  state.pos = start + 1;
+
+	  // Earlier we checked !silent, but this implementation does not need it
+	  token         = state.push('sup_open', 'sup', 1);
+	  token.markup  = '^';
+
+	  token         = state.push('text', '', 0);
+	  token.content = content.replace(UNESCAPE_RE, '$1');
+
+	  token         = state.push('sup_close', 'sup', -1);
+	  token.markup  = '^';
+
+	  state.pos = state.posMax + 1;
+	  state.posMax = max;
+	  return true;
+	}
+
+
+	module.exports = function sup_plugin(md) {
+	  md.inline.ruler.after('emphasis', 'sup', superscript);
+	};
+
+
+/***/ },
+/* 117 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+
+	module.exports = __webpack_require__(122);
+
+
+/***/ },
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// List of valid html blocks names, accorting to commonmark spec
@@ -18481,7 +21401,7 @@
 
 
 /***/ },
-/* 98 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Regexps to match html elements
@@ -18513,7 +21433,7 @@
 
 
 /***/ },
-/* 99 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// List of valid url schemas, accorting to commonmark spec
@@ -18691,20 +21611,20 @@
 
 
 /***/ },
-/* 100 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Just a shortcut for bulk export
 	'use strict';
 
 
-	exports.parseLinkLabel       = __webpack_require__(20);
-	exports.parseLinkDestination = __webpack_require__(13);
-	exports.parseLinkTitle       = __webpack_require__(14);
+	exports.parseLinkLabel       = __webpack_require__(22);
+	exports.parseLinkDestination = __webpack_require__(14);
+	exports.parseLinkTitle       = __webpack_require__(15);
 
 
 /***/ },
-/* 101 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Main perser class
@@ -18713,20 +21633,20 @@
 
 
 	var utils        = __webpack_require__(1);
-	var helpers      = __webpack_require__(100);
-	var Renderer     = __webpack_require__(108);
-	var ParserCore   = __webpack_require__(103);
-	var ParserBlock  = __webpack_require__(102);
-	var ParserInline = __webpack_require__(104);
-	var LinkifyIt    = __webpack_require__(140);
+	var helpers      = __webpack_require__(121);
+	var Renderer     = __webpack_require__(129);
+	var ParserCore   = __webpack_require__(124);
+	var ParserBlock  = __webpack_require__(123);
+	var ParserInline = __webpack_require__(125);
+	var LinkifyIt    = __webpack_require__(161);
 	var mdurl        = __webpack_require__(45);
-	var punycode     = __webpack_require__(176);
+	var punycode     = __webpack_require__(173);
 
 
 	var config = {
-	  'default': __webpack_require__(106),
-	  zero: __webpack_require__(107),
-	  commonmark: __webpack_require__(105)
+	  'default': __webpack_require__(127),
+	  zero: __webpack_require__(128),
+	  commonmark: __webpack_require__(126)
 	};
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -19258,7 +22178,7 @@
 
 
 /***/ },
-/* 102 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** internal
@@ -19269,23 +22189,23 @@
 	'use strict';
 
 
-	var Ruler           = __webpack_require__(21);
+	var Ruler           = __webpack_require__(23);
 
 
 	var _rules = [
 	  // First 2 params - rule name & source. Secondary array - list of rules,
 	  // which can be terminated by this one.
-	  [ 'code',       __webpack_require__(110) ],
-	  [ 'fence',      __webpack_require__(111),      [ 'paragraph', 'reference', 'blockquote', 'list' ] ],
-	  [ 'blockquote', __webpack_require__(109), [ 'paragraph', 'reference', 'list' ] ],
-	  [ 'hr',         __webpack_require__(113),         [ 'paragraph', 'reference', 'blockquote', 'list' ] ],
-	  [ 'list',       __webpack_require__(116),       [ 'paragraph', 'reference', 'blockquote' ] ],
-	  [ 'reference',  __webpack_require__(118) ],
-	  [ 'heading',    __webpack_require__(112),    [ 'paragraph', 'reference', 'blockquote' ] ],
-	  [ 'lheading',   __webpack_require__(115) ],
-	  [ 'html_block', __webpack_require__(114), [ 'paragraph', 'reference', 'blockquote' ] ],
-	  [ 'table',      __webpack_require__(120),      [ 'paragraph', 'reference' ] ],
-	  [ 'paragraph',  __webpack_require__(117) ]
+	  [ 'code',       __webpack_require__(131) ],
+	  [ 'fence',      __webpack_require__(132),      [ 'paragraph', 'reference', 'blockquote', 'list' ] ],
+	  [ 'blockquote', __webpack_require__(130), [ 'paragraph', 'reference', 'list' ] ],
+	  [ 'hr',         __webpack_require__(134),         [ 'paragraph', 'reference', 'blockquote', 'list' ] ],
+	  [ 'list',       __webpack_require__(137),       [ 'paragraph', 'reference', 'blockquote' ] ],
+	  [ 'reference',  __webpack_require__(139) ],
+	  [ 'heading',    __webpack_require__(133),    [ 'paragraph', 'reference', 'blockquote' ] ],
+	  [ 'lheading',   __webpack_require__(136) ],
+	  [ 'html_block', __webpack_require__(135), [ 'paragraph', 'reference', 'blockquote' ] ],
+	  [ 'table',      __webpack_require__(141),      [ 'paragraph', 'reference' ] ],
+	  [ 'paragraph',  __webpack_require__(138) ]
 	];
 
 
@@ -19382,14 +22302,14 @@
 	};
 
 
-	ParserBlock.prototype.State = __webpack_require__(119);
+	ParserBlock.prototype.State = __webpack_require__(140);
 
 
 	module.exports = ParserBlock;
 
 
 /***/ },
-/* 103 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** internal
@@ -19401,16 +22321,16 @@
 	'use strict';
 
 
-	var Ruler  = __webpack_require__(21);
+	var Ruler  = __webpack_require__(23);
 
 
 	var _rules = [
-	  [ 'normalize',      __webpack_require__(124)      ],
-	  [ 'block',          __webpack_require__(121)          ],
-	  [ 'inline',         __webpack_require__(122)         ],
-	  [ 'linkify',        __webpack_require__(123)        ],
-	  [ 'replacements',   __webpack_require__(125)   ],
-	  [ 'smartquotes',    __webpack_require__(126)    ]
+	  [ 'normalize',      __webpack_require__(145)      ],
+	  [ 'block',          __webpack_require__(142)          ],
+	  [ 'inline',         __webpack_require__(143)         ],
+	  [ 'linkify',        __webpack_require__(144)        ],
+	  [ 'replacements',   __webpack_require__(146)   ],
+	  [ 'smartquotes',    __webpack_require__(147)    ]
 	];
 
 
@@ -19446,14 +22366,14 @@
 	  }
 	};
 
-	Core.prototype.State = __webpack_require__(127);
+	Core.prototype.State = __webpack_require__(148);
 
 
 	module.exports = Core;
 
 
 /***/ },
-/* 104 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/** internal
@@ -19464,24 +22384,24 @@
 	'use strict';
 
 
-	var Ruler           = __webpack_require__(21);
+	var Ruler           = __webpack_require__(23);
 
 
 	////////////////////////////////////////////////////////////////////////////////
 	// Parser rules
 
 	var _rules = [
-	  [ 'text',            __webpack_require__(139) ],
-	  [ 'newline',         __webpack_require__(136) ],
-	  [ 'escape',          __webpack_require__(132) ],
-	  [ 'backticks',       __webpack_require__(129) ],
-	  [ 'strikethrough',   __webpack_require__(138) ],
-	  [ 'emphasis',        __webpack_require__(130) ],
-	  [ 'link',            __webpack_require__(135) ],
-	  [ 'image',           __webpack_require__(134) ],
-	  [ 'autolink',        __webpack_require__(128) ],
-	  [ 'html_inline',     __webpack_require__(133) ],
-	  [ 'entity',          __webpack_require__(131) ]
+	  [ 'text',            __webpack_require__(160) ],
+	  [ 'newline',         __webpack_require__(157) ],
+	  [ 'escape',          __webpack_require__(153) ],
+	  [ 'backticks',       __webpack_require__(150) ],
+	  [ 'strikethrough',   __webpack_require__(159) ],
+	  [ 'emphasis',        __webpack_require__(151) ],
+	  [ 'link',            __webpack_require__(156) ],
+	  [ 'image',           __webpack_require__(155) ],
+	  [ 'autolink',        __webpack_require__(149) ],
+	  [ 'html_inline',     __webpack_require__(154) ],
+	  [ 'entity',          __webpack_require__(152) ]
 	];
 
 
@@ -19583,14 +22503,14 @@
 	};
 
 
-	ParserInline.prototype.State = __webpack_require__(137);
+	ParserInline.prototype.State = __webpack_require__(158);
 
 
 	module.exports = ParserInline;
 
 
 /***/ },
-/* 105 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Commonmark default options
@@ -19667,7 +22587,7 @@
 
 
 /***/ },
-/* 106 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// markdown-it default options
@@ -19710,7 +22630,7 @@
 
 
 /***/ },
-/* 107 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// "Zero" preset, with nothing enabled. Useful for manual configuring of simple
@@ -19770,7 +22690,7 @@
 
 
 /***/ },
-/* 108 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20076,7 +22996,7 @@
 
 
 /***/ },
-/* 109 */
+/* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Block quotes
@@ -20211,7 +23131,7 @@
 
 
 /***/ },
-/* 110 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Code block (4 spaces padded)
@@ -20250,7 +23170,7 @@
 
 
 /***/ },
-/* 111 */
+/* 132 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fences (``` lang, ~~~ lang)
@@ -20347,7 +23267,7 @@
 
 
 /***/ },
-/* 112 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// heading (#, ##, ...)
@@ -20403,7 +23323,7 @@
 
 
 /***/ },
-/* 113 */
+/* 134 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Horizontal rule
@@ -20449,7 +23369,7 @@
 
 
 /***/ },
-/* 114 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// HTML block
@@ -20457,7 +23377,7 @@
 	'use strict';
 
 
-	var block_names = __webpack_require__(97);
+	var block_names = __webpack_require__(118);
 
 
 	var HTML_TAG_OPEN_RE = /^<([a-zA-Z][a-zA-Z0-9]{0,14})[\s\/>]/;
@@ -20527,7 +23447,7 @@
 
 
 /***/ },
-/* 115 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// lheading (---, ===)
@@ -20583,7 +23503,7 @@
 
 
 /***/ },
-/* 116 */
+/* 137 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Lists
@@ -20844,7 +23764,7 @@
 
 
 /***/ },
-/* 117 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Paragraph
@@ -20894,14 +23814,14 @@
 
 
 /***/ },
-/* 118 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 
-	var parseLinkDestination = __webpack_require__(13);
-	var parseLinkTitle       = __webpack_require__(14);
+	var parseLinkDestination = __webpack_require__(14);
+	var parseLinkTitle       = __webpack_require__(15);
 	var normalizeReference   = __webpack_require__(1).normalizeReference;
 
 
@@ -21063,14 +23983,14 @@
 
 
 /***/ },
-/* 119 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Parser state class
 
 	'use strict';
 
-	var Token = __webpack_require__(22);
+	var Token = __webpack_require__(24);
 
 
 	function StateBlock(src, md, env, tokens) {
@@ -21244,7 +24164,7 @@
 
 
 /***/ },
-/* 120 */
+/* 141 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// GFM table, non-standard
@@ -21420,7 +24340,7 @@
 
 
 /***/ },
-/* 121 */
+/* 142 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21442,7 +24362,7 @@
 
 
 /***/ },
-/* 122 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21461,7 +24381,7 @@
 
 
 /***/ },
-/* 123 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Replace link-like texts with link nodes.
@@ -21600,7 +24520,7 @@
 
 
 /***/ },
-/* 124 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Normalize input string
@@ -21645,7 +24565,7 @@
 
 
 /***/ },
-/* 125 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Simple typographyc replacements
@@ -21742,7 +24662,7 @@
 
 
 /***/ },
-/* 126 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Convert straight quotation marks to typographic ones
@@ -21901,14 +24821,14 @@
 
 
 /***/ },
-/* 127 */
+/* 148 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Core state object
 	//
 	'use strict';
 
-	var Token = __webpack_require__(22);
+	var Token = __webpack_require__(24);
 
 
 	function StateCore(src, md, env) {
@@ -21927,14 +24847,14 @@
 
 
 /***/ },
-/* 128 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Process autolinks '<protocol:...>'
 
 	'use strict';
 
-	var url_schemas = __webpack_require__(99);
+	var url_schemas = __webpack_require__(120);
 
 
 	/*eslint max-len:0*/
@@ -22005,7 +24925,7 @@
 
 
 /***/ },
-/* 129 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Parse backticks
@@ -22054,7 +24974,7 @@
 
 
 /***/ },
-/* 130 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Process *this* and _that_
@@ -22234,7 +25154,7 @@
 
 
 /***/ },
-/* 131 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Process html entity - &#123;, &#xAF;, &quot;, ...
@@ -22288,7 +25208,7 @@
 
 
 /***/ },
-/* 132 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Proceess escaped chars and hardbreaks
@@ -22340,7 +25260,7 @@
 
 
 /***/ },
-/* 133 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Process html tags
@@ -22348,7 +25268,7 @@
 	'use strict';
 
 
-	var HTML_TAG_RE = __webpack_require__(98).HTML_TAG_RE;
+	var HTML_TAG_RE = __webpack_require__(119).HTML_TAG_RE;
 
 
 	function isLetter(ch) {
@@ -22393,16 +25313,16 @@
 
 
 /***/ },
-/* 134 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Process ![image](<src> "title")
 
 	'use strict';
 
-	var parseLinkLabel       = __webpack_require__(20);
-	var parseLinkDestination = __webpack_require__(13);
-	var parseLinkTitle       = __webpack_require__(14);
+	var parseLinkLabel       = __webpack_require__(22);
+	var parseLinkDestination = __webpack_require__(14);
+	var parseLinkTitle       = __webpack_require__(15);
 	var normalizeReference   = __webpack_require__(1).normalizeReference;
 
 
@@ -22559,16 +25479,16 @@
 
 
 /***/ },
-/* 135 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Process [link](<to> "stuff")
 
 	'use strict';
 
-	var parseLinkLabel       = __webpack_require__(20);
-	var parseLinkDestination = __webpack_require__(13);
-	var parseLinkTitle       = __webpack_require__(14);
+	var parseLinkLabel       = __webpack_require__(22);
+	var parseLinkDestination = __webpack_require__(14);
+	var parseLinkTitle       = __webpack_require__(15);
 	var normalizeReference   = __webpack_require__(1).normalizeReference;
 
 
@@ -22718,7 +25638,7 @@
 
 
 /***/ },
-/* 136 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Proceess '\n'
@@ -22763,7 +25683,7 @@
 
 
 /***/ },
-/* 137 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Inline parser state
@@ -22771,7 +25691,7 @@
 	'use strict';
 
 
-	var Token = __webpack_require__(22);
+	var Token = __webpack_require__(24);
 
 	function StateInline(src, md, env, outTokens) {
 	  this.src = src;
@@ -22829,7 +25749,7 @@
 
 
 /***/ },
-/* 138 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// ~~strike through~~
@@ -22975,7 +25895,7 @@
 
 
 /***/ },
-/* 139 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Skip text characters for text token, place those to pending buffer
@@ -23070,7 +25990,7 @@
 
 
 /***/ },
-/* 140 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23215,7 +26135,7 @@
 	function compile(self) {
 
 	  // Load & clone RE patterns.
-	  var re = self.re = assign({}, __webpack_require__(141));
+	  var re = self.re = assign({}, __webpack_require__(162));
 
 	  // Define dynamic patterns
 	  var tlds = self.__tlds__.slice();
@@ -23692,7 +26612,7 @@
 
 
 /***/ },
-/* 141 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23701,7 +26621,7 @@
 	var src_Any = exports.src_Any = __webpack_require__(48).source;
 	var src_Cc  = exports.src_Cc = __webpack_require__(46).source;
 	var src_Z   = exports.src_Z  = __webpack_require__(47).source;
-	var src_P   = exports.src_P  = __webpack_require__(23).source;
+	var src_P   = exports.src_P  = __webpack_require__(25).source;
 
 	// \p{\Z\P\Cc\CF} (white spaces + control + format + punctuation)
 	var src_ZPCc = exports.src_ZPCc = [ src_Z, src_P, src_Cc ].join('|');
@@ -23855,7 +26775,7 @@
 
 
 /***/ },
-/* 142 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -23983,7 +26903,7 @@
 
 
 /***/ },
-/* 143 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -24087,7 +27007,7 @@
 
 
 /***/ },
-/* 144 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -24118,7 +27038,7 @@
 
 
 /***/ },
-/* 145 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -24436,25 +27356,25 @@
 
 
 /***/ },
-/* 146 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports=/[\xAD\u0600-\u0605\u061C\u06DD\u070F\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u206F\uFEFF\uFFF9-\uFFFB]|\uD804\uDCBD|\uD82F[\uDCA0-\uDCA3]|\uD834[\uDD73-\uDD7A]|\uDB40[\uDC01\uDC20-\uDC7F]/
 
 /***/ },
-/* 147 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
 	module.exports.Any = __webpack_require__(48);
 	module.exports.Cc  = __webpack_require__(46);
-	module.exports.Cf  = __webpack_require__(146);
-	module.exports.P   = __webpack_require__(23);
+	module.exports.Cf  = __webpack_require__(167);
+	module.exports.P   = __webpack_require__(25);
 	module.exports.Z   = __webpack_require__(47);
 
 
 /***/ },
-/* 148 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24463,102 +27383,154 @@
 	  value: true
 	});
 
-	var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
-
-	var _objectWithoutProperties = function (obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; };
-
-	var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _markdown = __webpack_require__(96);
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-	var _markdown2 = _interopRequireDefault(_markdown);
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
-	var _React$PropTypes$Component = __webpack_require__(7);
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _React$PropTypes$Component2 = _interopRequireDefault(_React$PropTypes$Component);
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-	var _isPlainObject = __webpack_require__(91);
+	var _markdownIt = __webpack_require__(117);
 
-	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+	var _markdownIt2 = _interopRequireDefault(_markdownIt);
 
-	var _assign = __webpack_require__(93);
+	var _react = __webpack_require__(8);
 
-	var _assign2 = _interopRequireDefault(_assign);
+	var _react2 = _interopRequireDefault(_react);
 
-	var _reduce = __webpack_require__(62);
+	var _lodashLangIsPlainObject = __webpack_require__(95);
 
-	var _reduce2 = _interopRequireDefault(_reduce);
+	var _lodashLangIsPlainObject2 = _interopRequireDefault(_lodashLangIsPlainObject);
 
-	var _zipObject = __webpack_require__(61);
+	var _lodashObjectAssign = __webpack_require__(98);
 
-	var _zipObject2 = _interopRequireDefault(_zipObject);
+	var _lodashObjectAssign2 = _interopRequireDefault(_lodashObjectAssign);
 
-	var _sortBy = __webpack_require__(63);
+	var _lodashCollectionReduce = __webpack_require__(64);
 
-	var _sortBy2 = _interopRequireDefault(_sortBy);
+	var _lodashCollectionReduce2 = _interopRequireDefault(_lodashCollectionReduce);
+
+	var _lodashArrayZipObject = __webpack_require__(63);
+
+	var _lodashArrayZipObject2 = _interopRequireDefault(_lodashArrayZipObject);
+
+	var _lodashCollectionSortBy = __webpack_require__(65);
+
+	var _lodashCollectionSortBy2 = _interopRequireDefault(_lodashCollectionSortBy);
+
+	var _lodashArrayCompact = __webpack_require__(61);
+
+	var _lodashArrayCompact2 = _interopRequireDefault(_lodashArrayCompact);
+
+	var _lodashStringCamelCase = __webpack_require__(99);
+
+	var _lodashStringCamelCase2 = _interopRequireDefault(_lodashStringCamelCase);
+
+	var _lodashLangIsString = __webpack_require__(96);
+
+	var _lodashLangIsString2 = _interopRequireDefault(_lodashLangIsString);
 
 	'use strict';
 
 	var DEFAULT_TAGS = {
-	  html: 'span'
+	  'html': 'span'
 	};
 
-	function convertTree(tokens, nested) {
-	  var branch = [];
+	var DEFAULT_RULES = {
+	  image: function image(token, attrs, children) {
+	    if (children.length) {
+	      attrs = _lodashObjectAssign2['default']({}, attrs, { alt: children[0] });
+	    }
+	    return [[token.tag, attrs]];
+	  },
 
-	  if (!nested) {
-	    branch.push('html');
+	  codeInline: function codeInline(token, attrs) {
+	    return [_lodashArrayCompact2['default']([token.tag, attrs, token.content])];
+	  },
+
+	  codeBlock: function codeBlock(token, attrs) {
+	    return [['pre', _lodashArrayCompact2['default']([token.tag, attrs, token.content])]];
+	  },
+
+	  fence: function fence(token, attrs) {
+	    if (token.info) {
+	      var langName = token.info.trim().split(/\s+/g)[0];
+	      attrs = _lodashObjectAssign2['default']({}, attrs, { 'data-language': langName });
+	    }
+
+	    return [['pre', _lodashArrayCompact2['default']([token.tag, attrs, token.content])]];
+	  },
+
+	  hardbreak: function hardbreak() {
+	    return [['br']];
+	  },
+
+	  softbreak: function softbreak(token, attrs, children, options) {
+	    return options.breaks ? [['br']] : '\n';
+	  },
+
+	  text: function text(token) {
+	    return token.content;
+	  },
+
+	  htmlBlock: function htmlBlock(token) {
+	    return token.content;
+	  },
+
+	  htmlInline: function htmlInline(token) {
+	    return token.content;
+	  },
+
+	  inline: function inline(token, attrs, children) {
+	    return children;
+	  },
+
+	  'default': function _default(token, attrs, children, options, getNext) {
+	    if (token.nesting === 1 && token.hidden) {
+	      return getNext();
+	    }
+	    /* plugin-related */
+	    if (!token.tag) {
+	      return token.content;
+	    }
+	    if (token.info) {
+	      attrs = _lodashObjectAssign2['default']({}, attrs, { 'data-info': token.info.trim() });
+	    }
+	    /* plugin-related */
+	    return [_lodashArrayCompact2['default']([token.tag, attrs].concat(token.nesting === 1 && getNext()))];
+	  }
+	};
+
+	function convertTree(tokens, convertRules, options) {
+	  function convertBranch(tkns, nested) {
+	    var branch = [];
+
+	    if (!nested) {
+	      branch.push('html');
+	    }
+
+	    function getNext() {
+	      return convertBranch(tkns, true);
+	    }
+
+	    var token = tkns.shift();
+	    while (token && token.nesting !== -1) {
+	      var attrs = token.attrs && _lodashArrayZipObject2['default'](_lodashCollectionSortBy2['default'](token.attrs, 0));
+	      var children = token.children && convertBranch(token.children.slice(), true);
+	      var rule = convertRules[_lodashStringCamelCase2['default'](token.type)] || convertRules['default'];
+
+	      branch = branch.concat(rule(token, attrs, children, options, getNext));
+	      token = tkns.shift();
+	    }
+	    return branch;
 	  }
 
-	  function getBlock(tkn, tkns) {
-	    var block = [];
-	    block.push(tkn.tag);
-	    if (tkn.attrs) {
-	      var attrs = _zipObject2['default'](_sortBy2['default'](tkn.attrs, 0));
-
-	      if (attrs.alt === '') {
-	        attrs.alt = tkn.children[0].content;
-	      }
-
-	      block.push(attrs);
-	    }
-
-	    if (tkn.content && !tkn.children) {
-	      block.push(tkn.content);
-	      return block;
-	    }
-
-	    return block.concat(convertTree(tkns, true));
-	  }
-
-	  var token = tokens.shift();
-	  while (token && token.nesting !== -1) {
-	    if (token.nesting === 1) {
-	      if (token.hidden) {
-	        branch = branch.concat(convertTree(tokens, true));
-	      } else {
-	        branch.push(getBlock(token, tokens));
-	      }
-	    }
-
-	    if (token.nesting === 0) {
-	      if (token.type === 'inline') {
-	        branch = branch.concat(convertTree(token.children, true));
-	      } else if (token.type === 'text') {
-	        branch.push(token.content);
-	      } else if (token.type === 'softbreak') {
-	        branch.push('\n');
-	      } else {
-	        branch.push(getBlock(token, tokens));
-	      }
-	    }
-	    token = tokens.shift();
-	  }
-	  return branch;
+	  return convertBranch(tokens, false);
 	}
 
 	function mdReactFactory() {
@@ -24574,11 +27546,17 @@
 	  var disableRules = _options$disableRules === undefined ? [] : _options$disableRules;
 	  var _options$plugins = options.plugins;
 	  var plugins = _options$plugins === undefined ? [] : _options$plugins;
+	  var _options$onGenerateKey = options.onGenerateKey;
+	  var onGenerateKey = _options$onGenerateKey === undefined ? function (tag, index) {
+	    return 'mdrct-' + tag + '-' + index;
+	  } : _options$onGenerateKey;
 
-	  var md = _markdown2['default'](presetName, markdownOptions).enable(enableRules).disable(disableRules);
+	  var md = _markdownIt2['default'](markdownOptions || presetName).enable(enableRules).disable(disableRules);
 
-	  md = _reduce2['default'](plugins, function (m, plugin) {
-	    return m.use(plugin);
+	  var convertRules = _lodashObjectAssign2['default']({}, DEFAULT_RULES, options.convertRules);
+
+	  md = _lodashCollectionReduce2['default'](plugins, function (m, plugin) {
+	    return plugin.plugin ? m.use.apply(m, [plugin.plugin].concat(_toConsumableArray(plugin.args))) : m.use(plugin);
 	  }, md);
 
 	  function iterateTree(tree) {
@@ -24586,9 +27564,9 @@
 	    var index = arguments[2] === undefined ? 0 : arguments[2];
 
 	    var tag = tree.shift();
-	    var key = 'mdrct-' + index;
+	    var key = onGenerateKey(tag, index);
 
-	    var props = tree.length && _isPlainObject2['default'](tree[0]) ? _assign2['default'](tree.shift(), { key: key }) : { key: key };
+	    var props = tree.length && _lodashLangIsPlainObject2['default'](tree[0]) ? _lodashObjectAssign2['default'](tree.shift(), { key: key }) : { key: key };
 
 	    var children = tree.map(function (branch, idx) {
 	      return Array.isArray(branch) ? iterateTree(branch, level + 1, idx) : branch;
@@ -24596,11 +27574,19 @@
 
 	    tag = tags[tag] || tag;
 
-	    return typeof onIterate === 'function' ? onIterate(tag, props, children, level) : _React$PropTypes$Component2['default'].createElement(tag, props, children);
+	    if (_lodashLangIsString2['default'](props.style)) {
+	      props.style = _lodashArrayZipObject2['default'](props.style.split(';').map(function (prop) {
+	        return prop.split(':');
+	      }).map(function (keyVal) {
+	        return [_lodashStringCamelCase2['default'](keyVal[0].trim()), keyVal[1].trim()];
+	      }));
+	    }
+
+	    return typeof onIterate === 'function' ? onIterate(tag, props, children, level) : _react2['default'].createElement(tag, props, children);
 	  }
 
 	  return function (text) {
-	    var tree = convertTree(md.parse(text, {}));
+	    var tree = convertTree(md.parse(text, {}), convertRules, md.options);
 	    return iterateTree(tree);
 	  };
 	}
@@ -24629,32 +27615,834 @@
 	  }], [{
 	    key: 'propTypes',
 	    value: {
-	      text: _React$PropTypes$Component.PropTypes.string.isRequired,
-	      onIterate: _React$PropTypes$Component.PropTypes.func,
-	      tags: _React$PropTypes$Component.PropTypes.object,
-	      presetName: _React$PropTypes$Component.PropTypes.string,
-	      markdownOptions: _React$PropTypes$Component.PropTypes.object,
-	      enableRules: _React$PropTypes$Component.PropTypes.array,
-	      disableRules: _React$PropTypes$Component.PropTypes.array,
-	      plugins: _React$PropTypes$Component.PropTypes.array
+	      text: _react.PropTypes.string.isRequired,
+	      onIterate: _react.PropTypes.func,
+	      onGenerateKey: _react.PropTypes.func,
+	      tags: _react.PropTypes.object,
+	      presetName: _react.PropTypes.string,
+	      markdownOptions: _react.PropTypes.object,
+	      enableRules: _react.PropTypes.array,
+	      disableRules: _react.PropTypes.array,
+	      convertRules: _react.PropTypes.object,
+	      plugins: _react.PropTypes.array
 	    },
 	    enumerable: true
 	  }]);
 
 	  return MDReactComponent;
-	})(_React$PropTypes$Component.Component);
+	})(_react.Component);
 
 	exports['default'] = MDReactComponent;
 	exports.mdReact = mdReactFactory;
 
 /***/ },
-/* 149 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "var grayLink = function(tag, props, children) {\n  if (tag === 'a') {\n      props.style = {color: 'gray', textDecoration: 'none'};\n    }\n    return React.createElement(tag, props, children);\n}\n\nvar ComponentExample = React.createClass({\n    render: function() {\n      return (\n        <div style={{paddingTop: 20}}>\n          <MDReactComponent text='# Some Examples ([mostly from here](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet))' onIterate={grayLink} />\n          <MDReactComponent text='## Emphasis' />\n          <MDReactComponent text={\n            'Emphasis, aka italics, with *asterisks* or _underscores_.\\n\\n' +\n            'Strong emphasis, aka bold, with **asterisks** or __underscores__.\\n\\n' +\n            'Combined emphasis with **asterisks and _underscores_**.'\n          } />\n          <MDReactComponent text='## Lists' />\n          <MDReactComponent text={\n            '1. First ordered list item\\n' +\n            '2. Another item\\n' +\n            '  * Unordered sub-list.\\n' +\n            '1. Actual numbers don\\'t matter, just that it\\'s a number\\n' +\n            '  1. Ordered sub-list\\n' +\n            '4. And another item.\\n' +\n            '\\n' +\n            '   You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we\\'ll use three here to also align the raw Markdown).\\n' +\n            '\\n' +\n            '   To have a line break without a paragraph, you will need to use two trailing spaces.  \\n' +\n            '   Note that this line is separate, but within the same paragraph.  \\n' +\n            '   (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)\\n' +\n            '\\n' +\n            '* Unordered list can use asterisks\\n' +\n            '- Or minuses\\n' +\n            '+ Or pluses'\n          } />\n          <MDReactComponent text='## Links' />\n          <MDReactComponent text={\n            '[I\\'m an inline-style link](https://www.google.com)\\n' +\n            '\\n' +\n            '[I\\'m a reference-style link][arbitrary case-insensitive reference text]\\n' +\n            '\\n' +\n            '[you can use numbers for reference-style link definitions][1]\\n' +\n            '\\n' +\n            'or leave it empty and use the [link text itself]\\n' +\n            '\\n' +\n            'some text to show that the reference links can follow later.\\n' +\n            '\\n' +\n            '[arbitrary case-insensitive reference text]: https://www.mozilla.org\\n' +\n            '[1]: http://slashdot.org\\n' +\n            '[link text itself]: http://www.reddit.com'\n          } />\n          <MDReactComponent text='-----' />\n          <MDReactComponent text='#### This page is using [Component Playground](https://github.com/FormidableLabs/component-playground), check it out' />\n        </div>\n      )\n    }\n});\n\nReact.render(<ComponentExample/>, mountNode);"
+	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+
+	;(function (exports) {
+		'use strict';
+
+	  var Arr = (typeof Uint8Array !== 'undefined')
+	    ? Uint8Array
+	    : Array
+
+		var PLUS   = '+'.charCodeAt(0)
+		var SLASH  = '/'.charCodeAt(0)
+		var NUMBER = '0'.charCodeAt(0)
+		var LOWER  = 'a'.charCodeAt(0)
+		var UPPER  = 'A'.charCodeAt(0)
+		var PLUS_URL_SAFE = '-'.charCodeAt(0)
+		var SLASH_URL_SAFE = '_'.charCodeAt(0)
+
+		function decode (elt) {
+			var code = elt.charCodeAt(0)
+			if (code === PLUS ||
+			    code === PLUS_URL_SAFE)
+				return 62 // '+'
+			if (code === SLASH ||
+			    code === SLASH_URL_SAFE)
+				return 63 // '/'
+			if (code < NUMBER)
+				return -1 //no match
+			if (code < NUMBER + 10)
+				return code - NUMBER + 26 + 26
+			if (code < UPPER + 26)
+				return code - UPPER
+			if (code < LOWER + 26)
+				return code - LOWER + 26
+		}
+
+		function b64ToByteArray (b64) {
+			var i, j, l, tmp, placeHolders, arr
+
+			if (b64.length % 4 > 0) {
+				throw new Error('Invalid string. Length must be a multiple of 4')
+			}
+
+			// the number of equal signs (place holders)
+			// if there are two placeholders, than the two characters before it
+			// represent one byte
+			// if there is only one, then the three characters before it represent 2 bytes
+			// this is just a cheap hack to not do indexOf twice
+			var len = b64.length
+			placeHolders = '=' === b64.charAt(len - 2) ? 2 : '=' === b64.charAt(len - 1) ? 1 : 0
+
+			// base64 is 4/3 + up to two characters of the original data
+			arr = new Arr(b64.length * 3 / 4 - placeHolders)
+
+			// if there are placeholders, only get up to the last complete 4 chars
+			l = placeHolders > 0 ? b64.length - 4 : b64.length
+
+			var L = 0
+
+			function push (v) {
+				arr[L++] = v
+			}
+
+			for (i = 0, j = 0; i < l; i += 4, j += 3) {
+				tmp = (decode(b64.charAt(i)) << 18) | (decode(b64.charAt(i + 1)) << 12) | (decode(b64.charAt(i + 2)) << 6) | decode(b64.charAt(i + 3))
+				push((tmp & 0xFF0000) >> 16)
+				push((tmp & 0xFF00) >> 8)
+				push(tmp & 0xFF)
+			}
+
+			if (placeHolders === 2) {
+				tmp = (decode(b64.charAt(i)) << 2) | (decode(b64.charAt(i + 1)) >> 4)
+				push(tmp & 0xFF)
+			} else if (placeHolders === 1) {
+				tmp = (decode(b64.charAt(i)) << 10) | (decode(b64.charAt(i + 1)) << 4) | (decode(b64.charAt(i + 2)) >> 2)
+				push((tmp >> 8) & 0xFF)
+				push(tmp & 0xFF)
+			}
+
+			return arr
+		}
+
+		function uint8ToBase64 (uint8) {
+			var i,
+				extraBytes = uint8.length % 3, // if we have 1 byte left, pad 2 bytes
+				output = "",
+				temp, length
+
+			function encode (num) {
+				return lookup.charAt(num)
+			}
+
+			function tripletToBase64 (num) {
+				return encode(num >> 18 & 0x3F) + encode(num >> 12 & 0x3F) + encode(num >> 6 & 0x3F) + encode(num & 0x3F)
+			}
+
+			// go through the array every three bytes, we'll deal with trailing stuff later
+			for (i = 0, length = uint8.length - extraBytes; i < length; i += 3) {
+				temp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
+				output += tripletToBase64(temp)
+			}
+
+			// pad the end with zeros, but make sure to not forget the extra bytes
+			switch (extraBytes) {
+				case 1:
+					temp = uint8[uint8.length - 1]
+					output += encode(temp >> 2)
+					output += encode((temp << 4) & 0x3F)
+					output += '=='
+					break
+				case 2:
+					temp = (uint8[uint8.length - 2] << 8) + (uint8[uint8.length - 1])
+					output += encode(temp >> 10)
+					output += encode((temp >> 4) & 0x3F)
+					output += encode((temp << 2) & 0x3F)
+					output += '='
+					break
+			}
+
+			return output
+		}
+
+		exports.toByteArray = b64ToByteArray
+		exports.fromByteArray = uint8ToBase64
+	}(false ? (this.base64js = {}) : exports))
+
 
 /***/ },
-/* 150 */
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+	  var e, m,
+	      eLen = nBytes * 8 - mLen - 1,
+	      eMax = (1 << eLen) - 1,
+	      eBias = eMax >> 1,
+	      nBits = -7,
+	      i = isLE ? (nBytes - 1) : 0,
+	      d = isLE ? -1 : 1,
+	      s = buffer[offset + i]
+
+	  i += d
+
+	  e = s & ((1 << (-nBits)) - 1)
+	  s >>= (-nBits)
+	  nBits += eLen
+	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  m = e & ((1 << (-nBits)) - 1)
+	  e >>= (-nBits)
+	  nBits += mLen
+	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+
+	  if (e === 0) {
+	    e = 1 - eBias
+	  } else if (e === eMax) {
+	    return m ? NaN : ((s ? -1 : 1) * Infinity)
+	  } else {
+	    m = m + Math.pow(2, mLen)
+	    e = e - eBias
+	  }
+	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+	}
+
+	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+	  var e, m, c,
+	      eLen = nBytes * 8 - mLen - 1,
+	      eMax = (1 << eLen) - 1,
+	      eBias = eMax >> 1,
+	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
+	      i = isLE ? 0 : (nBytes - 1),
+	      d = isLE ? 1 : -1,
+	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+	  value = Math.abs(value)
+
+	  if (isNaN(value) || value === Infinity) {
+	    m = isNaN(value) ? 1 : 0
+	    e = eMax
+	  } else {
+	    e = Math.floor(Math.log(value) / Math.LN2)
+	    if (value * (c = Math.pow(2, -e)) < 1) {
+	      e--
+	      c *= 2
+	    }
+	    if (e + eBias >= 1) {
+	      value += rt / c
+	    } else {
+	      value += rt * Math.pow(2, 1 - eBias)
+	    }
+	    if (value * c >= 2) {
+	      e++
+	      c /= 2
+	    }
+
+	    if (e + eBias >= eMax) {
+	      m = 0
+	      e = eMax
+	    } else if (e + eBias >= 1) {
+	      m = (value * c - 1) * Math.pow(2, mLen)
+	      e = e + eBias
+	    } else {
+	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+	      e = 0
+	    }
+	  }
+
+	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+	  e = (e << mLen) | m
+	  eLen += mLen
+	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+	  buffer[offset + i - d] |= s * 128
+	}
+
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	/**
+	 * isArray
+	 */
+
+	var isArray = Array.isArray;
+
+	/**
+	 * toString
+	 */
+
+	var str = Object.prototype.toString;
+
+	/**
+	 * Whether or not the given `val`
+	 * is an array.
+	 *
+	 * example:
+	 *
+	 *        isArray([]);
+	 *        // > true
+	 *        isArray(arguments);
+	 *        // > false
+	 *        isArray('');
+	 *        // > false
+	 *
+	 * @param {mixed} val
+	 * @return {bool}
+	 */
+
+	module.exports = isArray || function (val) {
+	  return !! val && '[object Array]' == str.call(val);
+	};
+
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
+	;(function(root) {
+
+		/** Detect free variables */
+		var freeExports = typeof exports == 'object' && exports &&
+			!exports.nodeType && exports;
+		var freeModule = typeof module == 'object' && module &&
+			!module.nodeType && module;
+		var freeGlobal = typeof global == 'object' && global;
+		if (
+			freeGlobal.global === freeGlobal ||
+			freeGlobal.window === freeGlobal ||
+			freeGlobal.self === freeGlobal
+		) {
+			root = freeGlobal;
+		}
+
+		/**
+		 * The `punycode` object.
+		 * @name punycode
+		 * @type Object
+		 */
+		var punycode,
+
+		/** Highest positive signed 32-bit float value */
+		maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
+
+		/** Bootstring parameters */
+		base = 36,
+		tMin = 1,
+		tMax = 26,
+		skew = 38,
+		damp = 700,
+		initialBias = 72,
+		initialN = 128, // 0x80
+		delimiter = '-', // '\x2D'
+
+		/** Regular expressions */
+		regexPunycode = /^xn--/,
+		regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
+		regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
+
+		/** Error messages */
+		errors = {
+			'overflow': 'Overflow: input needs wider integers to process',
+			'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
+			'invalid-input': 'Invalid input'
+		},
+
+		/** Convenience shortcuts */
+		baseMinusTMin = base - tMin,
+		floor = Math.floor,
+		stringFromCharCode = String.fromCharCode,
+
+		/** Temporary variable */
+		key;
+
+		/*--------------------------------------------------------------------------*/
+
+		/**
+		 * A generic error utility function.
+		 * @private
+		 * @param {String} type The error type.
+		 * @returns {Error} Throws a `RangeError` with the applicable error message.
+		 */
+		function error(type) {
+			throw RangeError(errors[type]);
+		}
+
+		/**
+		 * A generic `Array#map` utility function.
+		 * @private
+		 * @param {Array} array The array to iterate over.
+		 * @param {Function} callback The function that gets called for every array
+		 * item.
+		 * @returns {Array} A new array of values returned by the callback function.
+		 */
+		function map(array, fn) {
+			var length = array.length;
+			var result = [];
+			while (length--) {
+				result[length] = fn(array[length]);
+			}
+			return result;
+		}
+
+		/**
+		 * A simple `Array#map`-like wrapper to work with domain name strings or email
+		 * addresses.
+		 * @private
+		 * @param {String} domain The domain name or email address.
+		 * @param {Function} callback The function that gets called for every
+		 * character.
+		 * @returns {Array} A new string of characters returned by the callback
+		 * function.
+		 */
+		function mapDomain(string, fn) {
+			var parts = string.split('@');
+			var result = '';
+			if (parts.length > 1) {
+				// In email addresses, only the domain name should be punycoded. Leave
+				// the local part (i.e. everything up to `@`) intact.
+				result = parts[0] + '@';
+				string = parts[1];
+			}
+			// Avoid `split(regex)` for IE8 compatibility. See #17.
+			string = string.replace(regexSeparators, '\x2E');
+			var labels = string.split('.');
+			var encoded = map(labels, fn).join('.');
+			return result + encoded;
+		}
+
+		/**
+		 * Creates an array containing the numeric code points of each Unicode
+		 * character in the string. While JavaScript uses UCS-2 internally,
+		 * this function will convert a pair of surrogate halves (each of which
+		 * UCS-2 exposes as separate characters) into a single code point,
+		 * matching UTF-16.
+		 * @see `punycode.ucs2.encode`
+		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+		 * @memberOf punycode.ucs2
+		 * @name decode
+		 * @param {String} string The Unicode input string (UCS-2).
+		 * @returns {Array} The new array of code points.
+		 */
+		function ucs2decode(string) {
+			var output = [],
+			    counter = 0,
+			    length = string.length,
+			    value,
+			    extra;
+			while (counter < length) {
+				value = string.charCodeAt(counter++);
+				if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
+					// high surrogate, and there is a next character
+					extra = string.charCodeAt(counter++);
+					if ((extra & 0xFC00) == 0xDC00) { // low surrogate
+						output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
+					} else {
+						// unmatched surrogate; only append this code unit, in case the next
+						// code unit is the high surrogate of a surrogate pair
+						output.push(value);
+						counter--;
+					}
+				} else {
+					output.push(value);
+				}
+			}
+			return output;
+		}
+
+		/**
+		 * Creates a string based on an array of numeric code points.
+		 * @see `punycode.ucs2.decode`
+		 * @memberOf punycode.ucs2
+		 * @name encode
+		 * @param {Array} codePoints The array of numeric code points.
+		 * @returns {String} The new Unicode string (UCS-2).
+		 */
+		function ucs2encode(array) {
+			return map(array, function(value) {
+				var output = '';
+				if (value > 0xFFFF) {
+					value -= 0x10000;
+					output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
+					value = 0xDC00 | value & 0x3FF;
+				}
+				output += stringFromCharCode(value);
+				return output;
+			}).join('');
+		}
+
+		/**
+		 * Converts a basic code point into a digit/integer.
+		 * @see `digitToBasic()`
+		 * @private
+		 * @param {Number} codePoint The basic numeric code point value.
+		 * @returns {Number} The numeric value of a basic code point (for use in
+		 * representing integers) in the range `0` to `base - 1`, or `base` if
+		 * the code point does not represent a value.
+		 */
+		function basicToDigit(codePoint) {
+			if (codePoint - 48 < 10) {
+				return codePoint - 22;
+			}
+			if (codePoint - 65 < 26) {
+				return codePoint - 65;
+			}
+			if (codePoint - 97 < 26) {
+				return codePoint - 97;
+			}
+			return base;
+		}
+
+		/**
+		 * Converts a digit/integer into a basic code point.
+		 * @see `basicToDigit()`
+		 * @private
+		 * @param {Number} digit The numeric value of a basic code point.
+		 * @returns {Number} The basic code point whose value (when used for
+		 * representing integers) is `digit`, which needs to be in the range
+		 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
+		 * used; else, the lowercase form is used. The behavior is undefined
+		 * if `flag` is non-zero and `digit` has no uppercase form.
+		 */
+		function digitToBasic(digit, flag) {
+			//  0..25 map to ASCII a..z or A..Z
+			// 26..35 map to ASCII 0..9
+			return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
+		}
+
+		/**
+		 * Bias adaptation function as per section 3.4 of RFC 3492.
+		 * http://tools.ietf.org/html/rfc3492#section-3.4
+		 * @private
+		 */
+		function adapt(delta, numPoints, firstTime) {
+			var k = 0;
+			delta = firstTime ? floor(delta / damp) : delta >> 1;
+			delta += floor(delta / numPoints);
+			for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
+				delta = floor(delta / baseMinusTMin);
+			}
+			return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
+		}
+
+		/**
+		 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
+		 * symbols.
+		 * @memberOf punycode
+		 * @param {String} input The Punycode string of ASCII-only symbols.
+		 * @returns {String} The resulting string of Unicode symbols.
+		 */
+		function decode(input) {
+			// Don't use UCS-2
+			var output = [],
+			    inputLength = input.length,
+			    out,
+			    i = 0,
+			    n = initialN,
+			    bias = initialBias,
+			    basic,
+			    j,
+			    index,
+			    oldi,
+			    w,
+			    k,
+			    digit,
+			    t,
+			    /** Cached calculation results */
+			    baseMinusT;
+
+			// Handle the basic code points: let `basic` be the number of input code
+			// points before the last delimiter, or `0` if there is none, then copy
+			// the first basic code points to the output.
+
+			basic = input.lastIndexOf(delimiter);
+			if (basic < 0) {
+				basic = 0;
+			}
+
+			for (j = 0; j < basic; ++j) {
+				// if it's not a basic code point
+				if (input.charCodeAt(j) >= 0x80) {
+					error('not-basic');
+				}
+				output.push(input.charCodeAt(j));
+			}
+
+			// Main decoding loop: start just after the last delimiter if any basic code
+			// points were copied; start at the beginning otherwise.
+
+			for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
+
+				// `index` is the index of the next character to be consumed.
+				// Decode a generalized variable-length integer into `delta`,
+				// which gets added to `i`. The overflow checking is easier
+				// if we increase `i` as we go, then subtract off its starting
+				// value at the end to obtain `delta`.
+				for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
+
+					if (index >= inputLength) {
+						error('invalid-input');
+					}
+
+					digit = basicToDigit(input.charCodeAt(index++));
+
+					if (digit >= base || digit > floor((maxInt - i) / w)) {
+						error('overflow');
+					}
+
+					i += digit * w;
+					t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+
+					if (digit < t) {
+						break;
+					}
+
+					baseMinusT = base - t;
+					if (w > floor(maxInt / baseMinusT)) {
+						error('overflow');
+					}
+
+					w *= baseMinusT;
+
+				}
+
+				out = output.length + 1;
+				bias = adapt(i - oldi, out, oldi == 0);
+
+				// `i` was supposed to wrap around from `out` to `0`,
+				// incrementing `n` each time, so we'll fix that now:
+				if (floor(i / out) > maxInt - n) {
+					error('overflow');
+				}
+
+				n += floor(i / out);
+				i %= out;
+
+				// Insert `n` at position `i` of the output
+				output.splice(i++, 0, n);
+
+			}
+
+			return ucs2encode(output);
+		}
+
+		/**
+		 * Converts a string of Unicode symbols (e.g. a domain name label) to a
+		 * Punycode string of ASCII-only symbols.
+		 * @memberOf punycode
+		 * @param {String} input The string of Unicode symbols.
+		 * @returns {String} The resulting Punycode string of ASCII-only symbols.
+		 */
+		function encode(input) {
+			var n,
+			    delta,
+			    handledCPCount,
+			    basicLength,
+			    bias,
+			    j,
+			    m,
+			    q,
+			    k,
+			    t,
+			    currentValue,
+			    output = [],
+			    /** `inputLength` will hold the number of code points in `input`. */
+			    inputLength,
+			    /** Cached calculation results */
+			    handledCPCountPlusOne,
+			    baseMinusT,
+			    qMinusT;
+
+			// Convert the input in UCS-2 to Unicode
+			input = ucs2decode(input);
+
+			// Cache the length
+			inputLength = input.length;
+
+			// Initialize the state
+			n = initialN;
+			delta = 0;
+			bias = initialBias;
+
+			// Handle the basic code points
+			for (j = 0; j < inputLength; ++j) {
+				currentValue = input[j];
+				if (currentValue < 0x80) {
+					output.push(stringFromCharCode(currentValue));
+				}
+			}
+
+			handledCPCount = basicLength = output.length;
+
+			// `handledCPCount` is the number of code points that have been handled;
+			// `basicLength` is the number of basic code points.
+
+			// Finish the basic string - if it is not empty - with a delimiter
+			if (basicLength) {
+				output.push(delimiter);
+			}
+
+			// Main encoding loop:
+			while (handledCPCount < inputLength) {
+
+				// All non-basic code points < n have been handled already. Find the next
+				// larger one:
+				for (m = maxInt, j = 0; j < inputLength; ++j) {
+					currentValue = input[j];
+					if (currentValue >= n && currentValue < m) {
+						m = currentValue;
+					}
+				}
+
+				// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
+				// but guard against overflow
+				handledCPCountPlusOne = handledCPCount + 1;
+				if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
+					error('overflow');
+				}
+
+				delta += (m - n) * handledCPCountPlusOne;
+				n = m;
+
+				for (j = 0; j < inputLength; ++j) {
+					currentValue = input[j];
+
+					if (currentValue < n && ++delta > maxInt) {
+						error('overflow');
+					}
+
+					if (currentValue == n) {
+						// Represent delta as a generalized variable-length integer
+						for (q = delta, k = base; /* no condition */; k += base) {
+							t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
+							if (q < t) {
+								break;
+							}
+							qMinusT = q - t;
+							baseMinusT = base - t;
+							output.push(
+								stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
+							);
+							q = floor(qMinusT / baseMinusT);
+						}
+
+						output.push(stringFromCharCode(digitToBasic(q, 0)));
+						bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
+						delta = 0;
+						++handledCPCount;
+					}
+				}
+
+				++delta;
+				++n;
+
+			}
+			return output.join('');
+		}
+
+		/**
+		 * Converts a Punycode string representing a domain name or an email address
+		 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
+		 * it doesn't matter if you call it on a string that has already been
+		 * converted to Unicode.
+		 * @memberOf punycode
+		 * @param {String} input The Punycoded domain name or email address to
+		 * convert to Unicode.
+		 * @returns {String} The Unicode representation of the given Punycode
+		 * string.
+		 */
+		function toUnicode(input) {
+			return mapDomain(input, function(string) {
+				return regexPunycode.test(string)
+					? decode(string.slice(4).toLowerCase())
+					: string;
+			});
+		}
+
+		/**
+		 * Converts a Unicode string representing a domain name or an email address to
+		 * Punycode. Only the non-ASCII parts of the domain name will be converted,
+		 * i.e. it doesn't matter if you call it with a domain that's already in
+		 * ASCII.
+		 * @memberOf punycode
+		 * @param {String} input The domain name or email address to convert, as a
+		 * Unicode string.
+		 * @returns {String} The Punycode representation of the given domain name or
+		 * email address.
+		 */
+		function toASCII(input) {
+			return mapDomain(input, function(string) {
+				return regexNonASCII.test(string)
+					? 'xn--' + encode(string)
+					: string;
+			});
+		}
+
+		/*--------------------------------------------------------------------------*/
+
+		/** Define the public API */
+		punycode = {
+			/**
+			 * A string representing the current Punycode.js version number.
+			 * @memberOf punycode
+			 * @type String
+			 */
+			'version': '1.3.2',
+			/**
+			 * An object of methods to convert from JavaScript's internal character
+			 * representation (UCS-2) to Unicode code points, and back.
+			 * @see <https://mathiasbynens.be/notes/javascript-encoding>
+			 * @memberOf punycode
+			 * @type Object
+			 */
+			'ucs2': {
+				'decode': ucs2decode,
+				'encode': ucs2encode
+			},
+			'decode': decode,
+			'encode': encode,
+			'toASCII': toASCII,
+			'toUnicode': toUnicode
+		};
+
+		/** Expose `punycode` */
+		// Some AMD build optimizers, like r.js, check for specific condition patterns
+		// like the following:
+		if (
+			true
+		) {
+			!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
+				return punycode;
+			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (freeExports && freeModule) {
+			if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
+				freeModule.exports = punycode;
+			} else { // in Narwhal or RingoJS v0.7.0-
+				for (key in punycode) {
+					punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
+				}
+			}
+		} else { // in Rhino or a web browser
+			root.punycode = punycode;
+		}
+
+	}(this));
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(198)(module), (function() { return this; }())))
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "var handleIterate = function(Tag, props, children) {\n  switch(Tag) {\n  case 'table':\n    props.className = 'table table-striped';\n    break;\n  case 'code':\n    if (props['data-language']) {\n      return <Tag {...props} dangerouslySetInnerHTML={{__html: window.hljs.highlight(props['data-language'], children[0]).value}} />\n    };\n    break;\n  }\n  return <Tag {...props}>{children}</Tag>;\n}\n\nclass ComponentExample extends React.Component {\n  render() {\n    return (\n      <div>\n        <MDReactComponent text='### (the following content is taken from [MarkdownIt Demo Page](https://markdown-it.github.io/), which is used now in this library as a parser)' />\n        <MDReactComponent text='-----' />\n        <MDReactComponent text={__markdownText__}\n                          onIterate={handleIterate}\n                          markdownOptions={{ typographer: true }}\n                          plugins={[\n                            __plugins__.abbr,\n                            {plugin: __plugins__.container, args: ['warning']},\n                            __plugins__.deflist,\n                            __plugins__.emoji,\n                            __plugins__.footnote,\n                            __plugins__.ins,\n                            __plugins__.mark,\n                            __plugins__.sub,\n                            __plugins__.sup\n                          ]} />\n        <MDReactComponent text='-----' />\n        <MDReactComponent text='#### This page is using [Component Playground](https://github.com/FormidableLabs/component-playground), check it out' />\n      </div>\n    )\n  }\n};\n\nReact.render(<ComponentExample/>, mountNode);"
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = "------------\n\n# h1 Heading 8-)\n## h2 Heading\n### h3 Heading\n#### h4 Heading\n##### h5 Heading\n###### h6 Heading\n\n\n## Horizontal Rules\n\n___\n\n---\n\n***\n\n\n## Typographic replacements\n\nEnable typographer option to see result.\n\n(c) (C) (r) (R) (tm) (TM) (p) (P) +-\n\ntest.. test... test..... test?..... test!....\n\n!!!!!! ???? ,,  -- ---\n\n\"Smartypants, double quotes\" and 'single quotes'\n\n\n## Emphasis\n\n**This is bold text**\n\n__This is bold text__\n\n*This is italic text*\n\n_This is italic text_\n\n~~Strikethrough~~\n\n\n## Blockquotes\n\n\n> Blockquotes can also be nested...\n>> ...by using additional greater-than signs right next to each other...\n> > > ...or with spaces between arrows.\n\n\n## Lists\n\nUnordered\n\n+ Create a list by starting a line with `+`, `-`, or `*`\n+ Sub-lists are made by indenting 2 spaces:\n  - Marker character change forces new list start:\n    * Ac tristique libero volutpat at\n    + Facilisis in pretium nisl aliquet\n    - Nulla volutpat aliquam velit\n+ Very easy!\n\nOrdered\n\n1. Lorem ipsum dolor sit amet\n2. Consectetur adipiscing elit\n3. Integer molestie lorem at massa\n\n\n1. You can use sequential numbers...\n1. ...or keep all the numbers as `1.`\n\nStart numbering with offset:\n\n57. foo\n1. bar\n\n\n## Code\n\nInline `code`\n\nIndented code\n\n    // Some comments\n    line 1 of code\n    line 2 of code\n    line 3 of code\n\n\nBlock code \"fences\"\n\n```\nSample text here...\n```\n\nSyntax highlighting\n\n``` js\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```\n\n## Tables\n\n| Option | Description |\n| ------ | ----------- |\n| data   | path to data files to supply the data that will be passed into templates. |\n| engine | engine to be used for processing templates. Handlebars is the default. |\n| ext    | extension to be used for dest files. |\n\nRight aligned columns\n\n| Option | Description |\n| ------:| -----------:|\n| data   | path to data files to supply the data that will be passed into templates. |\n| engine | engine to be used for processing templates. Handlebars is the default. |\n| ext    | extension to be used for dest files. |\n\n\n## Links\n\n[link text](http://dev.nodeca.com)\n\n[link with title](http://nodeca.github.io/pica/demo/ \"title text!\")\n\nAutoconverted link https://github.com/nodeca/pica (enable linkify to see)\n\n\n## Images\n\n![Minion](https://octodex.github.com/images/minion.png)\n![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg \"The Stormtroopocat\")\n\nLike links, Images also have a footnote style syntax\n\n![Alt text][id]\n\nWith a reference later in the document defining the URL location:\n\n[id]: https://octodex.github.com/images/dojocat.jpg  \"The Dojocat\"\n\n\n## Plugins\n\nThe killer feature of `markdown-it` is very effective support of\n[syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).\n\n\n### [Emojies](https://github.com/markdown-it/markdown-it-emoji)\n\n> Classic markup: :wink: :crush: :cry: :tear: :laughing: :yum:\n>\n> Shortcuts (emoticons): :-) :-( 8-) ;)\n\nsee [how to change output](https://github.com/markdown-it/markdown-it-emoji#change-output) with twemoji.\n\n\n### [Subscipt](https://github.com/markdown-it/markdown-it-sub) / [Superscirpt](https://github.com/markdown-it/markdown-it-sup)\n\n- 19^th^\n- H~2~O\n\n\n### [\\<ins>](https://github.com/markdown-it/markdown-it-ins)\n\n++Inserted text++\n\n\n### [\\<mark>](https://github.com/markdown-it/markdown-it-mark)\n\n==Marked text==\n\n\n### [Footnotes](https://github.com/markdown-it/markdown-it-footnote)\n\nFootnote 1 link[^first].\n\nFootnote 2 link[^second].\n\nInline footnote^[Text of inline footnote] definition.\n\nDuplicated footnote reference[^second].\n\n[^first]: Footnote **can have markup**\n\n    and multiple paragraphs.\n\n[^second]: Footnote text.\n\n\n### [Definition lists](https://github.com/markdown-it/markdown-it-deflist)\n\nTerm 1\n\n:   Definition 1\nwith lazy continuation.\n\nTerm 2 with *inline markup*\n\n:   Definition 2\n\n        { some code, part of Definition 2 }\n\n    Third paragraph of definition 2.\n\n_Compact style:_\n\nTerm 1\n  ~ Definition 1\n\nTerm 2\n  ~ Definition 2a\n  ~ Definition 2b\n\n\n### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)\n\nThis is HTML abbreviation example.\n\nIt converts \"HTML\", but keep intact partial entries like \"xxxHTMLyyy\" and so on.\n\n*[HTML]: Hyper Text Markup Language\n\n### [Custom containers](https://github.com/markdown-it/markdown-it-container)\n\n::: warning\n*here be dragons*\n:::\n"
+
+/***/ },
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -24668,10 +28456,10 @@
 
 	'use strict';
 	/*eslint-disable no-undef*/
-	var visitors = __webpack_require__(170);
-	var transform = __webpack_require__(16).transform;
-	var typesSyntax = __webpack_require__(167);
-	var inlineSourceMap = __webpack_require__(171);
+	var visitors = __webpack_require__(196);
+	var transform = __webpack_require__(17).transform;
+	var typesSyntax = __webpack_require__(193);
+	var inlineSourceMap = __webpack_require__(197);
 
 	module.exports = {
 	  transform: function(input, options) {
@@ -24755,7 +28543,7 @@
 
 
 /***/ },
-/* 151 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Base62 = (function (my) {
@@ -24787,7 +28575,7 @@
 	module.exports = Base62
 
 /***/ },
-/* 152 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -24795,13 +28583,13 @@
 	 * Licensed under the New BSD license. See LICENSE.txt or:
 	 * http://opensource.org/licenses/BSD-3-Clause
 	 */
-	exports.SourceMapGenerator = __webpack_require__(51).SourceMapGenerator;
-	exports.SourceMapConsumer = __webpack_require__(155).SourceMapConsumer;
-	exports.SourceNode = __webpack_require__(156).SourceNode;
+	exports.SourceMapGenerator = __webpack_require__(52).SourceMapGenerator;
+	exports.SourceMapConsumer = __webpack_require__(181).SourceMapConsumer;
+	exports.SourceNode = __webpack_require__(182).SourceNode;
 
 
 /***/ },
-/* 153 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
@@ -24849,7 +28637,7 @@
 
 
 /***/ },
-/* 154 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
@@ -24936,7 +28724,7 @@
 
 
 /***/ },
-/* 155 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
@@ -24950,10 +28738,10 @@
 	}
 	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
 
-	  var util = __webpack_require__(15);
-	  var binarySearch = __webpack_require__(154);
-	  var ArraySet = __webpack_require__(49).ArraySet;
-	  var base64VLQ = __webpack_require__(50);
+	  var util = __webpack_require__(16);
+	  var binarySearch = __webpack_require__(180);
+	  var ArraySet = __webpack_require__(50).ArraySet;
+	  var base64VLQ = __webpack_require__(51);
 
 	  /**
 	   * A SourceMapConsumer instance represents a parsed source map which we can
@@ -25419,7 +29207,7 @@
 
 
 /***/ },
-/* 156 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* -*- Mode: js; js-indent-level: 2; -*- */
@@ -25433,8 +29221,8 @@
 	}
 	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require, exports, module) {
 
-	  var SourceMapGenerator = __webpack_require__(51).SourceMapGenerator;
-	  var util = __webpack_require__(15);
+	  var SourceMapGenerator = __webpack_require__(52).SourceMapGenerator;
+	  var util = __webpack_require__(16);
 
 	  /**
 	   * SourceNodes provide a way to abstract over interpolating/concatenating
@@ -25796,7 +29584,7 @@
 
 
 /***/ },
-/* 157 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25888,7 +29676,7 @@
 
 
 /***/ },
-/* 158 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -25931,8 +29719,8 @@
 	 * }.bind(this));
 	 *
 	 */
-	var restParamVisitors = __webpack_require__(24);
-	var destructuringVisitors = __webpack_require__(52);
+	var restParamVisitors = __webpack_require__(26);
+	var destructuringVisitors = __webpack_require__(53);
 
 	var Syntax = __webpack_require__(3).Syntax;
 	var utils = __webpack_require__(2);
@@ -26052,7 +29840,7 @@
 
 
 /***/ },
-/* 159 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26165,7 +29953,7 @@
 
 
 /***/ },
-/* 160 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26191,10 +29979,10 @@
 	 */
 	'use strict';
 
-	var base62 = __webpack_require__(151);
+	var base62 = __webpack_require__(177);
 	var Syntax = __webpack_require__(3).Syntax;
 	var utils = __webpack_require__(2);
-	var reservedWordsHelper = __webpack_require__(17);
+	var reservedWordsHelper = __webpack_require__(18);
 
 	var declareIdentInLocalScope = utils.declareIdentInLocalScope;
 	var initScopeMetadata = utils.initScopeMetadata;
@@ -26759,7 +30547,7 @@
 
 
 /***/ },
-/* 161 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26795,7 +30583,7 @@
 
 	var Syntax = __webpack_require__(3).Syntax;
 	var utils = __webpack_require__(2);
-	var reservedWordsHelper = __webpack_require__(17);
+	var reservedWordsHelper = __webpack_require__(18);
 
 	function visitObjectConciseMethod(traverse, node, path, state) {
 	  var isGenerator = node.value.generator;
@@ -26834,7 +30622,7 @@
 
 
 /***/ },
-/* 162 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26893,7 +30681,7 @@
 
 
 /***/ },
-/* 163 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27055,7 +30843,7 @@
 
 
 /***/ },
-/* 164 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27141,7 +30929,7 @@
 
 
 /***/ },
-/* 165 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27255,7 +31043,7 @@
 
 
 /***/ },
-/* 166 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27278,7 +31066,7 @@
 
 	var Syntax = __webpack_require__(3).Syntax;
 	var utils = __webpack_require__(2);
-	var reserverdWordsHelper = __webpack_require__(17);
+	var reserverdWordsHelper = __webpack_require__(18);
 
 	/**
 	 * Code adapted from https://github.com/spicyj/es3ify
@@ -27329,7 +31117,7 @@
 
 
 /***/ },
-/* 167 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var esprima = __webpack_require__(3);
@@ -27507,7 +31295,7 @@
 
 
 /***/ },
-/* 168 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27521,15 +31309,15 @@
 	/*global exports:true*/
 	'use strict';
 
-	var Syntax = __webpack_require__(16).Syntax;
+	var Syntax = __webpack_require__(17).Syntax;
 	var utils = __webpack_require__(2);
 
 	var renderJSXExpressionContainer =
-	  __webpack_require__(18).renderJSXExpressionContainer;
-	var renderJSXLiteral = __webpack_require__(18).renderJSXLiteral;
-	var quoteAttrName = __webpack_require__(18).quoteAttrName;
+	  __webpack_require__(19).renderJSXExpressionContainer;
+	var renderJSXLiteral = __webpack_require__(19).renderJSXLiteral;
+	var quoteAttrName = __webpack_require__(19).quoteAttrName;
 
-	var trimLeft = __webpack_require__(18).trimLeft;
+	var trimLeft = __webpack_require__(19).trimLeft;
 
 	/**
 	 * Customized desugar processor for React JSX. Currently:
@@ -27755,7 +31543,7 @@
 
 
 /***/ },
-/* 169 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27769,7 +31557,7 @@
 	/*global exports:true*/
 	'use strict';
 
-	var Syntax = __webpack_require__(16).Syntax;
+	var Syntax = __webpack_require__(17).Syntax;
 	var utils = __webpack_require__(2);
 
 	function addDisplayName(displayName, object, state) {
@@ -27854,7 +31642,7 @@
 
 
 /***/ },
-/* 170 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*global exports:true*/
@@ -27862,23 +31650,23 @@
 	'use strict';
 
 	var es6ArrowFunctions =
-	  __webpack_require__(158);
-	var es6Classes = __webpack_require__(160);
+	  __webpack_require__(184);
+	var es6Classes = __webpack_require__(186);
 	var es6Destructuring =
-	  __webpack_require__(52);
+	  __webpack_require__(53);
 	var es6ObjectConciseMethod =
-	  __webpack_require__(161);
+	  __webpack_require__(187);
 	var es6ObjectShortNotation =
-	  __webpack_require__(162);
-	var es6RestParameters = __webpack_require__(24);
-	var es6Templates = __webpack_require__(163);
+	  __webpack_require__(188);
+	var es6RestParameters = __webpack_require__(26);
+	var es6Templates = __webpack_require__(189);
 	var es6CallSpread =
-	  __webpack_require__(159);
+	  __webpack_require__(185);
 	var es7SpreadProperty =
-	  __webpack_require__(165);
-	var react = __webpack_require__(168);
-	var reactDisplayName = __webpack_require__(169);
-	var reservedWords = __webpack_require__(166);
+	  __webpack_require__(191);
+	var react = __webpack_require__(194);
+	var reactDisplayName = __webpack_require__(195);
+	var reservedWords = __webpack_require__(192);
 
 	/**
 	 * Map from transformName => orderedListOfVisitors.
@@ -27985,7 +31773,7 @@
 
 
 /***/ },
-/* 171 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27999,7 +31787,7 @@
 
 	'use strict';
 	/*eslint-disable no-undef*/
-	var Buffer = __webpack_require__(53).Buffer;
+	var Buffer = __webpack_require__(49).Buffer;
 
 	function inlineSourceMap(sourceMap, sourceCode, sourceFilename) {
 	  // This can be used with a sourcemap that has already has toJSON called on it.
@@ -28018,7 +31806,7 @@
 
 
 /***/ },
-/* 172 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = function(module) {
@@ -28034,801 +31822,7 @@
 
 
 /***/ },
-/* 173 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-
-	;(function (exports) {
-		'use strict';
-
-	  var Arr = (typeof Uint8Array !== 'undefined')
-	    ? Uint8Array
-	    : Array
-
-		var PLUS   = '+'.charCodeAt(0)
-		var SLASH  = '/'.charCodeAt(0)
-		var NUMBER = '0'.charCodeAt(0)
-		var LOWER  = 'a'.charCodeAt(0)
-		var UPPER  = 'A'.charCodeAt(0)
-		var PLUS_URL_SAFE = '-'.charCodeAt(0)
-		var SLASH_URL_SAFE = '_'.charCodeAt(0)
-
-		function decode (elt) {
-			var code = elt.charCodeAt(0)
-			if (code === PLUS ||
-			    code === PLUS_URL_SAFE)
-				return 62 // '+'
-			if (code === SLASH ||
-			    code === SLASH_URL_SAFE)
-				return 63 // '/'
-			if (code < NUMBER)
-				return -1 //no match
-			if (code < NUMBER + 10)
-				return code - NUMBER + 26 + 26
-			if (code < UPPER + 26)
-				return code - UPPER
-			if (code < LOWER + 26)
-				return code - LOWER + 26
-		}
-
-		function b64ToByteArray (b64) {
-			var i, j, l, tmp, placeHolders, arr
-
-			if (b64.length % 4 > 0) {
-				throw new Error('Invalid string. Length must be a multiple of 4')
-			}
-
-			// the number of equal signs (place holders)
-			// if there are two placeholders, than the two characters before it
-			// represent one byte
-			// if there is only one, then the three characters before it represent 2 bytes
-			// this is just a cheap hack to not do indexOf twice
-			var len = b64.length
-			placeHolders = '=' === b64.charAt(len - 2) ? 2 : '=' === b64.charAt(len - 1) ? 1 : 0
-
-			// base64 is 4/3 + up to two characters of the original data
-			arr = new Arr(b64.length * 3 / 4 - placeHolders)
-
-			// if there are placeholders, only get up to the last complete 4 chars
-			l = placeHolders > 0 ? b64.length - 4 : b64.length
-
-			var L = 0
-
-			function push (v) {
-				arr[L++] = v
-			}
-
-			for (i = 0, j = 0; i < l; i += 4, j += 3) {
-				tmp = (decode(b64.charAt(i)) << 18) | (decode(b64.charAt(i + 1)) << 12) | (decode(b64.charAt(i + 2)) << 6) | decode(b64.charAt(i + 3))
-				push((tmp & 0xFF0000) >> 16)
-				push((tmp & 0xFF00) >> 8)
-				push(tmp & 0xFF)
-			}
-
-			if (placeHolders === 2) {
-				tmp = (decode(b64.charAt(i)) << 2) | (decode(b64.charAt(i + 1)) >> 4)
-				push(tmp & 0xFF)
-			} else if (placeHolders === 1) {
-				tmp = (decode(b64.charAt(i)) << 10) | (decode(b64.charAt(i + 1)) << 4) | (decode(b64.charAt(i + 2)) >> 2)
-				push((tmp >> 8) & 0xFF)
-				push(tmp & 0xFF)
-			}
-
-			return arr
-		}
-
-		function uint8ToBase64 (uint8) {
-			var i,
-				extraBytes = uint8.length % 3, // if we have 1 byte left, pad 2 bytes
-				output = "",
-				temp, length
-
-			function encode (num) {
-				return lookup.charAt(num)
-			}
-
-			function tripletToBase64 (num) {
-				return encode(num >> 18 & 0x3F) + encode(num >> 12 & 0x3F) + encode(num >> 6 & 0x3F) + encode(num & 0x3F)
-			}
-
-			// go through the array every three bytes, we'll deal with trailing stuff later
-			for (i = 0, length = uint8.length - extraBytes; i < length; i += 3) {
-				temp = (uint8[i] << 16) + (uint8[i + 1] << 8) + (uint8[i + 2])
-				output += tripletToBase64(temp)
-			}
-
-			// pad the end with zeros, but make sure to not forget the extra bytes
-			switch (extraBytes) {
-				case 1:
-					temp = uint8[uint8.length - 1]
-					output += encode(temp >> 2)
-					output += encode((temp << 4) & 0x3F)
-					output += '=='
-					break
-				case 2:
-					temp = (uint8[uint8.length - 2] << 8) + (uint8[uint8.length - 1])
-					output += encode(temp >> 10)
-					output += encode((temp >> 4) & 0x3F)
-					output += encode((temp << 2) & 0x3F)
-					output += '='
-					break
-			}
-
-			return output
-		}
-
-		exports.toByteArray = b64ToByteArray
-		exports.fromByteArray = uint8ToBase64
-	}(false ? (this.base64js = {}) : exports))
-
-
-/***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.read = function(buffer, offset, isLE, mLen, nBytes) {
-	  var e, m,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      nBits = -7,
-	      i = isLE ? (nBytes - 1) : 0,
-	      d = isLE ? -1 : 1,
-	      s = buffer[offset + i];
-
-	  i += d;
-
-	  e = s & ((1 << (-nBits)) - 1);
-	  s >>= (-nBits);
-	  nBits += eLen;
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  m = e & ((1 << (-nBits)) - 1);
-	  e >>= (-nBits);
-	  nBits += mLen;
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8);
-
-	  if (e === 0) {
-	    e = 1 - eBias;
-	  } else if (e === eMax) {
-	    return m ? NaN : ((s ? -1 : 1) * Infinity);
-	  } else {
-	    m = m + Math.pow(2, mLen);
-	    e = e - eBias;
-	  }
-	  return (s ? -1 : 1) * m * Math.pow(2, e - mLen);
-	};
-
-	exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
-	  var e, m, c,
-	      eLen = nBytes * 8 - mLen - 1,
-	      eMax = (1 << eLen) - 1,
-	      eBias = eMax >> 1,
-	      rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0),
-	      i = isLE ? 0 : (nBytes - 1),
-	      d = isLE ? 1 : -1,
-	      s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0;
-
-	  value = Math.abs(value);
-
-	  if (isNaN(value) || value === Infinity) {
-	    m = isNaN(value) ? 1 : 0;
-	    e = eMax;
-	  } else {
-	    e = Math.floor(Math.log(value) / Math.LN2);
-	    if (value * (c = Math.pow(2, -e)) < 1) {
-	      e--;
-	      c *= 2;
-	    }
-	    if (e + eBias >= 1) {
-	      value += rt / c;
-	    } else {
-	      value += rt * Math.pow(2, 1 - eBias);
-	    }
-	    if (value * c >= 2) {
-	      e++;
-	      c /= 2;
-	    }
-
-	    if (e + eBias >= eMax) {
-	      m = 0;
-	      e = eMax;
-	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen);
-	      e = e + eBias;
-	    } else {
-	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen);
-	      e = 0;
-	    }
-	  }
-
-	  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8);
-
-	  e = (e << mLen) | m;
-	  eLen += mLen;
-	  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8);
-
-	  buffer[offset + i - d] |= s * 128;
-	};
-
-
-/***/ },
-/* 175 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	/**
-	 * isArray
-	 */
-
-	var isArray = Array.isArray;
-
-	/**
-	 * toString
-	 */
-
-	var str = Object.prototype.toString;
-
-	/**
-	 * Whether or not the given `val`
-	 * is an array.
-	 *
-	 * example:
-	 *
-	 *        isArray([]);
-	 *        // > true
-	 *        isArray(arguments);
-	 *        // > false
-	 *        isArray('');
-	 *        // > false
-	 *
-	 * @param {mixed} val
-	 * @return {bool}
-	 */
-
-	module.exports = isArray || function (val) {
-	  return !! val && '[object Array]' == str.call(val);
-	};
-
-
-/***/ },
-/* 176 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
-	;(function(root) {
-
-		/** Detect free variables */
-		var freeExports = typeof exports == 'object' && exports &&
-			!exports.nodeType && exports;
-		var freeModule = typeof module == 'object' && module &&
-			!module.nodeType && module;
-		var freeGlobal = typeof global == 'object' && global;
-		if (
-			freeGlobal.global === freeGlobal ||
-			freeGlobal.window === freeGlobal ||
-			freeGlobal.self === freeGlobal
-		) {
-			root = freeGlobal;
-		}
-
-		/**
-		 * The `punycode` object.
-		 * @name punycode
-		 * @type Object
-		 */
-		var punycode,
-
-		/** Highest positive signed 32-bit float value */
-		maxInt = 2147483647, // aka. 0x7FFFFFFF or 2^31-1
-
-		/** Bootstring parameters */
-		base = 36,
-		tMin = 1,
-		tMax = 26,
-		skew = 38,
-		damp = 700,
-		initialBias = 72,
-		initialN = 128, // 0x80
-		delimiter = '-', // '\x2D'
-
-		/** Regular expressions */
-		regexPunycode = /^xn--/,
-		regexNonASCII = /[^\x20-\x7E]/, // unprintable ASCII chars + non-ASCII chars
-		regexSeparators = /[\x2E\u3002\uFF0E\uFF61]/g, // RFC 3490 separators
-
-		/** Error messages */
-		errors = {
-			'overflow': 'Overflow: input needs wider integers to process',
-			'not-basic': 'Illegal input >= 0x80 (not a basic code point)',
-			'invalid-input': 'Invalid input'
-		},
-
-		/** Convenience shortcuts */
-		baseMinusTMin = base - tMin,
-		floor = Math.floor,
-		stringFromCharCode = String.fromCharCode,
-
-		/** Temporary variable */
-		key;
-
-		/*--------------------------------------------------------------------------*/
-
-		/**
-		 * A generic error utility function.
-		 * @private
-		 * @param {String} type The error type.
-		 * @returns {Error} Throws a `RangeError` with the applicable error message.
-		 */
-		function error(type) {
-			throw RangeError(errors[type]);
-		}
-
-		/**
-		 * A generic `Array#map` utility function.
-		 * @private
-		 * @param {Array} array The array to iterate over.
-		 * @param {Function} callback The function that gets called for every array
-		 * item.
-		 * @returns {Array} A new array of values returned by the callback function.
-		 */
-		function map(array, fn) {
-			var length = array.length;
-			var result = [];
-			while (length--) {
-				result[length] = fn(array[length]);
-			}
-			return result;
-		}
-
-		/**
-		 * A simple `Array#map`-like wrapper to work with domain name strings or email
-		 * addresses.
-		 * @private
-		 * @param {String} domain The domain name or email address.
-		 * @param {Function} callback The function that gets called for every
-		 * character.
-		 * @returns {Array} A new string of characters returned by the callback
-		 * function.
-		 */
-		function mapDomain(string, fn) {
-			var parts = string.split('@');
-			var result = '';
-			if (parts.length > 1) {
-				// In email addresses, only the domain name should be punycoded. Leave
-				// the local part (i.e. everything up to `@`) intact.
-				result = parts[0] + '@';
-				string = parts[1];
-			}
-			// Avoid `split(regex)` for IE8 compatibility. See #17.
-			string = string.replace(regexSeparators, '\x2E');
-			var labels = string.split('.');
-			var encoded = map(labels, fn).join('.');
-			return result + encoded;
-		}
-
-		/**
-		 * Creates an array containing the numeric code points of each Unicode
-		 * character in the string. While JavaScript uses UCS-2 internally,
-		 * this function will convert a pair of surrogate halves (each of which
-		 * UCS-2 exposes as separate characters) into a single code point,
-		 * matching UTF-16.
-		 * @see `punycode.ucs2.encode`
-		 * @see <https://mathiasbynens.be/notes/javascript-encoding>
-		 * @memberOf punycode.ucs2
-		 * @name decode
-		 * @param {String} string The Unicode input string (UCS-2).
-		 * @returns {Array} The new array of code points.
-		 */
-		function ucs2decode(string) {
-			var output = [],
-			    counter = 0,
-			    length = string.length,
-			    value,
-			    extra;
-			while (counter < length) {
-				value = string.charCodeAt(counter++);
-				if (value >= 0xD800 && value <= 0xDBFF && counter < length) {
-					// high surrogate, and there is a next character
-					extra = string.charCodeAt(counter++);
-					if ((extra & 0xFC00) == 0xDC00) { // low surrogate
-						output.push(((value & 0x3FF) << 10) + (extra & 0x3FF) + 0x10000);
-					} else {
-						// unmatched surrogate; only append this code unit, in case the next
-						// code unit is the high surrogate of a surrogate pair
-						output.push(value);
-						counter--;
-					}
-				} else {
-					output.push(value);
-				}
-			}
-			return output;
-		}
-
-		/**
-		 * Creates a string based on an array of numeric code points.
-		 * @see `punycode.ucs2.decode`
-		 * @memberOf punycode.ucs2
-		 * @name encode
-		 * @param {Array} codePoints The array of numeric code points.
-		 * @returns {String} The new Unicode string (UCS-2).
-		 */
-		function ucs2encode(array) {
-			return map(array, function(value) {
-				var output = '';
-				if (value > 0xFFFF) {
-					value -= 0x10000;
-					output += stringFromCharCode(value >>> 10 & 0x3FF | 0xD800);
-					value = 0xDC00 | value & 0x3FF;
-				}
-				output += stringFromCharCode(value);
-				return output;
-			}).join('');
-		}
-
-		/**
-		 * Converts a basic code point into a digit/integer.
-		 * @see `digitToBasic()`
-		 * @private
-		 * @param {Number} codePoint The basic numeric code point value.
-		 * @returns {Number} The numeric value of a basic code point (for use in
-		 * representing integers) in the range `0` to `base - 1`, or `base` if
-		 * the code point does not represent a value.
-		 */
-		function basicToDigit(codePoint) {
-			if (codePoint - 48 < 10) {
-				return codePoint - 22;
-			}
-			if (codePoint - 65 < 26) {
-				return codePoint - 65;
-			}
-			if (codePoint - 97 < 26) {
-				return codePoint - 97;
-			}
-			return base;
-		}
-
-		/**
-		 * Converts a digit/integer into a basic code point.
-		 * @see `basicToDigit()`
-		 * @private
-		 * @param {Number} digit The numeric value of a basic code point.
-		 * @returns {Number} The basic code point whose value (when used for
-		 * representing integers) is `digit`, which needs to be in the range
-		 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
-		 * used; else, the lowercase form is used. The behavior is undefined
-		 * if `flag` is non-zero and `digit` has no uppercase form.
-		 */
-		function digitToBasic(digit, flag) {
-			//  0..25 map to ASCII a..z or A..Z
-			// 26..35 map to ASCII 0..9
-			return digit + 22 + 75 * (digit < 26) - ((flag != 0) << 5);
-		}
-
-		/**
-		 * Bias adaptation function as per section 3.4 of RFC 3492.
-		 * http://tools.ietf.org/html/rfc3492#section-3.4
-		 * @private
-		 */
-		function adapt(delta, numPoints, firstTime) {
-			var k = 0;
-			delta = firstTime ? floor(delta / damp) : delta >> 1;
-			delta += floor(delta / numPoints);
-			for (/* no initialization */; delta > baseMinusTMin * tMax >> 1; k += base) {
-				delta = floor(delta / baseMinusTMin);
-			}
-			return floor(k + (baseMinusTMin + 1) * delta / (delta + skew));
-		}
-
-		/**
-		 * Converts a Punycode string of ASCII-only symbols to a string of Unicode
-		 * symbols.
-		 * @memberOf punycode
-		 * @param {String} input The Punycode string of ASCII-only symbols.
-		 * @returns {String} The resulting string of Unicode symbols.
-		 */
-		function decode(input) {
-			// Don't use UCS-2
-			var output = [],
-			    inputLength = input.length,
-			    out,
-			    i = 0,
-			    n = initialN,
-			    bias = initialBias,
-			    basic,
-			    j,
-			    index,
-			    oldi,
-			    w,
-			    k,
-			    digit,
-			    t,
-			    /** Cached calculation results */
-			    baseMinusT;
-
-			// Handle the basic code points: let `basic` be the number of input code
-			// points before the last delimiter, or `0` if there is none, then copy
-			// the first basic code points to the output.
-
-			basic = input.lastIndexOf(delimiter);
-			if (basic < 0) {
-				basic = 0;
-			}
-
-			for (j = 0; j < basic; ++j) {
-				// if it's not a basic code point
-				if (input.charCodeAt(j) >= 0x80) {
-					error('not-basic');
-				}
-				output.push(input.charCodeAt(j));
-			}
-
-			// Main decoding loop: start just after the last delimiter if any basic code
-			// points were copied; start at the beginning otherwise.
-
-			for (index = basic > 0 ? basic + 1 : 0; index < inputLength; /* no final expression */) {
-
-				// `index` is the index of the next character to be consumed.
-				// Decode a generalized variable-length integer into `delta`,
-				// which gets added to `i`. The overflow checking is easier
-				// if we increase `i` as we go, then subtract off its starting
-				// value at the end to obtain `delta`.
-				for (oldi = i, w = 1, k = base; /* no condition */; k += base) {
-
-					if (index >= inputLength) {
-						error('invalid-input');
-					}
-
-					digit = basicToDigit(input.charCodeAt(index++));
-
-					if (digit >= base || digit > floor((maxInt - i) / w)) {
-						error('overflow');
-					}
-
-					i += digit * w;
-					t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-
-					if (digit < t) {
-						break;
-					}
-
-					baseMinusT = base - t;
-					if (w > floor(maxInt / baseMinusT)) {
-						error('overflow');
-					}
-
-					w *= baseMinusT;
-
-				}
-
-				out = output.length + 1;
-				bias = adapt(i - oldi, out, oldi == 0);
-
-				// `i` was supposed to wrap around from `out` to `0`,
-				// incrementing `n` each time, so we'll fix that now:
-				if (floor(i / out) > maxInt - n) {
-					error('overflow');
-				}
-
-				n += floor(i / out);
-				i %= out;
-
-				// Insert `n` at position `i` of the output
-				output.splice(i++, 0, n);
-
-			}
-
-			return ucs2encode(output);
-		}
-
-		/**
-		 * Converts a string of Unicode symbols (e.g. a domain name label) to a
-		 * Punycode string of ASCII-only symbols.
-		 * @memberOf punycode
-		 * @param {String} input The string of Unicode symbols.
-		 * @returns {String} The resulting Punycode string of ASCII-only symbols.
-		 */
-		function encode(input) {
-			var n,
-			    delta,
-			    handledCPCount,
-			    basicLength,
-			    bias,
-			    j,
-			    m,
-			    q,
-			    k,
-			    t,
-			    currentValue,
-			    output = [],
-			    /** `inputLength` will hold the number of code points in `input`. */
-			    inputLength,
-			    /** Cached calculation results */
-			    handledCPCountPlusOne,
-			    baseMinusT,
-			    qMinusT;
-
-			// Convert the input in UCS-2 to Unicode
-			input = ucs2decode(input);
-
-			// Cache the length
-			inputLength = input.length;
-
-			// Initialize the state
-			n = initialN;
-			delta = 0;
-			bias = initialBias;
-
-			// Handle the basic code points
-			for (j = 0; j < inputLength; ++j) {
-				currentValue = input[j];
-				if (currentValue < 0x80) {
-					output.push(stringFromCharCode(currentValue));
-				}
-			}
-
-			handledCPCount = basicLength = output.length;
-
-			// `handledCPCount` is the number of code points that have been handled;
-			// `basicLength` is the number of basic code points.
-
-			// Finish the basic string - if it is not empty - with a delimiter
-			if (basicLength) {
-				output.push(delimiter);
-			}
-
-			// Main encoding loop:
-			while (handledCPCount < inputLength) {
-
-				// All non-basic code points < n have been handled already. Find the next
-				// larger one:
-				for (m = maxInt, j = 0; j < inputLength; ++j) {
-					currentValue = input[j];
-					if (currentValue >= n && currentValue < m) {
-						m = currentValue;
-					}
-				}
-
-				// Increase `delta` enough to advance the decoder's <n,i> state to <m,0>,
-				// but guard against overflow
-				handledCPCountPlusOne = handledCPCount + 1;
-				if (m - n > floor((maxInt - delta) / handledCPCountPlusOne)) {
-					error('overflow');
-				}
-
-				delta += (m - n) * handledCPCountPlusOne;
-				n = m;
-
-				for (j = 0; j < inputLength; ++j) {
-					currentValue = input[j];
-
-					if (currentValue < n && ++delta > maxInt) {
-						error('overflow');
-					}
-
-					if (currentValue == n) {
-						// Represent delta as a generalized variable-length integer
-						for (q = delta, k = base; /* no condition */; k += base) {
-							t = k <= bias ? tMin : (k >= bias + tMax ? tMax : k - bias);
-							if (q < t) {
-								break;
-							}
-							qMinusT = q - t;
-							baseMinusT = base - t;
-							output.push(
-								stringFromCharCode(digitToBasic(t + qMinusT % baseMinusT, 0))
-							);
-							q = floor(qMinusT / baseMinusT);
-						}
-
-						output.push(stringFromCharCode(digitToBasic(q, 0)));
-						bias = adapt(delta, handledCPCountPlusOne, handledCPCount == basicLength);
-						delta = 0;
-						++handledCPCount;
-					}
-				}
-
-				++delta;
-				++n;
-
-			}
-			return output.join('');
-		}
-
-		/**
-		 * Converts a Punycode string representing a domain name or an email address
-		 * to Unicode. Only the Punycoded parts of the input will be converted, i.e.
-		 * it doesn't matter if you call it on a string that has already been
-		 * converted to Unicode.
-		 * @memberOf punycode
-		 * @param {String} input The Punycoded domain name or email address to
-		 * convert to Unicode.
-		 * @returns {String} The Unicode representation of the given Punycode
-		 * string.
-		 */
-		function toUnicode(input) {
-			return mapDomain(input, function(string) {
-				return regexPunycode.test(string)
-					? decode(string.slice(4).toLowerCase())
-					: string;
-			});
-		}
-
-		/**
-		 * Converts a Unicode string representing a domain name or an email address to
-		 * Punycode. Only the non-ASCII parts of the domain name will be converted,
-		 * i.e. it doesn't matter if you call it with a domain that's already in
-		 * ASCII.
-		 * @memberOf punycode
-		 * @param {String} input The domain name or email address to convert, as a
-		 * Unicode string.
-		 * @returns {String} The Punycode representation of the given domain name or
-		 * email address.
-		 */
-		function toASCII(input) {
-			return mapDomain(input, function(string) {
-				return regexNonASCII.test(string)
-					? 'xn--' + encode(string)
-					: string;
-			});
-		}
-
-		/*--------------------------------------------------------------------------*/
-
-		/** Define the public API */
-		punycode = {
-			/**
-			 * A string representing the current Punycode.js version number.
-			 * @memberOf punycode
-			 * @type String
-			 */
-			'version': '1.3.2',
-			/**
-			 * An object of methods to convert from JavaScript's internal character
-			 * representation (UCS-2) to Unicode code points, and back.
-			 * @see <https://mathiasbynens.be/notes/javascript-encoding>
-			 * @memberOf punycode
-			 * @type Object
-			 */
-			'ucs2': {
-				'decode': ucs2decode,
-				'encode': ucs2encode
-			},
-			'decode': decode,
-			'encode': encode,
-			'toASCII': toASCII,
-			'toUnicode': toUnicode
-		};
-
-		/** Expose `punycode` */
-		// Some AMD build optimizers, like r.js, check for specific condition patterns
-		// like the following:
-		if (
-			true
-		) {
-			!(__WEBPACK_AMD_DEFINE_RESULT__ = function() {
-				return punycode;
-			}.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else if (freeExports && freeModule) {
-			if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
-				freeModule.exports = punycode;
-			} else { // in Narwhal or RingoJS v0.7.0-
-				for (key in punycode) {
-					punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
-				}
-			}
-		} else { // in Rhino or a web browser
-			root.punycode = punycode;
-		}
-
-	}(this));
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(172)(module), (function() { return this; }())))
-
-/***/ },
-/* 177 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = babel;

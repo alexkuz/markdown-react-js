@@ -4,11 +4,56 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/codemirror.min.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/theme/monokai.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.2.0/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/highlight.js/8.5.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/8.5.0/styles/solarized_light.min.css">
     <style>
 .body {
   font-family: Helvetica, Arial;
   color: rgb(46, 47, 51);
   padding: 20px 40px;
+}
+
+/* Component Playground */
+
+.playground {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.CodeMirror {
+  height: 500px;
+
+}
+
+.playgroundCode {
+  -webkit-flex: 0 1 60%;
+  -ms-flex: 0 1 60%;
+  flex: 0 1 60%;
+}
+
+.playgroundPreview {
+  height: 500px;
+  overflow-y: scroll;
+  padding-left: 20px;
+
+  -webkit-flex: 0 1 40%;
+  -ms-flex: 0 1 40%;
+  flex: 0 1 40%;
+}
+
+/* /Component Playground */
+
+div[data-info="warning"] {
+  background-color: #ff8;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+img {
+  max-width: 33%;
 }
   </style>
   </head>
@@ -19,7 +64,7 @@
     <h1>Markdown React</h1>
     <p><b>MDReactComponent</b> converts Markdown text to React component. You can try out the component in runtime, thanks to the awesome <a href="https://github.com/FormidableLabs/component-playground">Component Playground</a> by <a href="https://github.com/kenwheeler">Ken Wheeler</a>. <a href="https://github.com/alexkuz/markdown-react-js">Here</a> are the source and some more examples.
     <div class="root" id="root" />
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.2/react-with-addons.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.2/react-with-addons.js"></script>
         <script type="text/javascript" src="js/babel-core/browser.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/codemirror.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.0.0/mode/javascript/javascript.min.js"></script>

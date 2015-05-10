@@ -6,4 +6,7 @@ copy:
 webpack:
 		webpack
 
-.PHONY: copy webpack
+dev:
+		node_modules/webpack-dev-server/bin/webpack-dev-server.js
+
+.PHONY: copy webpack dev

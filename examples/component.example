@@ -1,61 +1,42 @@
-var grayLink = function(tag, props, children) {
-  if (tag === 'a') {
-      props.style = {color: 'gray', textDecoration: 'none'};
-    }
-    return React.createElement(tag, props, children);
+var handleIterate = function(Tag, props, children) {
+  switch(Tag) {
+  case 'table':
+    props.className = 'table table-striped';
+    break;
+  case 'code':
+    if (props['data-language']) {
+      return <Tag {...props} dangerouslySetInnerHTML={{__html: window.hljs.highlight(props['data-language'], children[0]).value}} />
+    };
+    break;
+  }
+  return <Tag {...props}>{children}</Tag>;
 }
 
-var ComponentExample = React.createClass({
-    render: function() {
-      return (
-        <div style={{paddingTop: 20}}>
-          <MDReactComponent text='# Some Examples ([mostly from here](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet))' onIterate={grayLink} />
-          <MDReactComponent text='## Emphasis' />
-          <MDReactComponent text={
-            'Emphasis, aka italics, with *asterisks* or _underscores_.\n\n' +
-            'Strong emphasis, aka bold, with **asterisks** or __underscores__.\n\n' +
-            'Combined emphasis with **asterisks and _underscores_**.'
-          } />
-          <MDReactComponent text='## Lists' />
-          <MDReactComponent text={
-            '1. First ordered list item\n' +
-            '2. Another item\n' +
-            '  * Unordered sub-list.\n' +
-            '1. Actual numbers don\'t matter, just that it\'s a number\n' +
-            '  1. Ordered sub-list\n' +
-            '4. And another item.\n' +
-            '\n' +
-            '   You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we\'ll use three here to also align the raw Markdown).\n' +
-            '\n' +
-            '   To have a line break without a paragraph, you will need to use two trailing spaces.  \n' +
-            '   Note that this line is separate, but within the same paragraph.  \n' +
-            '   (This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)\n' +
-            '\n' +
-            '* Unordered list can use asterisks\n' +
-            '- Or minuses\n' +
-            '+ Or pluses'
-          } />
-          <MDReactComponent text='## Links' />
-          <MDReactComponent text={
-            '[I\'m an inline-style link](https://www.google.com)\n' +
-            '\n' +
-            '[I\'m a reference-style link][arbitrary case-insensitive reference text]\n' +
-            '\n' +
-            '[you can use numbers for reference-style link definitions][1]\n' +
-            '\n' +
-            'or leave it empty and use the [link text itself]\n' +
-            '\n' +
-            'some text to show that the reference links can follow later.\n' +
-            '\n' +
-            '[arbitrary case-insensitive reference text]: https://www.mozilla.org\n' +
-            '[1]: http://slashdot.org\n' +
-            '[link text itself]: http://www.reddit.com'
-          } />
-          <MDReactComponent text='-----' />
-          <MDReactComponent text='#### This page is using [Component Playground](https://github.com/FormidableLabs/component-playground), check it out' />
-        </div>
-      )
-    }
-});
+class ComponentExample extends React.Component {
+  render() {
+    return (
+      <div>
+        <MDReactComponent text='### (the following content is taken from [MarkdownIt Demo Page](https://markdown-it.github.io/), which is used now in this library as a parser)' />
+        <MDReactComponent text='-----' />
+        <MDReactComponent text={__markdownText__}
+                          onIterate={handleIterate}
+                          markdownOptions={{ typographer: true }}
+                          plugins={[
+                            __plugins__.abbr,
+                            {plugin: __plugins__.container, args: ['warning']},
+                            __plugins__.deflist,
+                            __plugins__.emoji,
+                            __plugins__.footnote,
+                            __plugins__.ins,
+                            __plugins__.mark,
+                            __plugins__.sub,
+                            __plugins__.sup
+                          ]} />
+        <MDReactComponent text='-----' />
+        <MDReactComponent text='#### This page is using [Component Playground](https://github.com/FormidableLabs/component-playground), check it out' />
+      </div>
+    )
+  }
+};
 
 React.render(<ComponentExample/>, mountNode);

@@ -6,6 +6,18 @@ import { mdReact } from '../src/index';
 import React, { renderToStaticMarkup } from 'react';
 import update from 'react/lib/update';
 
+const plugins = {
+  abbr: require('markdown-it-abbr'),
+  container: require('markdown-it-container'),
+  deflist: require('markdown-it-deflist'),
+  emoji: require('markdown-it-emoji'),
+  footnote: require('markdown-it-footnote'),
+  ins: require('markdown-it-ins'),
+  mark: require('markdown-it-mark'),
+  sub: require('markdown-it-sub'),
+  sup: require('markdown-it-sup')
+};
+
 function render(text, options) {
   return renderToStaticMarkup(mdReact(options)(text));
 }
@@ -86,6 +98,72 @@ describe('Markdown tests', () => {
       '<span><p>I think you should use an <code>&lt;addr&gt;</code> element here instead.</p></span>'
     );
   });
+
+  it('should work with tables', () => {
+    assert.equal(
+      render('| Option | Description |\n| ------ | ----------- |\n| data   | path to data files to supply the data that will be passed into templates. |\n| engine | engine to be used for processing templates. Handlebars is the default. |\n| ext    | extension to be used for dest files. |\n'),
+      '<span><table><thead><tr><th>Option</th><th>Description</th></tr></thead><tbody><tr><td>data</td><td>path to data files to supply the data that will be passed into templates.</td></tr><tr><td>engine</td><td>engine to be used for processing templates. Handlebars is the default.</td></tr><tr><td>ext</td><td>extension to be used for dest files.</td></tr></tbody></table></span>'
+    );
+  });
+
+  it('should work with indented code', () => {
+    assert.equal(
+      render('Indented code\n\n    // Some comments\n    line 1 of code\n    line 2 of code\n    line 3 of code'),
+      '<span><p>Indented code</p><pre>\n<code>// Some comments\nline 1 of code\nline 2 of code\nline 3 of code</code></pre></span>'
+    );
+  });
+
+  it('should work with block code', () => {
+    assert.equal(
+      render('Block code "fences"\n\n```\nSample text here...\n```\n'),
+      '<span><p>Block code &quot;fences&quot;</p><pre>\n<code>Sample text here...\n</code></pre></span>'
+    );
+  });
+
+  it('should work with highlighted code', () => {
+    assert.equal(
+      render('Syntax highlighting\n\n``` js\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```'),
+      '<span><p>Syntax highlighting</p><pre>\n<code data-language="js">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n</code></pre></span>'
+    );
+  });
+
+  it('should work with enabled typographer', () => {
+    assert.equal(
+      render('## Typographic replacements\n\nEnable typographer option to see result.\n\n(c) (C) (r) (R) (tm) (TM) (p) (P) +-\n\ntest.. test... test..... test?..... test!....\n\n!!!!!! ???? ,,  -- ---\n\n"Smartypants, double quotes" and \'single quotes\'',
+        {markdownOptions: {typographer: true}}),
+      '<span><h2>Typographic replacements</h2><p>Enable typographer option to see result.</p><p>© © ® ® ™ ™ § § ±</p><p>test… test… test… test?.. test!..</p><p>!!! ??? ,  – —</p><p>“Smartypants, double quotes” and ‘single quotes’</p></span>'
+    );
+  });
+
+  it('should work with disabled typographer', () => {
+    assert.equal(
+      render('## Typographic replacements\n\nEnable typographer option to see result.\n\n(c) (C) (r) (R) (tm) (TM) (p) (P) +-\n\ntest.. test... test..... test?..... test!....\n\n!!!!!! ???? ,,  -- ---\n\n"Smartypants, double quotes" and \'single quotes\'',
+        {markdownOptions: {typographer: false}}),
+      '<span><h2>Typographic replacements</h2><p>Enable typographer option to see result.</p><p>(c) (C) (r) (R) (tm) (TM) (p) (P) +-</p><p>test.. test... test..... test?..... test!....</p><p>!!!!!! ???? ,,  -- ---</p><p>&quot;Smartypants, double quotes&quot; and &#x27;single quotes&#x27;</p></span>'
+    );
+  });
+});
+
+describe('Markdown plugins', () => {
+  it('should work with emoji', () => {
+    assert.equal(
+      render(':) 8-)',
+        {plugins: [plugins.emoji]}),
+      '<span><p>😃 😎</p></span>'
+    );
+  });
+
+  it('should work with container', () => {
+    assert.equal(
+      render('::: warning\n*here be dragons*\n:::',
+        {plugins: [{plugin: plugins.container, args: ['warning']}]}),
+      '<span><div data-info="warning"><p><em>here be dragons</em></p></div></span>'
+    );
+  });
+
+  /* TODO: footnote and other plugins */
+
+
 });
 
 // Markdown-React

@@ -4,6 +4,7 @@ module.exports = {
   entry: './src/index',
   module: {
     loaders: [
+      { test: /\.json$/, loader: 'json' },
       { test: /\.js$/, loader: 'babel?stage=0', exclude: /node_modules/ }
     ]
   },

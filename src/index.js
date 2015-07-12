@@ -114,7 +114,8 @@ function mdReactFactory(options={}) {
   const { onIterate, tags=DEFAULT_TAGS,
     presetName, markdownOptions,
     enableRules=[], disableRules=[], plugins=[],
-    onGenerateKey=(tag, index) => `mdrct-${tag}-${index}` } = options;
+    onGenerateKey=(tag, index) => `mdrct-${tag}-${index}`,
+    className } = options;
 
   let md = markdown(markdownOptions || presetName)
     .enable(enableRules)
@@ -122,7 +123,12 @@ function mdReactFactory(options={}) {
 
   const convertRules = assign({}, DEFAULT_RULES, options.convertRules);
 
-  md = reduce(plugins, (m, plugin) => plugin.plugin ? m.use(plugin.plugin, ...plugin.args) : m.use(plugin), md);
+  md = reduce(plugins, (m, plugin) =>
+    plugin.plugin ?
+    m.use(plugin.plugin, ...plugin.args) :
+    m.use(plugin),
+    md
+  );
 
   function iterateTree(tree, level=0, index=0) {
     let tag = tree.shift();
@@ -131,6 +137,10 @@ function mdReactFactory(options={}) {
     const props = (tree.length && isPlainObject(tree[0])) ?
       assign(tree.shift(), { key }) :
       { key };
+
+    if (level === 0 && className) {
+      props.className = className;
+    }
 
     const children = tree.map(
       (branch, idx) => Array.isArray(branch) ?
@@ -170,7 +180,8 @@ class MDReactComponent extends Component {
     enableRules: PropTypes.array,
     disableRules: PropTypes.array,
     convertRules: PropTypes.object,
-    plugins: PropTypes.array
+    plugins: PropTypes.array,
+    className: PropTypes.string
   }
 
   render() {

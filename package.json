@@ -2,7 +2,7 @@
   "name": "markdown-react-js",
   "version": "0.2.0",
   "description": "Markdown to React Component converter",
-  "main": "src-es5/index.js",
+  "main": "lib/index.js",
   "directories": {
     "example": "examples",
     "test": "test"
@@ -17,6 +17,7 @@
     "babel-core": "^5.2.6",
     "babel-eslint": "^3.0.1",
     "babel-loader": "^5.0.0",
+    "babel-runtime": "^5.6.17",
     "eslint": "^0.21.0",
     "eslint-plugin-react": "^2.2.0",
     "json-loader": "^0.5.1",
@@ -36,7 +37,14 @@
     "react": "^0.13.2"
   },
   "scripts": {
-    "test": "make test"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babelhook --recursive --reporter spec --timeout 3000",
+    "dist": "NODE_ENV=production ./node_modules/.bin/webpack -p",
+    "build": "./node_modules/.bin/babel --out-dir lib --optional runtime src",
+    "lint": "./node_modules/.bin/eslint test src/index.js",
+    "prepublish": "npm run build && npm run dist",
+    "preversion": "npm test",
+    "version": "npm run build && npm run dist && git add -A .",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

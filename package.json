@@ -1,6 +1,6 @@
 {
   "name": "markdown-react-js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Markdown to React Component converter",
   "main": "lib/index.js",
   "directories": {

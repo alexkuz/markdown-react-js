@@ -34,7 +34,7 @@
     "webpack": "^1.8.11"
   },
   "peerDependencies": {
-    "react": "^0.13.2 || 0.14.0-rc1"
+    "react": ">=0.13.2"
   },
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babelhook --recursive --reporter spec --timeout 3000",

@@ -76,20 +76,20 @@ Result:
 #### Using custom component renderer
 
 ```
-import update from 'react/lib/update';
-
 function handleIterate(Tag, props, children, level) {
   if (level === 1) {
-    props = update(props, {
-      className: { $set: 'first-level-class' }
-    });
+    props = {
+      ...props,
+      className: 'first-level-class'
+    };
   }
   
   if (Tag === 'a') {
-    props = update(props, {
-      className: { $set: 'link-class' },
-      href: { $apply: h => h.replace('SOME_URL', 'http://example.com') }
-    });
+    props = {
+      ...props,
+      className: 'link-class',
+      href: props.href.replace('SOME_URL', 'http://example.com')
+    };
   }
   
   return <Tag {...props}>{children}</Tag>;

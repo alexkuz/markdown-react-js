@@ -8,7 +8,6 @@
     "test": "test"
   },
   "dependencies": {
-    "chai": "^2.3.0",
     "lodash": "^3.8.0",
     "markdown-it": "^4.2.1"
   },
@@ -18,6 +17,7 @@
     "babel-eslint": "^3.0.1",
     "babel-loader": "^5.0.0",
     "babel-runtime": "^5.6.17",
+    "chai": "^2.3.0",
     "eslint": "^0.21.0",
     "eslint-plugin-react": "^2.2.0",
     "json-loader": "^0.5.1",

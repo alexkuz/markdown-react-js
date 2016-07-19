@@ -142,11 +142,17 @@ function mdReactFactory(options={}) {
       props.className = className;
     }
 
-    const children = tree.map(
+    let children = tree.map(
       (branch, idx) => Array.isArray(branch) ?
         iterateTree(branch, level + 1, idx) :
         branch
     );
+
+    // Don't pass empty children array to void elements like img,
+    // otherwise react will warn you.
+    if (!children.length) {
+      children = undefined;
+    }
 
     tag = tags[tag] || tag;
 

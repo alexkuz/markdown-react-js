@@ -3,7 +3,7 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import { mdReact } from '../src/index';
-import React from 'react';
+import React, {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import update from 'react/lib/update';
 
@@ -175,7 +175,16 @@ describe('Markdown-React options tests', () => {
       render('Here is [some link with class](SOME_URL).', { onIterate: linkCallback }),
       '<span><p>Here is <a href="http://real-url.com" class="link-class">some link with class</a>.</p></span>'
     );
+  });
 
+  it('should forward additional props to createElement/onIterate', () => {
+    let someProp
+    const onIterate = (tag, props) => {
+      someProp = props.someProp;
+      return createElement(tag, props);
+    };
+    render('Something', { onIterate, someProp: 123 });
+    assert.equal(someProp, 123);
   });
 
   it('should distinct tags depending on level', () => {
@@ -183,7 +192,6 @@ describe('Markdown-React options tests', () => {
       render('This node has custom class, **but not this node**.', { onIterate: firstLevelCallback }),
       '<span><p class="first-level-class">This node has custom class, <strong>but not this node</strong>.</p></span>'
     );
-
   });
 
   it('should replace tags', () => {

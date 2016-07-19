@@ -115,7 +115,7 @@ function mdReactFactory(options={}) {
     presetName, markdownOptions,
     enableRules=[], disableRules=[], plugins=[],
     onGenerateKey=(tag, index) => `mdrct-${tag}-${index}`,
-    className } = options;
+    className, ...defaultProps } = options;
 
   let md = markdown(markdownOptions || presetName)
     .enable(enableRules)
@@ -133,10 +133,11 @@ function mdReactFactory(options={}) {
   function iterateTree(tree, level=0, index=0) {
     let tag = tree.shift();
     const key = onGenerateKey(tag, index);
+    const props = {...defaultProps, key};
 
-    const props = (tree.length && isPlainObject(tree[0])) ?
-      assign(tree.shift(), { key }) :
-      { key };
+    if (tree.length && isPlainObject(tree[0])) {
+      assign(props, tree.shift());
+    }
 
     if (level === 0 && className) {
       props.className = className;

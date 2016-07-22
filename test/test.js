@@ -178,13 +178,20 @@ describe('Markdown-React options tests', () => {
   });
 
   it('should forward additional props to createElement/onIterate', () => {
-    let someProp
+    let someProp1;
+    let someProp2;
     const onIterate = (tag, props) => {
-      someProp = props.someProp;
+      someProp1 = props.someProp1;
+      someProp2 = props.someProp2;
       return createElement(tag, props);
     };
-    render('Something', { onIterate, someProp: 123 });
-    assert.equal(someProp, 123);
+    const render = mdReact({ onIterate })
+    render('Something', { someProp1: 1, someProp2: 2 });
+    assert.equal(someProp1, 1);
+    assert.equal(someProp2, 2);
+    render('Something', { someProp1: 3, someProp2: 4 });
+    assert.equal(someProp1, 3);
+    assert.equal(someProp2, 4);
   });
 
   it('should distinct tags depending on level', () => {

@@ -117,7 +117,7 @@ function mdReactFactory(options={}) {
     onGenerateKey=(tag, index) => `mdrct-${tag}-${index}`,
     className } = options;
 
-  let md = markdown(markdownOptions || presetName)
+  let md = markdown(presetName || 'default', markdownOptions)
     .enable(enableRules)
     .disable(disableRules);
 

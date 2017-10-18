@@ -130,23 +130,32 @@ function mdReactFactory(options={}) {
     md
   );
 
+  let defaultProps;
+
   function iterateTree(tree, level=0, index=0) {
     let tag = tree.shift();
     const key = onGenerateKey(tag, index);
+    const props = { ...defaultProps, key };
 
-    const props = (tree.length && isPlainObject(tree[0])) ?
-      assign(tree.shift(), { key }) :
-      { key };
+    if (tree.length && isPlainObject(tree[0])) {
+      assign(props, tree.shift());
+    }
 
     if (level === 0 && className) {
       props.className = className;
     }
 
-    const children = tree.map(
+    let children = tree.map(
       (branch, idx) => Array.isArray(branch) ?
         iterateTree(branch, level + 1, idx) :
         branch
     );
+
+    // Don't pass empty children array to void elements like img,
+    // otherwise react will warn you.
+    if (!children.length) {
+      children = undefined;
+    }
 
     tag = tags[tag] || tag;
 
@@ -163,7 +172,8 @@ function mdReactFactory(options={}) {
       React.createElement(tag, props, children);
   }
 
-  return function(text) {
+  return function(text, props) {
+    defaultProps = props;
     const tree = convertTree(md.parse(text, {}), convertRules, md.options);
     return iterateTree(tree);
   };

@@ -3,7 +3,8 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import { mdReact } from '../src/index';
-import React, { renderToStaticMarkup } from 'react';
+import React, {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
 import update from 'react/lib/update';
 
 const plugins = {
@@ -74,7 +75,7 @@ describe('Markdown tests', () => {
   it('should work with images', () => {
     assert.equal(
       render('![GitHub Logo](/images/logo.png)\nFormat: ![Alt Text](url)'),
-      '<span><p><img alt="GitHub Logo" src="/images/logo.png">\nFormat: <img alt="Alt Text" src="url"></p></span>'
+      '<span><p><img alt="GitHub Logo" src="/images/logo.png"/>\nFormat: <img alt="Alt Text" src="url"/></p></span>'
     );
   });
 
@@ -109,21 +110,21 @@ describe('Markdown tests', () => {
   it('should work with indented code', () => {
     assert.equal(
       render('Indented code\n\n    // Some comments\n    line 1 of code\n    line 2 of code\n    line 3 of code'),
-      '<span><p>Indented code</p><pre>\n<code>// Some comments\nline 1 of code\nline 2 of code\nline 3 of code</code></pre></span>'
+      '<span><p>Indented code</p><pre><code>// Some comments\nline 1 of code\nline 2 of code\nline 3 of code</code></pre></span>'
     );
   });
 
   it('should work with block code', () => {
     assert.equal(
       render('Block code "fences"\n\n```\nSample text here...\n```\n'),
-      '<span><p>Block code &quot;fences&quot;</p><pre>\n<code>Sample text here...\n</code></pre></span>'
+      '<span><p>Block code &quot;fences&quot;</p><pre><code>Sample text here...\n</code></pre></span>'
     );
   });
 
   it('should work with highlighted code', () => {
     assert.equal(
       render('Syntax highlighting\n\n``` js\nvar foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n```'),
-      '<span><p>Syntax highlighting</p><pre>\n<code data-language="js">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n</code></pre></span>'
+      '<span><p>Syntax highlighting</p><pre><code data-language="js">var foo = function (bar) {\n  return bar++;\n};\n\nconsole.log(foo(5));\n</code></pre></span>'
     );
   });
 
@@ -174,7 +175,23 @@ describe('Markdown-React options tests', () => {
       render('Here is [some link with class](SOME_URL).', { onIterate: linkCallback }),
       '<span><p>Here is <a href="http://real-url.com" class="link-class">some link with class</a>.</p></span>'
     );
+  });
 
+  it('should forward additional props to createElement/onIterate', () => {
+    let someProp1;
+    let someProp2;
+    const onIterate = (tag, props) => {
+      someProp1 = props.someProp1;
+      someProp2 = props.someProp2;
+      return createElement(tag, props);
+    };
+    const render = mdReact({ onIterate })
+    render('Something', { someProp1: 1, someProp2: 2 });
+    assert.equal(someProp1, 1);
+    assert.equal(someProp2, 2);
+    render('Something', { someProp1: 3, someProp2: 4 });
+    assert.equal(someProp1, 3);
+    assert.equal(someProp2, 4);
   });
 
   it('should distinct tags depending on level', () => {
@@ -182,7 +199,6 @@ describe('Markdown-React options tests', () => {
       render('This node has custom class, **but not this node**.', { onIterate: firstLevelCallback }),
       '<span><p class="first-level-class">This node has custom class, <strong>but not this node</strong>.</p></span>'
     );
-
   });
 
   it('should replace tags', () => {

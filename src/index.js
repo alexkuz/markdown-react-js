@@ -1,7 +1,8 @@
 'use strict';
 
 import markdown from 'markdown-it';
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import isPlainObject from 'lodash/lang/isPlainObject';
 import assign from 'lodash/object/assign';
 import reduce from 'lodash/collection/reduce';

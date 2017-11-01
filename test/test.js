@@ -3,9 +3,9 @@
 import { assert } from 'chai';
 import { describe, it } from 'mocha';
 import { mdReact } from '../src/index';
-import React, {createElement} from 'react';
-import {renderToStaticMarkup} from 'react-dom/server';
-import update from 'react/lib/update';
+import React, { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import update from 'immutability-helper';
 
 const plugins = {
   abbr: require('markdown-it-abbr'),

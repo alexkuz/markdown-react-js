@@ -10,10 +10,8 @@ This project uses Markdown parser from [Markdown It](https://github.com/markdown
 
 #### Basic example
 
-```
+```jsx
 import MDReactComponent from 'markdown-react-js';
-
-...
 
 render() {
   return (
@@ -24,10 +22,8 @@ render() {
 
 or, using function instead of component:
 
-```
+```jsx
 import { mdReact } from 'markdown-react-js';
-
-...
 
 render() {
   return mdReact()('Some text **with emphasis**.');
@@ -36,7 +32,7 @@ render() {
 
 Result:
 
-```
+```jsx
 <span>
   <p>
     Some text with <strong>emphasis</strong>.
@@ -46,14 +42,12 @@ Result:
 
 #### Using custom tags
 
-```
+```jsx
 const TAGS = {
   html: 'span', // root node, replaced by default
   strong: 'b',
   em: 'i'
 }
-
-...
 
 render() {
   return (
@@ -64,7 +58,7 @@ render() {
 
 Result:
 
-```
+```jsx
 <span>
   <p>
     Some <b>bold</b> and <i>italic</i> text.
@@ -75,7 +69,7 @@ Result:
 
 #### Using custom component renderer
 
-```
+```jsx
 function handleIterate(Tag, props, children, level) {
   if (level === 1) {
     props = {
@@ -95,8 +89,6 @@ function handleIterate(Tag, props, children, level) {
   return <Tag {...props}>{children}</Tag>;
 }
 
-...
-
 render() {
   return (
     <MDReactComponent text='[This link](SOME_URL) has it’s own style.' onIterate={handleIterate} />   
@@ -106,7 +98,7 @@ render() {
 
 Result:
 
-```
+```jsx
 <span>
   <p class="first-level-class">
     <a href="http://example.com" class="link-class">This link</a> has it’s own style.

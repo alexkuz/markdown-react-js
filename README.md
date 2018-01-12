@@ -6,6 +6,13 @@ This project uses Markdown parser from [Markdown It](https://github.com/markdown
 
 **DEMO**: http://alexkuz.github.io/markdown-react-js/
 
+## Install
+
+```sh
+npm i markdown-react-js
+```
+
+
 ## Examples
 
 ### Basic example

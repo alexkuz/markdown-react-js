@@ -8,7 +8,7 @@ This project uses Markdown parser from [Markdown It](https://github.com/markdown
 
 ## Examples
 
-#### Basic example
+### Basic example
 
 ```jsx
 import MDReactComponent from 'markdown-react-js';
@@ -40,7 +40,7 @@ Result:
 </span>
 ```
 
-#### Using custom tags
+### Using custom tags
 
 ```jsx
 const TAGS = {
@@ -67,7 +67,7 @@ Result:
 
 ```
 
-#### Using custom component renderer
+### Using custom component renderer
 
 ```jsx
 function handleIterate(Tag, props, children, level) {
@@ -107,7 +107,7 @@ Result:
 
 ```
 
-### Copyright
+## Copyright
 
 Copyright 2015, Alexander Kuznetsov &lt;alexkuz@gmail.com&gt;
 

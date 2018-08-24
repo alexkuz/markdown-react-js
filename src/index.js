@@ -3,14 +3,14 @@
 import markdown from 'markdown-it';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isPlainObject from 'lodash/lang/isPlainObject';
-import assign from 'lodash/object/assign';
-import reduce from 'lodash/collection/reduce';
-import zipObject from 'lodash/array/zipObject';
-import sortBy from 'lodash/collection/sortBy';
-import compact from 'lodash/array/compact';
-import camelCase from 'lodash/string/camelCase';
-import isString from 'lodash/lang/isString';
+import isPlainObject from 'lodash/isPlainObject';
+import assign from 'lodash/assign';
+import reduce from 'lodash/reduce';
+import zipObject from 'lodash/zipObject';
+import sortBy from 'lodash/sortBy';
+import compact from 'lodash/compact';
+import camelCase from 'lodash/camelCase';
+import isString from 'lodash/isString';
 
 
 const DEFAULT_TAGS = {

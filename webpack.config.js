@@ -1,31 +1,50 @@
-var webpack = require('webpack');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   entry: './src/index',
-  module: {
-    loaders: [
-      { test: /\.json$/, loader: 'json' },
-      { test: /\.js$/, loader: 'babel', exclude: /node_modules/ }
-    ]
-  },
   output: {
-    filename: 'dist/markdown-react.min.js',
+    filename: 'markdown-react.min.js',
     libraryTarget: 'umd',
     library: 'MarkdownReact'
   },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+  module: {
+    rules: [
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
-  ],
+    ]
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        parallel: true,
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            comparisons: false
+          },
+          output: {
+            comments: false,
+            ascii_only: true
+          }
+        }
+      })
+    ],
+  },
   externals: {
     react: 'React'
   }

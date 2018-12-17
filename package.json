@@ -1,6 +1,6 @@
 {
   "name": "markdown-react-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Markdown to React Component converter",
   "main": "lib/index.js",
   "directories": {
@@ -8,21 +8,27 @@
     "test": "test"
   },
   "dependencies": {
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
     "markdown-it": "^4.2.1",
     "prop-types": "^15.6.0"
   },
   "devDependencies": {
-    "babel": "^5.2.6",
-    "babel-core": "^5.2.6",
-    "babel-eslint": "^3.0.1",
-    "babel-loader": "^5.0.0",
-    "babel-runtime": "^5.6.17",
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
     "chai": "^2.3.0",
-    "eslint": "^0.21.0",
+    "eslint": "^5.10.0",
+    "eslint-loader": "^2.1.1",
     "eslint-plugin-react": "^2.2.0",
     "immutability-helper": "^2.4.0",
-    "json-loader": "^0.5.1",
+    "json-loader": "^0.5.7",
     "markdown-it-abbr": "^1.0.0",
     "markdown-it-container": "^1.0.0",
     "markdown-it-deflist": "^1.0.0",
@@ -32,23 +38,26 @@
     "markdown-it-mark": "^1.0.0",
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
-    "mocha": "^2.2.4",
+    "mocha": "^5.2.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "webpack": "^1.8.11"
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
   },
   "peerDependencies": {
     "react": "^16.0.0"
   },
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babelhook --recursive --reporter spec --timeout 3000",
-    "dist": "NODE_ENV=production ./node_modules/.bin/webpack -p",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --compilers js:@babel/register --recursive --reporter spec --timeout 3000",
+    "dist": "NODE_ENV=production ./node_modules/.bin/webpack --config webpack.config.js",
     "build": "./node_modules/.bin/babel --out-dir lib --optional runtime src",
     "lint": "./node_modules/.bin/eslint test src/index.js",
     "prepublish": "npm run build && npm run dist",
     "preversion": "npm test",
     "version": "npm run build && npm run dist && git add -A .",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "babel-version": "./node_modules/.bin/babel --version"
   },
   "repository": {
     "type": "git",

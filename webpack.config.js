@@ -1,7 +1,7 @@
+var webpack = require('webpack');
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
   entry: './src/index',
   output: {
     filename: 'markdown-react.min.js',
@@ -22,7 +22,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env'],
+            plugins: [
+              '@babel/plugin-proposal-function-bind',
+              '@babel/plugin-proposal-class-properties'
+            ]
           }
         }
       }
@@ -31,20 +35,22 @@ module.exports = {
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
-        parallel: true,
         uglifyOptions: {
           compress: {
-            warnings: false,
-            comparisons: false
-          },
-          output: {
-            comments: false,
-            ascii_only: true
+            warnings: false
           }
         }
       })
     ],
   },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
+  ],
   externals: {
     react: 'React'
   }

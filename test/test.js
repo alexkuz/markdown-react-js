@@ -75,7 +75,7 @@ describe('Markdown tests', () => {
   it('should work with images', () => {
     assert.equal(
       render('![GitHub Logo](/images/logo.png)\nFormat: ![Alt Text](url)'),
-      '<span><p><img alt="GitHub Logo" src="/images/logo.png"/>\nFormat: <img alt="Alt Text" src="url"/></p></span>'
+      '<span><p><img src="/images/logo.png" alt="GitHub Logo"/>\nFormat: <img src="url" alt="Alt Text"/></p></span>'
     );
   });
 
@@ -83,6 +83,13 @@ describe('Markdown tests', () => {
     assert.equal(
       render('Here is [some link](http://some-url.com).'),
       '<span><p>Here is <a href="http://some-url.com">some link</a>.</p></span>'
+    );
+  });
+
+  it('should work with "tel:" links', () => {
+    assert.equal(
+      render('toll-free [1-800-000-0000](tel:180000000 "Contact phone number:180000000")'),
+      '<span><p>toll-free <a href="tel:180000000" title="Contact phone number:180000000">1-800-000-0000</a></p></span>'
     );
   });
 

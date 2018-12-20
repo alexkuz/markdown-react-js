@@ -7,7 +7,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import assign from 'lodash/assign';
 import reduce from 'lodash/reduce';
 import zipObject from 'lodash/zipObject';
-import sortBy from 'lodash/sortBy';
+import fromPairs from 'lodash/fromPairs'
 import compact from 'lodash/compact';
 import camelCase from 'lodash/camelCase';
 import isString from 'lodash/isString';
@@ -77,6 +77,7 @@ const DEFAULT_RULES = {
     if (token.info) {
       attrs = assign({}, attrs, { 'data-info': token.info.trim() });
     }
+
     /* plugin-related */
     return [compact([token.tag, attrs].concat((token.nesting === 1) && getNext()))];
   }
@@ -96,15 +97,17 @@ function convertTree(tokens, convertRules, options) {
 
     let token = tkns.shift();
     while (token && token.nesting !== -1) {
-      const attrs = token.attrs && zipObject(sortBy(token.attrs, 0));
+      const attrs = token.attrs && fromPairs(token.attrs);
       const children = token.children && convertBranch(token.children.slice(), true);
       const rule = convertRules[camelCase(token.type)] || convertRules.default;
 
       branch = branch.concat(
         rule(token, attrs, children, options, getNext)
       );
+
       token = tkns.shift();
     }
+
     return branch;
   }
 
@@ -175,6 +178,7 @@ function mdReactFactory(options={}) {
 
   return function(text, props) {
     defaultProps = props;
+    
     const tree = convertTree(md.parse(text, {}), convertRules, md.options);
     return iterateTree(tree);
   };
